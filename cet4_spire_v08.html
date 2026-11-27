@@ -1,0 +1,625 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>词塔 · 灰烬远征 V0.9</title><meta name="theme-color" content="#171b27"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="spire-manifest.json"><link rel="apple-touch-icon" href="spire-icon.png"><style>
+*{box-sizing:border-box}body{margin:0;background:#111a1c;color:#f0e8d5;font:15px system-ui,sans-serif;min-height:100vh}main{max-width:660px;margin:auto;padding:16px 14px 30px}button{font:inherit;color:inherit;border:1px solid #59635b;border-radius:10px;background:#263535;padding:11px;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.35;cursor:default}button:active:not(:disabled){transform:scale(.97)}.top,.line{display:flex;justify-content:space-between;gap:8px;align-items:center}.brand{font-size:25px;font-weight:900;letter-spacing:3px;color:#e7c78d}.small{font-size:12px;color:#b0b7a9}.panel{background:#1a282b;border:1px solid #43504b;border-radius:14px;padding:14px;margin:12px 0}.arena{position:relative;min-height:220px;text-align:center;background:radial-gradient(ellipse at 50% 70%,#46574b 0,#25383a 37%,#152325 76%);overflow:hidden}.arena:before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(118deg,transparent 0 80px,#c8b57a09 82px 85px)}.monster{height:105px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 12px 10px #0009)}.monster svg{width:128px;height:112px}.hp{height:9px;border-radius:8px;background:#0d1719;overflow:hidden;margin:7px 0}.hp i{display:block;height:100%;background:#d66a58;transition:width .25s}.enemyhp i{background:#96b46c}.hand{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.card{padding:9px 6px;min-height:113px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(150deg,#47322b,#241f20);border-color:#93654e;text-align:center}.card.skill{background:linear-gradient(150deg,#264754,#1a2b36);border-color:#648c9b}.card.power{background:linear-gradient(150deg,#4b4230,#2c2520);border-color:#c1a266}.card b{font-size:16px}.card .art{font-size:23px}.card span{font-size:12px;color:#d8d1bf}.opts{display:grid;gap:8px}.opts button{text-align:left;line-height:1.4}.word{font-size:30px;font-weight:800;letter-spacing:.5px;overflow-wrap:anywhere;margin:12px 0 4px}.gold{color:#edc681}.red{color:#ff9d88}.green{color:#b7dd93}.primary{background:#d6b477;color:#24231d;font-weight:800;border-color:#f2d9a0}.wide{width:100%;margin-top:8px}.path{display:flex;gap:5px;justify-content:center;margin:12px 0}.node{height:27px;width:27px;border-radius:50%;display:grid;place-items:center;border:1px solid #687268;color:#85958b;font-size:12px}.node.now{background:#d6b477;color:#29251b}.node.done{background:#45644c;color:white}.log{min-height:40px;line-height:1.5}.tag{padding:4px 8px;border:1px solid #697869;border-radius:20px;font-size:12px}.menu{display:grid;grid-template-columns:1fr 1fr;gap:8px}details{margin-top:12px;color:#b0b7a9}summary{cursor:pointer}input[type=file]{max-width:100%}.flash{animation:hit .25s}@keyframes hit{50%{transform:translateX(5px);filter:brightness(1.8)}}
+.mapgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;position:relative}.mapgrid button{z-index:1;min-height:43px;font-size:13px;padding:6px}.mapgrid button.selected{border-color:#f5d289;background:#5b4b31}.mapgrid .boss{grid-column:1/-1}.rare{border-color:#e9c16f!important}.uncommon{border-color:#80b9b2!important}.card .rarity{font-size:10px;letter-spacing:.5px}.status{display:flex;gap:6px;flex-wrap:wrap;margin:5px 0}.status span{background:#293b3c;border-radius:6px;padding:4px 6px;font-size:12px}.card{min-width:0}.card span{overflow-wrap:anywhere}.catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.shopitem{margin:8px 0}.routeinfo{font-size:12px;color:#b4c6ad}.mapwrap{position:relative}.mapwrap svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.mapgrid button:disabled{opacity:.55}.hand{grid-template-columns:repeat(3,minmax(0,1fr))}.card:disabled{opacity:.42} 
+:root{color-scheme:dark;--gold:#e6c58c;--ink:#100f16;--paper:#f3e6cd}body{background:radial-gradient(ellipse at 50% 0,#302936 0,#14131c 42%,#0a0b12 90%);font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--paper)}main{max-width:900px;padding:14px 14px 38px}button{border-radius:7px;background:linear-gradient(180deg,#36303a,#201e28);border-color:#695c51;box-shadow:inset 0 1px #ffffff0b,0 3px 7px #0004}button:focus-visible{outline:2px solid #f2d49c;outline-offset:2px}button:active:not(:disabled){transform:translateY(2px)}.brand{font-family:Georgia,"Songti SC",serif;font-size:32px;letter-spacing:5px;color:#f5d69f;text-shadow:0 2px 10px #9b683e80}.brand .small{letter-spacing:1px;font:10px system-ui;color:#b6a58b}.small{color:#baadab}.top{min-height:40px}.panel{position:relative;border:1px solid #665449;border-radius:10px;background:linear-gradient(140deg,#29242e,#191923 80%);box-shadow:0 7px 22px #0006,inset 0 0 0 3px #100f1670;padding:16px}.panel h2{font-family:Georgia,"Songti SC",serif;letter-spacing:2px;margin:4px 0 12px;color:#eed4a5}.panel h3{font-size:14px;color:#d7c2a3;letter-spacing:1px}.primary{background:linear-gradient(180deg,#f0cf8e,#b58044);border-color:#f6d69d;color:#211711;box-shadow:0 3px 0 #705032,0 6px 15px #0006}.wide{min-height:43px}.hp{height:12px;background:#0d0c13;border:1px solid #514441;border-radius:4px;box-shadow:inset 0 2px 4px #000a}.hp i{background:linear-gradient(180deg,#e48370,#963b42);box-shadow:0 0 9px #f56b5650}.enemyhp i{background:linear-gradient(180deg,#f0a077,#b3473e)}.arena{min-height:285px;padding:14px 14px 12px;background:radial-gradient(ellipse at 70% 50%,#9e5c3b33,transparent 54%),linear-gradient(#171725,#34303a 65%,#15141c);isolation:isolate}.arena:before{background:none}.scene{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.87}.stage{display:flex;align-items:flex-end;justify-content:space-around;min-height:172px;gap:8px;position:relative}.fighter,.foe{width:46%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}.fighter svg,.foe svg{width:100%;height:165px;filter:drop-shadow(0 8px 4px #0009);overflow:visible}.foe svg{animation:breathe 3s ease-in-out infinite;transform-origin:center bottom}.fighter svg{animation:breathe 4s ease-in-out infinite}.figlabel{font-size:11px;letter-spacing:1px;color:#e4cdb2;background:#120f18bb;padding:3px 9px;border:1px solid #64504c;border-radius:4px}.intent{display:inline-block;background:#15121dd9;color:#ffd2a2;border:1px solid #896044;border-radius:5px;padding:6px 13px;font-weight:700;font-size:12px}.enemyline{font-size:13px;font-weight:700;display:flex;justify-content:space-between;gap:8px;margin-top:9px}.status{gap:5px}.status span{background:#201c28;border:1px solid #473d4b;color:#bfb1bd;font-size:11px}.combatbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:10px 0}.orb{display:grid;place-items:center;width:44px;height:44px;border:2px solid #c59858;border-radius:50%;background:radial-gradient(circle at 35% 25%,#f4cc76,#b77130 45%,#46271f 85%);box-shadow:0 0 15px #df9a4350,inset 0 0 0 3px #4d302b70;color:#fff4ce;font-size:22px;font-weight:900;text-shadow:0 2px 3px #573116}.log{min-height:25px;font-size:12px;color:#cab7a7;margin:7px 0}.hand,.catalog{gap:8px;grid-template-columns:repeat(3,minmax(0,1fr))}.card{position:relative;isolation:isolate;overflow:hidden;min-height:172px;border:1px solid #b27b60;border-radius:9px;padding:7px 6px 8px;gap:5px;background:linear-gradient(160deg,#633d36,#2d202a 55%,#201b24);box-shadow:inset 0 0 0 3px #251b25,0 5px 10px #0008;text-align:center}.card:before{content:'';position:absolute;inset:4px;z-index:-1;border:1px solid #ad8e703d;border-radius:5px;pointer-events:none}.card.skill{background:linear-gradient(160deg,#355968,#202a3a 55%,#1c2230);border-color:#779caa}.card.power{background:linear-gradient(160deg,#715b38,#3b2f2d 55%,#211d25);border-color:#d4b46d}.card.rare{box-shadow:inset 0 0 0 3px #5a462d,0 0 13px #ecb85e30}.card.uncommon{box-shadow:inset 0 0 0 3px #20383d,0 4px 12px #0007}.card b{font-size:14px;color:#f9e7c9;letter-spacing:.5px}.card .art{height:65px;min-height:65px;border:1px solid #bfa28454;border-radius:5px;width:100%;background:#100d17;overflow:hidden}.card .art svg{width:100%;height:100%;display:block}.card .line{width:100%;min-height:20px}.card .cost{display:grid;place-items:center;border:1px solid #e7c081;background:radial-gradient(circle at 35% 30%,#e8b96d,#6f3b29 75%);border-radius:50%;height:23px;width:23px;color:#fff0c6;font-weight:800;font-size:14px}.card .rarity{font-size:10px;color:#d5bd9a}.card .effect{font-size:11px;line-height:1.35;min-height:30px;color:#e0d2c6;white-space:normal}.card .kind{font-size:9px;letter-spacing:2px;color:#bca99d}.card:disabled{opacity:.45;filter:saturate(.5)}.card:hover:not(:disabled){border-color:#f9d9a1}.hand.battlehand{display:flex;overflow-x:auto;scroll-snap-type:x proximity;padding:6px 2px 13px;gap:8px;scrollbar-color:#97704b #201d28}.battlehand .card{flex:0 0 calc((100% - 16px)/3);scroll-snap-align:start;min-height:185px}.endturn{background:linear-gradient(#514259,#2e293a);border-color:#ad8b72;color:#f2dbbd;font-weight:700}.quizpanel{border-color:#b49a68;background:radial-gradient(ellipse at top,#51423e,#211e2a 65%);padding:16px;animation:appear .18s ease-out}.word{font-family:Georgia,serif;color:#ffe2aa;font-size:34px;text-shadow:0 2px 6px #0006}.opts{margin-top:12px}.opts button{background:linear-gradient(90deg,#35303d,#24212b);border-color:#78665d;min-height:47px;display:flex;align-items:center;gap:10px}.letter{display:grid;place-items:center;width:25px;height:25px;border:1px solid #a28c73;color:#e7c58d;border-radius:4px;font-weight:700;flex:none}.mapwrap{margin:12px auto 0;max-width:500px;padding:4px 0;background:radial-gradient(ellipse at center,#74604c20,transparent 75%)}.mapwrap>svg{z-index:0}.mapgrid{gap:12px 14px;grid-template-columns:repeat(3,minmax(0,1fr))}.mapgrid button{justify-self:center;width:100%;max-width:112px;min-height:55px;background:linear-gradient(#38303c,#25202a);border:1px solid #736254;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;position:relative}.mapgrid button:disabled{opacity:.47}.mapgrid button.selected{opacity:1;border-color:#bda06b;background:#4a3e32}.mapgrid button.available{background:linear-gradient(#715537,#3d2e29);border-color:#e4bf7e;box-shadow:0 0 12px #edbe6940;animation:pulse 2.5s infinite}.mapgrid .boss{max-width:140px}.mapicon{font-size:20px;line-height:1.1}.maplabel{font-size:10px;color:#e3c9ac}.mapgrid .elite .mapicon,.mapgrid .boss .mapicon{color:#e78b79}.mapgrid .rest .mapicon{color:#f3bc76}.mapgrid .shop .mapicon{color:#9dc5bf}.hero{min-height:390px;text-align:center;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 45%,#83513b40,#1c1a25 65%)}.hero .scene{opacity:.65}.hero .heroart{height:210px;display:grid;place-items:center}.heroart svg{width:210px;height:210px;filter:drop-shadow(0 0 25px #d2804e55)}.eyebrow{font-size:10px;letter-spacing:4px;color:#c6aa86;text-transform:uppercase}.hero h1{font-family:Georgia,"Songti SC",serif;color:#f5d6a0;font-size:34px;letter-spacing:6px;margin:5px 0;text-shadow:0 3px 8px #0009}.hero p{font-size:12px;color:#c8b9ae}.hero .primary{max-width:390px;min-height:50px;font-size:16px;letter-spacing:3px}.hero .secondary{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:390px;margin:auto}.rewardpanel{background:radial-gradient(ellipse at top,#5b4530,#201e27 65%)}.rewardpanel h2{text-align:center;letter-spacing:4px}details{border-top:1px solid #4b3e46;padding-top:12px;color:#bcaeaf}summary{font-size:13px} @keyframes breathe{50%{transform:translateY(-3px) scaleY(1.025)}}@keyframes pulse{50%{box-shadow:0 0 16px #edbe6980}}@keyframes appear{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}@media(min-width:660px){.hand,.catalog{grid-template-columns:repeat(5,minmax(0,1fr))}.battlehand .card{flex:0 0 calc((100% - 32px)/5)}.arena{min-height:340px}.stage{min-height:220px}.fighter svg,.foe svg{height:220px}.card{min-height:185px}.card .art{height:80px}.hero{min-height:450px}}@media(max-width:370px){main{padding:10px 9px 25px}.panel{padding:11px}.card b{font-size:12px}.card .effect{font-size:10px}.card{min-height:163px}.battlehand .card{flex-basis:calc((100% - 12px)/2.7)}.arena{min-height:260px}.fighter svg,.foe svg{height:145px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* Feedback layer: transient effects do not modify game state. */
+.fx-settings{display:flex;gap:5px;align-items:center}.fx-settings button{padding:7px 9px;font-size:12px;white-space:nowrap}.fx-settings .on{border-color:#c79b59;color:#f0ce91}.fx-float{position:absolute;z-index:15;pointer-events:none;left:var(--x);top:var(--y);font-size:clamp(18px,5vw,30px);font-weight:950;letter-spacing:1px;white-space:nowrap;color:var(--c);text-shadow:0 2px 2px #000,0 0 12px #000;animation:fxfloat 1.15s ease-out both}.fx-slash{position:absolute;z-index:12;width:110px;height:14px;left:var(--x);top:var(--y);pointer-events:none;background:linear-gradient(90deg,transparent,#ffae6b,#fff6cb,transparent);box-shadow:0 0 14px #ff7a48;animation:fxslash .48s ease-out both}.fx-particle{position:absolute;z-index:13;pointer-events:none;width:5px;height:5px;border-radius:50%;background:var(--c);left:var(--x);top:var(--y);box-shadow:0 0 8px var(--c);animation:fxspark .65s ease-out both}.fx-shield{position:absolute;z-index:11;pointer-events:none;left:var(--x);top:var(--y);width:82px;height:82px;border-radius:50%;border:2px solid #9ae7ff;box-shadow:0 0 22px #67cfff,inset 0 0 20px #67cfff;background:#85dcff22;animation:fxring .7s ease-out both}.fx-hit{animation:fxhit .45s ease-out!important}.fx-lunge{animation:fxlunge .45s ease-out!important}.fx-lunge-back{animation:fxlungeback .45s ease-out!important}.fx-ghost{position:fixed!important;z-index:9999;pointer-events:none!important;margin:0!important;animation:fxcard .48s cubic-bezier(.2,.7,.3,1) forwards;box-shadow:0 0 26px #d4a660!important}.fx-deal{animation:fxdeal .42s cubic-bezier(.2,.7,.3,1) both;animation-delay:var(--delay)}.fx-reward{animation:fxreward .7s ease-out both}.fx-banner{position:absolute;top:7px;left:50%;z-index:15;pointer-events:none;white-space:nowrap;font-weight:900;color:#f9df9b;text-shadow:0 2px 3px #000,0 0 10px #be783b;animation:fxbanner 1.5s both}.quizpanel.fx-good{box-shadow:0 0 20px #91cd6944;border-color:#9abf77}.quizpanel.fx-bad{box-shadow:0 0 20px #ff795044;border-color:#b96058}.rewardpanel h2{letter-spacing:3px}.fx-reward .hand>*{animation:fxdeal .55s both}.fx-reward .hand>*:nth-child(2){animation-delay:.12s}.fx-reward .hand>*:nth-child(3){animation-delay:.24s}
+@keyframes fxfloat{0%{opacity:0;transform:translate(-50%,-15%) scale(.65)}18%{opacity:1;transform:translate(-50%,-30%) scale(1.2)}65%{opacity:1}100%{opacity:0;transform:translate(-50%,-115%) scale(.95)}}@keyframes fxslash{0%{opacity:0;transform:translate(-50%,-50%) rotate(-42deg) scaleX(.1)}35%{opacity:1;transform:translate(-50%,-50%) rotate(-42deg) scaleX(1.2)}100%{opacity:0;transform:translate(-50%,-50%) rotate(-42deg) scaleX(.3)}}@keyframes fxspark{from{opacity:1;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.15)}}@keyframes fxring{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}35%{opacity:.95}100%{opacity:0;transform:translate(-50%,-50%) scale(1.55)}}@keyframes fxhit{0%,100%{transform:translateX(0)}18%{transform:translateX(9px);filter:brightness(1.8) saturate(.4)}36%{transform:translateX(-6px)}58%{transform:translateX(4px)}}@keyframes fxlunge{0%,100%{transform:translateX(0)}40%{transform:translateX(22px) rotate(4deg)}}@keyframes fxlungeback{0%,100%{transform:translateX(0)}40%{transform:translateX(-22px) rotate(-4deg)}}@keyframes fxcard{0%{opacity:1;transform:translate(0,0) rotate(0) scale(1)}65%{opacity:.92;transform:translate(var(--dx),var(--dy)) rotate(-7deg) scale(.85)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}@keyframes fxdeal{from{opacity:0;transform:translateY(20px) rotate(-3deg) scale(.92)}to{opacity:1;transform:translateY(0) rotate(0) scale(1)}}@keyframes fxreward{from{opacity:.3;transform:scale(.97);filter:brightness(1.35)}to{opacity:1;transform:scale(1);filter:brightness(1)}}@keyframes fxbanner{0%{opacity:0;transform:translate(-50%,-8px) scale(.8)}20%,70%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-10px)}}@media(prefers-reduced-motion:reduce){.fx-float,.fx-slash,.fx-particle,.fx-shield,.fx-hit,.fx-lunge,.fx-lunge-back,.fx-ghost,.fx-deal,.fx-reward,.fx-banner{animation:none!important}.fx-particle,.fx-slash,.fx-ghost{display:none!important}}body.fx-less .fx-particle,body.fx-less .fx-slash,body.fx-less .fx-ghost{display:none!important}body.fx-less .fx-hit,body.fx-less .fx-lunge,body.fx-less .fx-lunge-back,body.fx-less .fx-deal,body.fx-less .fx-reward{animation:none!important}
+ .actbar{display:flex;gap:5px;margin:10px 0}.actbar span{flex:1;padding:8px 3px;text-align:center;font-size:11px;background:#1c2230;border:1px solid #505569;color:#aaa}.actbar .active{border-color:#e9ba75;color:#ffd291;background:#3e3540}.actbar .cleared{color:#a8d59a}.offline-note{font-size:12px;color:#b7c8b2;margin:9px 0}.act-transition{text-align:center;padding:22px}.act-transition .pixel{height:90px}.act-transition h2{color:#f0c477}.act-transition .primary{margin-top:10px}body[data-act="1"] .mapwrap{background-color:#1d2926}body[data-act="2"] .mapwrap{background-color:#39272b}body[data-act="3"] .mapwrap{background-color:#29243c}</style><style>
+body{background:#171b27;color:#eee6d3}main{max-width:720px}.brand{letter-spacing:1px;color:#f3c879;text-shadow:2px 2px #593c35}.panel,button,.card,.primary,.quizpanel{border-radius:3px!important;box-shadow:3px 3px 0 #0c1019!important}.panel{background:#242b3b;border:2px solid #555269}.arena,.hero{background:#202638!important}.scene{opacity:1!important}.pixel{image-rendering:pixelated;shape-rendering:crispEdges;filter:drop-shadow(3px 4px 0 #11131e)!important}.fighter .pixel,.foe .pixel{width:100%;height:100%;max-height:142px}.heroart .pixel{max-height:170px}.card{background:#422f38!important;border:2px solid #9c6954!important}.card.skill{background:#293c50!important;border-color:#6e92aa!important}.card.power{background:#42394e!important;border-color:#ad92c0!important}.card.rare{border-color:#e3bc6d!important;box-shadow:0 0 0 1px #dbb45b,3px 3px #11131e!important}.card .art{background:#181e2b!important;border-radius:0!important}.card .art .pixel{height:100%;width:100%;max-height:78px}.hp{border-radius:0!important;height:10px}.hp i{background:#bb5257}.enemyhp i{background:#88ad65}.studygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.studygrid div{background:#181e2c;border:1px solid #555269;padding:10px 4px}.studygrid b{display:block;color:#f1c87e;font-size:26px}.studygrid span{font-size:12px}.wordrow p{overflow-wrap:anywhere}select{background:#242b3b;color:#eee6d3;padding:6px}button{font-weight:600}a{color:#e3c284}.fx-less .fighter,.fx-less .foe{animation:none!important}@media(max-width:420px){.fighter .pixel,.foe .pixel{max-height:116px}.top{flex-wrap:wrap}.card .art .pixel{max-height:64px}}
+</style><style>.campbox{text-align:left;background:#111521e6;border:1px solid #746347;padding:10px;margin:12px 0;position:relative}.campchoices{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.campchoices button,.loadouts button{background:#272d3c;padding:8px;min-width:0}.campchoices .selected,.loadouts .selected{border-color:#f3c879;color:#f3c879;background:#40362c}.loadouts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.loadouts button{text-align:left;display:flex;flex-direction:column;gap:4px;font-size:13px}.loadouts small{font-size:11px;color:#bcb4a4}.campbox p{line-height:1.5}.hero{overflow:visible}</style></head><body><main id="app"></main><script id="spire-embedded-bank" type="application/json">null</script>
+<script>
+const SOURCE='https://raw.githubusercontent.com/grhliu/wordtyper-vocabularies/main/vocabularies/cet4.json';
+const RAW=`abandon|放弃；抛弃
+abnormal|反常的
+absorb|吸收；使专注
+abstract|抽象的；摘要
+abundant|丰富的
+abuse|滥用；虐待
+academic|学术的
+accelerate|加速
+access|进入；使用权
+accommodate|容纳；使适应
+accompany|陪伴
+accomplish|完成；实现
+accordance|一致；符合
+accumulate|积累
+accurate|准确的
+accuse|指责；控告
+acknowledge|承认；确认
+acquire|获得
+adapt|适应；改编
+adequate|足够的
+adjust|调整
+administration|管理；行政
+advocate|提倡；拥护者
+affection|喜爱；感情
+agenda|议程
+aggressive|侵略性的；进取的
+allocate|分配
+alter|改变
+alternative|替代方案
+ambiguous|模棱两可的
+amend|修订
+anticipate|预期；预料
+anxiety|焦虑
+apparent|明显的；表面上的
+appeal|呼吁；吸引力
+applicable|适用的
+appoint|任命；指定
+appreciate|欣赏；感激
+approach|方法；接近
+appropriate|适当的
+arbitrary|任意的；专断的
+artificial|人工的
+assemble|集合；组装
+assess|评估
+assign|分配；指派
+assist|协助
+assume|假定；承担
+assure|保证；使确信
+attach|附上；使依附
+attain|达到；获得
+attribute|归因于；属性
+authority|权威；当局
+available|可获得的
+barrier|障碍
+beneficial|有益的
+bias|偏见；偏向
+bond|纽带；债券
+bound|必然的；界限
+capacity|容量；能力
+cease|停止
+challenge|挑战；质疑
+circumstance|情况；环境
+cite|引用
+clarify|澄清
+collapse|倒塌；崩溃
+colleague|同事
+commence|开始
+commit|承诺；犯下
+commodity|商品
+compensate|补偿
+competent|胜任的
+compile|汇编；编纂
+complement|补充；使完整
+complex|复杂的；综合体
+component|组成部分
+comprehensive|全面的
+comprise|由……组成
+compromise|妥协
+conceal|隐藏
+concentrate|集中；浓缩
+concept|概念
+concern|担忧；涉及
+conclude|得出结论；结束
+conduct|进行；行为
+confer|授予；商议
+confine|限制
+confirm|证实
+conflict|冲突
+conform|符合；遵从
+confront|面对
+consent|同意
+consequence|后果
+considerable|相当大的
+consistent|一致的
+constitute|构成
+constraint|限制；约束
+consume|消耗
+contemporary|当代的
+contribute|贡献；促成
+convey|传达；运输
+cope|应对
+corporate|公司的
+correspond|相对应；通信
+criteria|标准（复数）
+crucial|至关重要的
+cultivate|培养；耕种
+decay|腐烂；衰退
+decline|下降；拒绝
+dedicate|献身；致力于
+deficit|赤字；不足
+define|定义；界定
+deliberate|故意的；审慎的
+demonstrate|证明；展示
+deny|否认
+depict|描绘
+deprive|剥夺
+derive|源于；获得
+detect|察觉；检测
+deviate|偏离
+diminish|减少
+discriminate|歧视；区别
+dismiss|解雇；不予考虑
+display|展示
+dispute|争论；争端
+distinct|明显不同的
+distinguish|区分
+distribute|分配；分布
+diverse|多样的
+domestic|国内的；家庭的
+dominant|占主导地位的
+draft|草稿；起草
+durable|耐用的
+dynamic|动态的；有活力的
+efficient|高效的
+eliminate|消除
+emerge|出现；显露
+emphasis|强调
+empirical|经验的；实证的
+encounter|遇到；遭遇
+enhance|增强
+ensure|确保
+enterprise|企业；事业
+enthusiasm|热情
+equivalent|等同的；等价物
+establish|建立；确立
+estimate|估计
+evaluate|评价；评估
+eventual|最终的
+evident|明显的
+evolve|演变
+exceed|超过
+exception|例外
+excessive|过度的
+exclude|排除
+execute|执行
+exhibit|展出；表现
+expand|扩张
+explicit|明确的
+exploit|利用；剥削
+exposure|暴露；接触
+extent|程度；范围
+extract|提取；摘录
+facilitate|促进；使便利
+factor|因素
+feasible|可行的
+flexible|灵活的
+fluctuate|波动
+formal|正式的
+foster|培养；促进
+fragile|脆弱的
+frequent|频繁的
+fundamental|基本的；根本的
+generate|产生
+genuine|真正的；真诚的
+grant|授予；补助金
+guarantee|保证
+hence|因此；从此
+highlight|突出；强调
+hypothesis|假设
+identify|识别；确认
+illustrate|说明；举例
+impact|影响；冲击
+implement|实施；工具
+implication|含义；潜在影响
+imply|暗示；意味着
+impose|强加；征收
+incentive|激励；诱因
+incline|倾向；倾斜
+incorporate|纳入；合并
+indicate|表明；指出
+inevitable|不可避免的
+infer|推断
+inhibit|抑制
+initial|最初的
+innovate|创新
+inspect|检查
+integrate|整合
+intense|强烈的
+interfere|干涉；干扰
+interpret|解释；口译
+interval|间隔
+intervention|干预
+intrinsic|内在的
+investigate|调查；研究
+isolate|隔离
+justify|证明……合理
+label|标签；贴标签
+launch|发起；发射
+legislation|立法
+legitimate|合法的；正当的
+liable|有责任的；易于……的
+maintain|维持；主张
+manipulate|操纵
+manual|手工的；手册
+margin|边缘；差额
+mature|成熟的
+mechanism|机制
+mediate|调解
+merit|优点；价值
+minor|较小的；未成年人
+modify|修改
+monitor|监测
+motive|动机
+mutual|相互的
+negative|消极的；负面的
+negotiate|谈判
+notion|概念；观念
+obligation|义务
+obtain|获得
+obvious|明显的
+occupy|占据
+occur|发生
+offset|抵消
+ongoing|持续进行的
+option|选择
+orient|使适应；确定方向
+outcome|结果
+overall|总体的
+overcome|克服
+participate|参与
+perceive|感知；理解
+persist|坚持；持续
+perspective|观点；视角
+phenomenon|现象
+potential|潜在的；潜力
+precise|精确的
+predict|预测
+preliminary|初步的
+preserve|保护；保存
+prevail|盛行；获胜
+primary|主要的；初级的
+prior|先前的；优先的
+priority|优先事项
+procedure|程序；步骤
+proceed|继续进行
+prohibit|禁止
+prominent|突出的
+promote|促进；晋升
+proportion|比例
+prospect|前景
+prosperity|繁荣
+provoke|激起；挑衅
+pursue|追求；从事
+qualify|使具备资格
+radical|根本的；激进的
+random|随机的
+range|范围
+recruit|招募
+recover|恢复
+refine|改进；精炼
+regulate|管理；调节
+reinforce|加强
+reject|拒绝
+relevant|相关的
+reluctant|不情愿的
+remarkable|显著的
+render|使成为；提供
+renew|更新
+requirement|要求
+rescue|营救
+resent|怨恨
+reserve|保留；储备
+resolve|解决；决心
+resort|求助；度假胜地
+restore|恢复
+restrict|限制
+retain|保留
+reveal|揭示
+reverse|逆转；相反的
+revise|修订；复习
+rigid|僵硬的；严格的
+rival|竞争对手
+scarce|稀缺的
+scenario|情景；设想
+scope|范围
+secure|获得；安全的
+seek|寻求
+selective|有选择的
+sequence|顺序
+severe|严重的
+shift|转移；变化
+significant|重要的；显著的
+simulate|模拟
+sole|唯一的；鞋底
+specify|具体说明
+stable|稳定的
+stimulate|刺激；促进
+strategy|策略
+subsequent|随后的
+substantial|大量的；实质的
+substitute|代替；替代品
+sufficient|充分的
+summarize|总结
+supplement|补充
+suppress|抑制；镇压
+sustain|维持；承受
+symbolic|象征性的
+tackle|处理；应对
+tendency|倾向
+tentative|暂定的；试探性的
+terminate|终止
+territory|领土；领域
+trace|追踪；痕迹
+transfer|转移；转让
+transform|改变；转化
+transition|过渡
+transmit|传输
+transparent|透明的
+trigger|触发
+ultimate|最终的
+undergo|经历；经受
+underlying|潜在的；根本的
+undertake|承担；着手
+unique|独特的
+utilize|利用
+valid|有效的
+vary|变化
+venture|冒险；商业项目
+violate|违反
+virtual|虚拟的；实质上的
+visible|可见的
+vital|至关重要的
+vulnerable|易受伤害的
+welfare|福利
+withdraw|撤回；退出
+witness|目击；证人`;
+let words=RAW.split('\n').map(x=>{let [w,t]=x.split('|');return {w,t,p:''}}), bank='离线精选 '+words.length+' 词', mode='smart';
+const basic=new Set('a an the of in on at to for from by with and or but if as is are be am was were been being do does did have has had can could will would shall should may might must not no yes I you he she it we they me him her us them my your his our their this that these those here there who what when where why how all some any many much more most less very too so up down out over under into off back go come get make take give see look watch hear listen say tell speak read write eat drink run walk sit stand open close big small good bad new old high low hot cold day night morning evening time year month week today tomorrow yesterday man woman boy girl child school book pen desk chair table water food milk apple dog cat house home car bus train red blue green black white one two three four five six seven eight nine ten first last happy sad friend family father mother sister brother teacher student work play love like want need know think feel find help use name people thing life hand head eye face room door window world'.toLowerCase().split(' '));
+
+const CARDRAW=`strike|斩击|⚔|1|attack|basic|hit:8:11
+guard|格挡|⛨|1|skill|basic|block:8:11
+bash|破甲重击|◆|2|attack|basic|hit:14:17,vul:2:3
+quick|疾风斩|✦|1|attack|common|hit:6:9,draw:1
+cleave|裂地|⚒|2|attack|common|hit:22:28
+parry|反击|⟐|1|skill|common|hit:5:8,block:6:9
+double|双刃|✕|1|attack|common|multi:5:7:2
+poison|灼烧|☄|1|attack|common|hit:4:6,burn:3:5
+focus|凝神|✧|0|skill|common|draw:1:2,exhaust:1
+rally|号令|⚑|0|skill|uncommon|energy:1:2,exhaust:1
+rage|战意|♨|1|power|uncommon|str:3:4
+heal|汲血|♥|2|attack|uncommon|hit:12:16,heal:5:7
+fort|铁壁|▣|2|skill|common|block:20:26
+execute|终结|✷|2|attack|uncommon|execute:18:23
+healguard|恢复术|✚|1|skill|uncommon|heal:4:6,block:4:6,exhaust:1
+jab|突刺|➶|0|attack|common|hit:4:7
+shatter|碎甲|⛏|1|attack|common|strip:5:9,hit:8:11
+feint|虚晃|◈|1|attack|common|hit:5:8,weak:2:3
+steady|稳步|▤|1|skill|common|block:7:10,draw:1
+flame|火种|♨|0|skill|common|burn:3:5,exhaust:1
+shieldbash|盾击|⛨|1|attack|uncommon|shieldhit:3:5
+bastion|壁垒|▣|2|power|rare|retain:1
+rampart|坚阵|▥|1|skill|uncommon|doubleblock:1,block:2:5
+bulwark|固若金汤|⬡|2|skill|uncommon|block:26:34,exhaust:1
+thorns|荆棘甲|✳|1|power|uncommon|thorns:3:5
+ironwill|钢铁意志|⚙|1|power|uncommon|blockturn:4:6
+counter|盾墙回响|⟲|1|power|rare|blockhit:3:5
+warcry|战吼|⚑|0|skill|common|draw:2:3,exhaust:1
+frenzy|狂热|♨|1|skill|common|self:3,str:3:4
+whirl|旋风连斩|✺|2|attack|uncommon|multi:6:8:3
+giant|巨人之力|♜|2|power|rare|strturn:2:3
+limit|突破极限|✦|1|skill|rare|doublestr:1,exhaust:1
+blood|血契|♦|0|skill|uncommon|self:6:4,energy:2,draw:2:3,exhaust:1
+revenge|复仇|⚔|1|attack|uncommon|losthit:6:9
+bloodrage|浴血|♥|1|power|uncommon|hurtstr:1:2
+sacrifice|献祭|☽|1|skill|common|burnhand:1,block:9:13
+purge|净化|✧|1|skill|uncommon|burnhand:2,draw:2:3
+ashes|余灰护体|✺|1|power|uncommon|exblock:4:6
+memory|灰烬记忆|◉|1|power|rare|exdraw:1:2
+inferno|焚城|☄|2|attack|rare|hit:12:16,burn:10:15
+ignite|添薪|♨|1|skill|uncommon|doubleburn:1,burn:1:3
+cinder|火刃|☄|1|attack|common|burnhit:5:8
+smoke|烟幕|☁|1|skill|common|block:5:8,weak:2:3
+furnace|不灭熔炉|♨|1|power|rare|burnturn:3:5
+brand|烙印|◆|1|attack|uncommon|hit:8:11,vul:1:2,burn:3:5
+study|破译|◇|1|skill|common|draw:3:4
+tempo|节奏|♫|1|skill|uncommon|energy:2,draw:1:2,exhaust:1
+mastery|连胜誓约|✶|1|power|rare|combo:1:2
+momentum|乘胜追击|➶|1|attack|uncommon|streakhit:5:8
+oath|守护誓言|⛨|0|skill|common|block:5:8,exhaust:1
+laststand|背水一战|♜|2|attack|rare|lowhit:24:32
+meditate|静心|◉|1|skill|common|block:6:9,energy:1
+renew|重燃|✚|1|skill|uncommon|heal:5:8,exhaust:1
+meteor|陨星|☄|3|attack|rare|hit:38:48,burn:4:7
+fracture|断罪|✷|1|attack|uncommon|vulhit:9:13
+forge|战地锻造|⚒|1|skill|uncommon|tempstr:4:6,draw:1
+resolve|坚忍|▣|1|skill|common|block:10:14,self:2:1
+avalanche|山崩|⚒|2|attack|rare|multi:8:11:3,exhaust:1
+lifeline|生命之线|♥|1|power|rare|turnheal:1:2
+ashblade|灰烬之刃|⚔|1|attack|uncommon|exhit:6:9`;
+const cards=Object.fromEntries(CARDRAW.split('\n').map(line=>{let [id,name,icon,cost,type,rarity,effects]=line.split('|');return [id,{name,icon,cost:+cost,type,rarity,fx:effects.split(',').map(e=>{let [k,n,u,m]=e.split(':');return {k,n:+n,u:u===undefined?+n:+u,m:+m||1}})}]}));
+const base=k=>k.replace(/\+$/,'');const upgraded=k=>k.endsWith('+');const info=k=>cards[base(k)];const cost=k=>Math.max(0,info(k).cost-(upgraded(k)&&['bastion','limit'].includes(base(k))?1:0));
+const labels={hit:'伤害',block:'护甲',vul:'易伤',weak:'虚弱',draw:'抽牌',str:'力量',burn:'燃烧',heal:'回血',energy:'能量',self:'自损生命',strip:'移除敌甲',thorns:'反伤',blockturn:'每回合护甲',blockhit:'每次获得护甲时伤害',strturn:'每回合力量',hurtstr:'失去生命时力量',exblock:'消耗时护甲',exdraw:'消耗时抽牌',burnturn:'每回合敌燃烧',combo:'每连续答对3题力量',turnheal:'每回合回血（本战最多8）',tempstr:'本回合力量'};
+function describe(k){return info(k).fx.map(f=>{let n=upgraded(k)?f.u:f.n;return ({multi:`${f.m}次${n}伤害`,exhaust:'消耗',execute:`${n}伤害，敌血<35%翻倍`,shieldhit:`${n}+当前护甲伤害`,retain:'护甲跨回合保留',doubleblock:'护甲翻倍',doublestr:'力量翻倍',losthit:`${n}+本场失血伤害（额外最多20）`,burnhand:`消耗手中最多${n}张其他卡`,doubleburn:'敌燃烧翻倍',burnhit:`${n}+敌燃烧伤害`,streakhit:`${n}+连续答对数×2伤害（额外最多20）`,lowhit:`${n}伤害，自身血<35%翻倍`,vulhit:`${n}伤害，敌易伤时额外50%`,exhit:`${n}+本场消耗数×3伤害`}[f.k]||`${labels[f.k]||f.k} ${n}`)}).join('；')}
+const monsters=[['苔泥史莱姆','slime',29,[['攻',6],['盾',5],['攻',9]]],['洞穴蝙蝠','bat',34,[['攻',8],['攻',5],['攻',12]]],['骸骨卫兵','skel',42,[['盾',8],['攻',12],['攻',7]]],['荆棘魔菇','mush',48,[['攻',7],['盾',10],['攻',15]]],['深渊眼魔','eye',54,[['攻',12],['强',2],['攻',10]]],['熔岩魔像','golem',66,[['盾',12],['攻',16],['攻',12]]],['黑甲骑士','knight',78,[['攻',15],['盾',15],['强',3],['攻',19]]],['灰烬之龙','dragon',132,[['攻',16],['盾',18],['强',3],['攻',23]]],['吞噬母体','slime',144,[['攻',13],['分裂',0],['攻',22]]],['镜面审判者','eye',115,[['攻',14],['镜',0],['攻',20]]]];
+monsters.push(
+ ['腐根守卫','root',49,[['盾',9],['攻',13],['强',1]]],
+ ['荆棘巨兽','thorn',81,[['攻',10],['盾',14],['攻',16]]],
+ ['枯木之王','rootking',120,[['盾',14],['强',2],['攻',20],['攻',13]]],
+ ['熔火小鬼','imp',65,[['攻',12],['诅',2],['攻',17]]],
+ ['熔岩猎犬','hound',73,[['攻',14],['强',2],['攻',18]]],
+ ['熔炉守卫','furnace',105,[['盾',17],['攻',22],['强',2]]],
+ ['铸铁暴君','tyrant',168,[['盾',22],['攻',20],['强',3],['攻',27]]],
+ ['虚空幽魂','ghost',91,[['诅',2],['攻',18],['吸',12]]],
+ ['深渊蜘蛛','spider',94,[['攻',15],['诅',2],['攻',22]]],
+ ['星陨巨像','star',126,[['盾',20],['强',3],['攻',24]]],
+ ['虚空君主','voidking',210,[['诅',2],['攻',25],['吸',18],['强',3],['攻',32]]]);
+const ACTS=[{name:'腐朽森林',en:'I · FOREST',normal:[0,1,3,10],elite:[11],boss:[8,12],events:[0,2,3,6]}, {name:'熔岩地宫',en:'II · FURNACE',normal:[2,5,13,14],elite:[15,6],boss:[7,16],events:[1,4,7,8]}, {name:'虚空高塔',en:'III · VOID',normal:[4,17,18],elite:[19],boss:[9,20],events:[5,9,10,11]}];
+const actInfo=()=>ACTS[(s?.act||1)-1];const totalFloor=()=>((s?.act||1)-1)*11+(s?.floor||0);const actBoss=a=>sh(ACTS[a-1].boss)[0];
+function actStrip(){return '<div class="actbar">'+ACTS.map((a,i)=>`<span class="${i+1===(s?.act||1)?'active':i+1<(s?.act||1)?'cleared':''}">${['I','II','III'][i]} ${a.name}</span>`).join('')+'</div>'}
+const $=id=>document.getElementById(id), sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}, clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+let progress={},s=null,quiz=null,msg='',clock=0;try{progress=JSON.parse(localStorage.getItem('spireWords')||'{}');s=JSON.parse(localStorage.getItem('spireRunV2')||'null');quiz=JSON.parse(localStorage.getItem('spireQuizV2')||'null');clock=Number(localStorage.getItem('spireClock')||0)}catch(e){}if(s&&!s.map)s=null;
+function save(){try{localStorage.setItem('spireWords',JSON.stringify(progress));localStorage.setItem('spireRunV2',JSON.stringify(s));localStorage.setItem('spireQuizV2',JSON.stringify(quiz));localStorage.setItem('spireClock',String(clock))}catch(e){}}
+function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const BANKKEY='spireBankV6', STUDYKEY='spireStudyV6';
+let study={dailyNew:40,auto:true};try{Object.assign(study,JSON.parse(localStorage.getItem(STUDYKEY)||'{}'));mode=study.mode||'smart'}catch(e){}
+function cacheBank(a){try{localStorage.setItem(BANKKEY,JSON.stringify(a));return true}catch(e){return false}}
+function loadBank(data,quiet=false){let a=Array.isArray(data)?data:data.words;if(!Array.isArray(a))throw Error('词库格式错误');let m=new Map();for(let x of a){let w=String(x.word||x.w||'').trim().toLowerCase();let t=Array.isArray(x.translations)?(x.translations.filter(v=>!String(v).startsWith('[')).join('；')||x.translations.join('；')):String(x.t||x.translation||'');if(w&&t)m.set(w,{w,t,p:x.phonetic||x.p||''})}if(m.size<100)throw Error('词库不完整');words=[...m.values()];let cached=cacheBank(words);bank=(words.length===3815?'3815条来源规模 · ':'导入词库 ')+words.length+' 词 · '+(cached?'已缓存':'未缓存');if(!quiet)render()}
+try{let a=JSON.parse(localStorage.getItem(BANKKEY)||'null');if(a?.length>=100)loadBank(a,true)}catch(e){}
+try{let a=JSON.parse(document.getElementById('spire-embedded-bank').textContent);if(a?.length>=3815&&words.length<3815)loadBank(a,true)}catch(e){}
+let bankLoading=false;async function online(){if(bankLoading)return;bankLoading=true;let previous=bank;bank='正在连接词库…';render();for(let u of ["./cet4.json",SOURCE,'https://cdn.jsdelivr.net/gh/grhliu/wordtyper-vocabularies@main/vocabularies/cet4.json','https://fastly.jsdelivr.net/gh/grhliu/wordtyper-vocabularies@main/vocabularies/cet4.json']){try{let ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),6500);let r;try{r=await fetch(u,{signal:ctl.signal})}finally{clearTimeout(timer)}if(!r.ok)continue;let data=await r.json();if((data.words||data).length<3815)continue;loadBank(data);bankLoading=false;return}catch(e){}}bankLoading=false;bank=previous+' · 联网失败，可导入';render()}
+
+const roomNames={normal:'⚔ 战斗',elite:'◆ 精英',rest:'♨ 篝火',shop:'◇ 商店',event:'? 事件',boss:'♛ 首领'};
+const relics={heart:'再生之心：战后回血6',battery:'余烬：首回合+1能量',shield:'石符：每回合+3护甲',coin:'金羽：战后额外10金币',edge:'磨石：开战力量+2',ember:'火种瓶：开战燃烧5'};
+function mapGen(){return Array.from({length:11},(_,i)=>i===10?['boss','boss','boss']:i===0?['normal','normal','normal']:i===9?sh(['rest','rest','shop']):sh(i===2||i===5||i===8?['elite','normal','rest']:i===3||i===7?['shop','event','normal']:['normal','event',i>2?'elite':'normal']))}
+function newRun(){let setup=loadouts[meta.loadout]||loadouts.classic;let difficulty=meta.difficulty;let health=difficulty==='practice'?90:difficulty==='challenge'?75:80;s={hp:health,max:health,act:1,floor:0,col:1,deck:[...setup.deck],gold:35,relic:[],difficulty,loadout:meta.loadout,id:Date.now()+'-'+Math.random().toString(36).slice(2),phase:'map',right:0,total:0,seen:[],wrong:[],map:mapGen(),boss:actBoss(1),route:[],removeCost:45};quiz=null;msg='';save();render()}
+function avail(c){return s.floor===0||Math.abs(c-s.col)<=1||s.floor===10}
+function pickRoom(c){if(s.phase!=='map'||!avail(c)||s.floor>=11)return;let type=s.map[s.floor][c];s.col=c;s.route.push(c);s.floor++;if(type==='rest'||type==='shop'||type==='event'){s.phase=type;if(type==='shop'){s.stock=rewardPool(4);s.removed=false}if(type==='event'){s.event=sh(actInfo().events)[0];s.eventUpgrade=false};save();render();return}startBattle(type)}
+function startBattle(type){let pool=actInfo();let choices=type==='elite'?pool.elite:pool.normal;let i=type==='boss'?s.boss:sh(type==='normal'&&s.floor<=2?choices.slice(0,2):choices)[0];let m=monsters[i];s.enemy=i;s.elite=type==='elite';s.ehp=Math.round((m[2]+(type==='boss'?0:Math.floor((s.floor-1)/2)*3))*rules(s).hp);s.emax=s.ehp;s.eBlock=0;s.ePower=0;s.burn=s.relic.includes('ember')?5:0;s.vuln=0;s.weak=0;s.playerWeak=0;s.str=s.relic.includes('edge')?2:0;s.tempstr=0;s.turn=0;s.pile=sh(s.deck);s.discard=[];s.hand=[];s.ex=[];s.powers={};s.lost=0;s.sustain=0;s.streak=0;s.block=0;s.mirror=false;s.split=false;s.phase='battle';msg='新的敌人出现！';turnStart();save();render()}
+function draw(n){while(n--&&s.hand.length<9){if(!s.pile.length){s.pile=sh(s.discard);s.discard=[]}if(!s.pile.length)break;s.hand.push(s.pile.pop())}}
+function heal(n){s.hp=clamp(s.hp+n,0,s.max)}
+function power(k){return s.powers[k]||0}
+function hurt(n){n=Math.min(s.hp,n);s.hp-=n;s.lost+=n;if(n)s.str+=power('hurtstr')}
+function direct(n){let a=Math.min(s.eBlock,n);s.eBlock-=a;s.ehp-=n-a}
+function damage(n){direct(Math.max(0,Math.round((n+s.str+s.tempstr)*(s.vuln?1.5:1)*(s.playerWeak>0?.75:1))))}
+function block(n){if(n<=0)return;s.block+=n;if(power('blockhit'))direct(power('blockhit'))}
+function exhaust(k){s.ex.push(k);block(power('exblock'));draw(power('exdraw'))}
+function turnStart(){s.turn++;s.energy=3+(s.relic.includes('battery')&&s.turn===1?1:0);if(!power('retain'))s.block=0;s.tempstr=0;s.str+=power('strturn');s.burn+=power('burnturn');let regen=Math.min(power('turnheal'),Math.max(0,8-(s.sustain||0)));let before=s.hp;heal(regen);s.sustain=(s.sustain||0)+s.hp-before;block(power('blockturn')+(s.relic.includes('shield')?3:0));draw(5)}
+function intent(){let a=s.enemy===8&&s.split?[['攻',18],['攻',25],['盾',10]]:monsters[s.enemy][3];let [kind,n]=a[(s.turn-1)%a.length];if(s.turn>=10){kind='攻';n=Math.max(n,14)+2*(s.turn-9)}if(kind==='攻'||kind==='吸')n=Math.max(1,Math.round(n*rules(s).atk));return [kind,n]}
+function endTurn(){if(quiz||s.phase!=='battle')return;let [kind,n]=intent();s.playerWeak=Math.max(0,(s.playerWeak||0)-1);s.eBlock=0;if(s.burn>0){s.ehp-=s.burn;s.burn--;if(s.ehp<=0){win();return}}if(kind==='攻'){let d=Math.max(0,Math.floor((n+s.ePower)*(s.weak?.75:1))-s.block);hurt(d);if(power('thorns'))direct(power('thorns'));msg='敌人造成 '+d+' 点伤害。'}else if(kind==='诅'){s.playerWeak=(s.playerWeak||0)+n;msg='敌人施加 '+n+' 回合虚弱。'}else if(kind==='吸'){let d=Math.max(0,n+s.ePower-s.block);hurt(d);s.ehp=Math.min(s.emax,s.ehp+Math.ceil(d/2));msg='敌人汲取 '+d+' 生命并回复自身。'}else if(kind==='盾'){s.eBlock=n;msg='敌人获得 '+n+' 护甲。'}else if(kind==='强'){s.ePower+=n;msg='敌人力量提升 '+n+'。'}else if(kind==='镜'){s.mirror=true;msg='镜面反制：下一张正确攻击牌反伤5。'}else if(kind==='分裂'){if(!s.split&&s.ehp<s.emax*.75){s.split=true;s.ehp=Math.min(s.emax,s.ehp+20);msg='母体分裂并恢复20生命。'}else {s.eBlock=10;msg='母体形成护甲。'}}s.vuln=Math.max(0,s.vuln-1);s.weak=Math.max(0,s.weak-1);s.discard.push(...s.hand);s.hand=[];if(s.hp<=0){s.phase='dead';finishRun()}else if(s.ehp<=0){win();return}else turnStart();save();render()}
+function play(i){if(quiz||s.phase!=='battle')return;let key=s.hand[i];if(!key||cost(key)>s.energy)return;quiz={...question(),i,key,done:false};save();render()}
+function effect(f,k){let n=upgraded(k)?f.u:f.n;switch(f.k){case'hit':damage(n);break;case'block':block(n);break;case'vul':s.vuln+=n;break;case'weak':s.weak+=n;break;case'draw':draw(n);break;case'str':s.str+=n;break;case'burn':s.burn+=n;break;case'heal':heal(n);break;case'energy':s.energy+=n;break;case'self':hurt(n);break;case'strip':s.eBlock=Math.max(0,s.eBlock-n);break;case'multi':for(let i=0;i<f.m;i++)damage(n);break;case'execute':damage(s.ehp<s.emax*.35?n*2:n);break;case'shieldhit':damage(n+s.block);break;case'doubleblock':block(s.block);break;case'doublestr':s.str*=2;break;case'losthit':damage(n+Math.min(20,s.lost));break;case'burnhand':for(let i=0;i<n&&s.hand.length;i++)exhaust(s.hand.splice(Math.floor(Math.random()*s.hand.length),1)[0]);break;case'doubleburn':s.burn*=2;break;case'burnhit':damage(n+s.burn);break;case'streakhit':damage(n+Math.min(20,s.streak*2));break;case'lowhit':damage(s.hp<s.max*.35?n*2:n);break;case'vulhit':damage(s.vuln?Math.round(n*1.5):n);break;case'tempstr':s.tempstr+=n;break;case'exhit':damage(n+s.ex.length*3);break;case'exhaust':break;default:s.powers[f.k]=(s.powers[f.k]||0)+n}}
+function answer(i,known=false){if(!quiz||quiz.done)return;let q=quiz,w=q.word;if(known){updateWord(w.w,true,true);s.seen.push(w.w);let alternatives=words.filter(x=>eligible(x)&&!rec(x.w)?.known&&!s.seen.slice(-5).includes(x.w));if(!alternatives.length){quiz=null;msg='已标记掌握；没有其他待学词。请重新选牌或切换全词模式。'}else{quiz={...makeQuestion(chooseWord(s.seen.slice(-5))),i:q.i,key:q.key,done:false};msg='已标记掌握；不消耗能量，换一道题。'}save();render();return}let ok=q.choices[i]===q.correct;clock++;updateWord(w.w,ok,known);if(!known){s.total++;if(ok)s.right++;else s.wrong.push(w.w)}s.seen.push(w.w);let k=q.key,c=info(k);s.energy-=cost(k);s.hand.splice(q.i,1);if(ok){if(!known){s.streak++;if(s.streak%3===0)s.str+=power('combo')}for(let f of c.fx)effect(f,k);if(c.type==='attack'&&s.mirror){hurt(5);s.mirror=false}if(c.type==='power'){}else if(c.fx.some(f=>f.k==='exhaust'))exhaust(k);else s.discard.push(k);msg=known?'标记掌握；技能生效。':'答对！'+c.name+' 生效。'}else{s.streak=0;s.discard.push(k);let mercy=s.difficulty==='practice'?3:0;if(mercy){s.block+=mercy;msg='答错，技能失效；获得3点保底护甲，加入复习。'}else msg='答错，卡牌失效；加入复习。'}q.done=true;q.ok=ok;save();render()}
+function next(){if(!quiz?.done)return;quiz=null;if(s.hp<=0){s.phase='dead';finishRun();save();render();return}if(s.ehp<=0){win();return}save();render()}
+function rewardPool(n=3){let pool=Object.keys(cards).filter(k=>cards[k].rarity!=='basic'),a=[];while(a.length<n&&pool.length){let r=Math.random(),rar=r<.13?'rare':r<.48?'uncommon':'common',p=pool.filter(k=>cards[k].rarity===rar);let k=sh(p.length?p:pool)[0];a.push(k);pool=pool.filter(x=>x!==k)}return a}
+function giveRelic(){let r=sh(Object.keys(relics).filter(k=>!s.relic.includes(k)))[0];if(r)s.relic.push(r);return r}
+function win(){quiz=null;s.gold+=(s.floor===11?85:s.elite?55:28)+(s.relic.includes('coin')?10:0);if(s.relic.includes('heart'))heal(6);s.got=(s.elite||s.floor===11)?giveRelic():null;s.phase=s.floor===11&&s.act===3?'victory':'reward';if(s.phase==='victory')finishRun();s.reward=rewardPool();save();render()}
+function reward(k){if(s.phase!=='reward')return;if(k)s.deck.push(k);if(s.floor===11&&s.act<3){s.phase='actClear';save();render()}else leave()}
+function nextAct(){if(s.phase!=='actClear'||s.act>=3)return;s.act++;s.floor=0;s.col=1;s.map=mapGen();s.route=[];s.boss=actBoss(s.act);s.phase='map';heal(Math.ceil((s.max-s.hp)*.75));quiz=null;save();render()}
+function leave(){s.phase='map';save();render()}
+function rest(){heal(Math.ceil(s.max*.3));leave()}
+function upgrade(i){if(s.phase!=='rest'&&s.phase!=='event')return;if(!s.deck[i]||upgraded(s.deck[i]))return;s.deck[i]+='+';leave()}
+function price(k){return {common:45,uncommon:65,rare:90}[info(k).rarity]||40}
+function buy(i){if(s.phase!=='shop')return;let k=s.stock[i];if(!k||s.gold<price(k))return;s.gold-=price(k);s.deck.push(k);s.stock.splice(i,1);save();render()}
+function removeCard(i){if(s.phase!=='shop'||s.removed||s.deck.length<=5||s.gold<s.removeCost||!s.deck[i])return;s.gold-=s.removeCost;s.removeCost+=15;s.deck.splice(i,1);s.removed=true;save();render()}
+const events=[['裂隙祭坛','以血换取力量。','失去10生命，获得随机遗物','获得20金币'],['流浪铁匠','铁匠愿意为旅人打磨武器。','免费强化一张牌','获得30金币'],['古井','泉水似乎能增强体魄。','最大生命+8，恢复8','恢复16生命'],['失落商队','遗落的箱子里有未知宝物。','失去6生命，获得65金币','安全取得20金币'],['灰烬图书馆','残页记录着失传剑术。','获得随机稀有牌','恢复12生命'],['诡秘交易','商人愿以金币换取祝福。','花费40金币，随机遗物','离开'],['苔藓圣坛','森林中有尚未熄灭的微光。','恢复20生命','获得35金币'],['熔炉试炼','火焰能重铸你的兵器。','失去8生命，免费强化一张牌','获得25金币'],['熔岩渡船','渡船人索要金币。','花30金币，最大生命+10并回血10','恢复8生命'],['虚空图书馆','文字从残页中自行浮现。','获得一张随机稀有牌','获得50金币'],['星光泉','星光落在一池清泉之中。','恢复24生命','最大生命+6并回血6'],['最后的誓言','献出代价，迎接最终战。','失去12生命，获得80金币','恢复15生命']];
+function eventChoice(i){if(s.phase!=='event')return;switch(s.event){case 0:if(i===0){if(s.hp<=10)return;hurtEvent(10);giveRelic()}else s.gold+=20;break;case 1:if(i===0){s.eventUpgrade=true;save();render();return}else s.gold+=30;break;case 2:if(i===0){s.max+=8;heal(8)}else heal(16);break;case 3:if(i===0){if(s.hp<=6)return;hurtEvent(6);s.gold+=65}else s.gold+=20;break;case 4:if(i===0)s.deck.push(sh(Object.keys(cards).filter(k=>cards[k].rarity==='rare'))[0]);else heal(12);break;case 5:if(i===0){if(s.gold<40)return;s.gold-=40;giveRelic()}break;case 6:if(i===0)heal(20);else s.gold+=35;break;case 7:if(i===0){if(s.hp<=8||s.eventUpgrade||s.deck.every(upgraded))return;hurtEvent(8);s.eventUpgrade=true;save();render();return}else s.gold+=25;break;case 8:if(i===0){if(s.gold<30)return;s.gold-=30;s.max+=10;heal(10)}else heal(8);break;case 9:if(i===0)s.deck.push(sh(Object.keys(cards).filter(k=>cards[k].rarity==='rare'))[0]);else s.gold+=50;break;case 10:if(i===0)heal(24);else{s.max+=6;heal(6)}break;case 11:if(i===0){if(s.hp<=12)return;hurtEvent(12);s.gold+=80}else heal(15);break}leave()}
+function hurtEvent(n){s.hp-=n}
+function card(k,i,action){let c=info(k);return `<button class="card ${c.type} ${c.rarity}" ${action?`onclick="${action}"`:''} ${i!==null&&s.energy<cost(k)?'disabled':''}><div class="line"><span class="cost">${cost(k)}</span><span class="rarity">${{basic:'基础',common:'普通',uncommon:'罕见',rare:'稀有'}[c.rarity]}</span></div><div class="art">${cardArt(k)}</div><b>${c.name}${upgraded(k)?'+':''}</b><span class="kind">${{attack:'攻击',skill:'技能',power:'能力'}[c.type]}</span><span class="effect">${esc(describe(k))}</span></button>`}
+function gloss(t){return t.split('；')[0].replace(/^\s*(?:[a-z]+\.)+\s*/i,'').split(/[,，]/).slice(0,3).join('，').trim()||t}
+function pos(t){let m=t.match(/^\s*(vt|vi|v|n|a|adj|adv|prep)\./);return m?m[1].replace(/^(vt|vi)$/,'v').replace(/^adj$/,'a'):''}
+const DAY=86400000, intervals=[0,1,3,7,14,30,60,120];
+function dayKey(){let d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function rec(w){let p=progress[w];if(!p)return null;if(!Number.isFinite(p.level)){p.level=p.known?5:Math.min(3,p.streak||0);p.nextAt=0;p.reviewAt=0;p.lapses=p.wrong||0}return p}
+function reviewDue(p){return p&&((p.nextAt||0)<=Date.now()||(p.due>0&&p.due<=clock))}
+function updateWord(w,ok,known=false){let p=rec(w)||{right:0,wrong:0,streak:0,level:0,lapses:0,firstDay:dayKey()};if(!known){p.tested=true;p.lastResult=ok?'right':'wrong'}if(!p.firstDay)p.firstDay=dayKey();let now=Date.now();if(known){p.known=true;p.level=Math.max(5,p.level);p.nextAt=now+30*DAY;p.due=0}else if(ok){if(p.known)p.level=Math.min(p.level,Math.max(0,Math.min(4,p.right||0)));p.right++;p.streak++;p.known=false;p.level=Math.min(7,p.level+1);p.nextAt=now+(p.level===1?10*60000:intervals[p.level-1]*DAY);p.due=p.level===1?clock+5:0}else{p.wrong++;p.lapses++;p.streak=0;p.known=false;p.level=0;p.nextAt=now+90*1000;p.due=clock+4}p.reviewAt=now;progress[w]=p;return p}
+function eligible(x){return mode==='all'||!basic.has(x.w)||!!progress[x.w]}
+function dueWords(){return words.filter(x=>eligible(x)&&reviewDue(rec(x.w)))}
+function chooseWord(recent=[],reviewOnly=false){let pool=words.filter(eligible),available=pool.filter(x=>!recent.includes(x.w)&&(!rec(x.w)?.known||reviewDue(rec(x.w)))),due=available.filter(x=>reviewDue(rec(x.w))),fresh=available.filter(x=>!progress[x.w]),today=Object.values(progress).filter(p=>p.firstDay===dayKey()).length;
+ if(due.length&&(reviewOnly||!fresh.length||today>=study.dailyNew||Math.random()<.7)){due.sort((a,b)=>{let pa=rec(a.w),pb=rec(b.w);return (pa.nextAt||0)-(pb.nextAt||0)});return sh(due.slice(0,Math.max(8,Math.ceil(due.length*.2))))[0]}
+ if(fresh.length&&(!reviewOnly&&today<study.dailyNew))return sh(fresh)[0];if(reviewOnly)return null;
+ if(due.length)return sh(due)[0];let existing=available.filter(x=>progress[x.w]&&!rec(x.w).known);if(existing.length)return sh(existing.sort((a,b)=>rec(a.w).level-rec(b.w).level).slice(0,Math.max(10,Math.ceil(existing.length*.25))))[0];return sh(available.length?available:pool.length?pool:words)[0]}
+function makeQuestion(word){let reverse=Math.random()<.24&&gloss(word.t).length>1,correct=reverse?word.w:gloss(word.t),choices=[],pool=words.filter(x=>x.w!==word.w&&gloss(x.t)!==gloss(word.t));for(let x of [...sh(pool.filter(x=>pos(word.t)&&pos(x.t)===pos(word.t))),...sh(pool)]){let t=reverse?x.w:gloss(x.t);if(t!==correct&&!choices.includes(t)&&!word.t.includes(t)&&(!reverse||!x.t.includes(gloss(word.t))))choices.push(t);if(choices.length===3)break}return {word,reverse,correct,choices:sh([correct,...choices])}}
+function question(){return makeQuestion(chooseWord(s.seen.slice(-5)))}
+
+function monsterArt(type){let shapes={slime:'<path fill="#76ab7d" d="M11 85Q7 68 28 49Q40 15 64 28Q88 31 95 57Q118 70 111 89Q104 103 60 102Q20 103 11 85Z"/><ellipse cx="44" cy="66" rx="8" ry="11" fill="#1b3631"/><ellipse cx="79" cy="66" rx="8" ry="11" fill="#1b3631"/><path d="M49 83Q61 90 73 83" stroke="#263a34" stroke-width="4" fill="none"/>',bat:'<path fill="#786ca1" d="M58 46Q34 15 4 30L23 48 7 76 36 67 60 92 86 67 115 76 100 48 116 30Q86 15 62 46Z"/><ellipse fill="#393044" cx="60" cy="61" rx="23" ry="32"/><path fill="#aa92c3" d="M40 43L38 12 53 35 69 35 84 12 80 43Z"/><circle cx="51" cy="54" r="5" fill="#f2ba68"/><circle cx="70" cy="54" r="5" fill="#f2ba68"/>',skel:'<path fill="#b9b9a1" d="M24 50Q24 14 60 14Q96 14 96 50Q96 72 77 78L76 91H44L43 78Q24 72 24 50Z"/><path fill="#313738" d="M32 49Q45 35 55 50L52 64H37ZM65 50Q75 35 88 49L83 64H68ZM60 63L54 73H66Z"/><path stroke="#303638" stroke-width="4" d="M50 81V91M60 81V91M70 81V91"/>',mush:'<path fill="#d2b596" d="M44 53H77L86 102H34Z"/><path fill="#a55d70" d="M8 62Q9 15 60 13Q110 15 112 62Q78 73 60 66Q36 73 8 62Z"/><g fill="#e6c5a1"><circle cx="35" cy="44" r="9"/><circle cx="70" cy="30" r="10"/><circle cx="94" cy="51" r="7"/></g><g fill="#44303a"><circle cx="48" cy="79" r="4"/><circle cx="71" cy="79" r="4"/></g>',eye:'<path d="M60 14L75 32 104 19 98 47 116 64 91 76 99 101 72 92 60 111 47 92 21 101 28 76 4 64 22 47 15 19 45 32Z" fill="#745a9a"/><ellipse cx="60" cy="62" rx="39" ry="26" fill="#dfb4ca"/><ellipse cx="60" cy="62" rx="13" ry="24" fill="#22233a"/><circle cx="55" cy="54" r="5" fill="#fff"/>',golem:'<path d="M31 13H85L99 43 91 76 105 102H70L60 82 49 102H15L28 76 20 43Z" fill="#737b78"/><path d="M36 38L53 30 60 55 75 33 86 44 71 72 59 63 48 82" fill="none" stroke="#f68c51" stroke-width="6"/><path d="M37 26H51M70 26H84" stroke="#ffe09e" stroke-width="5"/>',knight:'<path fill="#68737a" d="M33 15H87L99 52 80 79 83 104H37L40 79 21 52Z"/><path fill="#242b31" d="M33 42H87L77 55H43Z"/><path d="M40 47H80" stroke="#e68173" stroke-width="4"/><path d="M14 87L102 19" stroke="#c6c9be" stroke-width="8"/><path d="M17 63L39 87" stroke="#b79a65" stroke-width="7"/>',dragon:'<path d="M50 42L10 12 17 59 1 83 36 75 58 102 81 76 118 84 102 59 110 12 70 42Z" fill="#a6574c"/><path d="M33 56L31 20 47 38 73 38 89 20 86 56 76 84 60 98 44 84Z" fill="#cc7458"/><path d="M40 57L53 62M80 57L67 62" stroke="#ffe1a0" stroke-width="6"/><path d="M49 77L60 86 71 77" stroke="#42252b" stroke-width="5" fill="none"/>'};return `<svg viewBox="0 0 120 116" xmlns="http://www.w3.org/2000/svg">${shapes[type]}</svg>`}
+
+function sceneArt(){return `<svg class="scene" viewBox="0 0 800 350" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#141526"/><stop offset="1" stop-color="#5b4245"/></linearGradient><radialGradient id="moon"><stop stop-color="#ecc7a2" stop-opacity=".8"/><stop offset="1" stop-color="#dd8661" stop-opacity="0"/></radialGradient><linearGradient id="floor" x2="0" y2="1"><stop stop-color="#45404a"/><stop offset="1" stop-color="#171620"/></linearGradient></defs><path fill="url(#sky)" d="M0 0H800V350H0z"/><circle cx="630" cy="82" r="90" fill="url(#moon)"/><path fill="#252434" d="M0 233V69L57 22 105 67V178L165 132 207 146V90L238 62 278 90V174L341 119 378 159V56L413 18 448 56V165L510 119 549 168V80L590 32 632 80V151L690 120 741 160V64L800 12V233Z"/><g fill="#181923" stroke="#776054" stroke-width="2"><path d="M0 0H100V251H0Z M700 0H800V251H700Z"/><path d="M100 0Q400 310 700 0H660Q400 250 140 0Z"/><path d="M118 0V210H148V0M652 0V210H682V0"/></g><path d="M0 240Q400 213 800 240V350H0Z" fill="url(#floor)"/><g stroke="#a99483" opacity=".17" fill="none"><path d="M0 270H800M0 310H800M0 340H800M400 225L-100 350M400 225L110 350M400 225L280 350M400 225L520 350M400 225L690 350M400 225L900 350"/></g><g fill="#e9a56c" opacity=".7">${Array.from({length:24},(_,i)=>`<circle cx="${(i*137+53)%800}" cy="${(i*47+37)%255}" r="${i%3===0?1.6:.8}"/>`).join('')}</g></svg>`}
+function heroArt(){return `<svg viewBox="0 0 180 190" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="steel" x2="1" y2="1"><stop stop-color="#e4ceac"/><stop offset=".4" stop-color="#85828b"/><stop offset=".7" stop-color="#393d4b"/><stop offset="1" stop-color="#ad9585"/></linearGradient><linearGradient id="cape" x2="0" y2="1"><stop stop-color="#ab5846"/><stop offset="1" stop-color="#471e2c"/></linearGradient></defs><ellipse cx="86" cy="179" rx="60" ry="8" fill="#0a0910" opacity=".7"/><path d="M68 51Q29 60 19 171L61 160 99 176 121 98 112 59Z" fill="url(#cape)" stroke="#2e2029" stroke-width="2"/><path d="M74 119L62 168 45 177 72 178 89 132 94 173 115 177 124 168 112 118Z" fill="#363440" stroke="#ac9582" stroke-width="2"/><path d="M59 70L75 56 106 57 126 76 112 121 71 121Z" fill="url(#steel)" stroke="#352e36" stroke-width="3"/><path d="M77 68L91 111 108 68 91 79Z" fill="#4c4550" stroke="#d2a87a" stroke-width="2"/><path d="M59 66L42 76 35 108 52 119 68 91Z M119 65L138 76 145 111 128 120 112 88Z" fill="url(#steel)" stroke="#3d333a" stroke-width="3"/><path d="M69 32L85 12 108 25 115 47 104 65 80 63 65 47Z" fill="url(#steel)" stroke="#302b35" stroke-width="3"/><path d="M68 40L110 40 103 51 76 51Z" fill="#171823"/><path d="M76 44H103" stroke="#ff9b58" stroke-width="3"/><path d="M92 16V39" stroke="#eed6a4" stroke-width="2"/><path d="M125 117L163 30 166 14 151 25 113 110Z" fill="url(#steel)" stroke="#d8bc92" stroke-width="2"/><path d="M106 105L135 119" stroke="#d8ad6b" stroke-width="6"/><path d="M120 115L108 140" stroke="#49303a" stroke-width="7"/><circle cx="107" cy="141" r="4" fill="#d0a66d"/><path d="M41 94Q22 91 18 112L24 143 46 153 62 135 63 108Z" fill="#454650" stroke="#bc9569" stroke-width="3"/><path d="M40 100V141M25 120H55" stroke="#d8ad76" stroke-width="3"/><path d="M77 126H106" stroke="#b89b79" stroke-width="4"/></svg>`}
+function cardArt(k){let c=info(k),fx=c.fx.map(f=>f.k),family=fx.some(x=>x.toLowerCase().includes('burn'))?'fire':fx.some(x=>['self','heal','turnheal','hurtstr','losthit','lowhit'].includes(x))?'blood':fx.some(x=>['block','retain','doubleblock','shieldhit','blockturn','blockhit','exblock','thorns'].includes(x))?'shield':fx.some(x=>['draw','energy','combo','exdraw','burnhand'].includes(x))?'rune':c.type==='power'?'crown':'blade';let pal={fire:['#ed9d4b','#6b272a'],blood:['#e0808b','#551f35'],shield:['#92c2d7','#263f60'],rune:['#b2a8ed','#45345e'],crown:['#f0d28b','#64472e'],blade:['#e0ba91','#653c40']}[family],seed=[...base(k)].reduce((n,v)=>n+v.charCodeAt(0),0),g='a'+base(k)+ (upgraded(k)?'u':'');let shapes={blade:`<g transform="rotate(${seed%21-10} 60 38)"><path d="M29 63L85 10 94 6 90 20 40 72Z" fill="#e4d9c4" stroke="#fff1cc" stroke-width="1"/><path d="M36 66L90 12" stroke="#77798a" stroke-width="2"/><path d="M25 51L49 75" stroke="${pal[0]}" stroke-width="5"/><path d="M32 65L19 78" stroke="#a36b53" stroke-width="5"/></g>`,shield:`<path d="M60 9L92 20 88 52Q80 66 60 77Q40 66 32 52L28 20Z" fill="#354c68" stroke="${pal[0]}" stroke-width="3"/><path d="M60 17L83 26 80 49Q73 61 60 68Q47 61 40 49L37 26Z" fill="#7d98af" stroke="#d3e4e6"/><path d="M60 23V61M43 40H77" stroke="#25344b" stroke-width="5"/>`,fire:`<path d="M62 5Q67 31 83 39Q95 53 81 68Q61 85 42 69Q24 57 42 35Q41 51 51 47Q68 30 62 5Z" fill="#dc6942" stroke="${pal[0]}" stroke-width="2"/><path d="M61 36Q75 52 70 65Q60 76 51 65Q44 56 61 36Z" fill="#ffda86"/>`,blood:`<path d="M60 10Q72 31 88 48Q100 71 75 78Q44 90 32 66Q22 50 60 10Z" fill="#a13e52" stroke="${pal[0]}" stroke-width="2"/><path d="M50 44Q40 61 49 69" fill="none" stroke="#ffc4b2" stroke-width="4" stroke-linecap="round"/>`,rune:`<g fill="none" stroke="${pal[0]}" stroke-width="2"><circle cx="60" cy="42" r="28"/><circle cx="60" cy="42" r="20"/><path d="M60 7L87 60H33Z M60 77L33 24H87Z"/></g><circle cx="60" cy="42" r="8" fill="#eee5ff"/>`,crown:`<path d="M30 25L45 43 60 13 75 43 90 25 82 65H38Z" fill="#b18b50" stroke="${pal[0]}" stroke-width="2"/><path d="M40 56H80" stroke="#f1d79e" stroke-width="4"/><circle cx="60" cy="46" r="6" fill="#b24f56"/>`};return `<svg viewBox="0 0 120 84" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="${g}"><stop stop-color="${pal[1]}"/><stop offset="1" stop-color="#15121d"/></radialGradient></defs><path d="M0 0H120V84H0Z" fill="url(#${g})"/><g stroke="${pal[0]}" opacity=".24" fill="none"><circle cx="60" cy="42" r="38"/><path d="M0 70L120 12M0 12L120 70M60 0V84"/></g><g fill="${pal[0]}" opacity=".6">${Array.from({length:8},(_,i)=>`<circle cx="${(seed+i*31)%120}" cy="${(seed+i*19)%84}" r="${i%3===0?1.6:.8}"/>`).join('')}</g>${shapes[family]}<path d="M4 12V4H15M105 4H116V12M4 72V80H15M105 80H116V72" fill="none" stroke="${pal[0]}" opacity=".7"/></svg>`}
+function enhancedMonster(type){if(type==='knight')return heroArt().replaceAll('#ff9b58','#ff554d').replaceAll('#ab5846','#515067');let original=monsterArt(type);let palettes={slime:['#a1d69f','#38775d'],bat:['#a99acd','#3c294c'],skel:['#eee2bf','#746b64'],mush:['#e5a9b7','#6c374d'],eye:['#c5a2eb','#563b79'],golem:['#b3a89a','#51474e'],dragon:['#f5a17a','#763735']};let [light,dark]=palettes[type]||palettes.dragon;let extra=`<ellipse cx="60" cy="104" rx="49" ry="9" fill="#0d0c15" opacity=".7"/><g fill="${light}" opacity=".55"><circle cx="20" cy="32" r="1.5"/><circle cx="99" cy="24" r="2"/><circle cx="108" cy="77" r="1.2"/></g>`;return original.replace('xmlns="http://www.w3.org/2000/svg">','xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="m'+type+'" x2=".7" y2="1"><stop stop-color="'+light+'"/><stop offset="1" stop-color="'+dark+'"/></linearGradient></defs>'+extra).replace(/fill="(#[a-fA-F0-9]{6})"/g,(m,v)=>{return ['#76ab7d','#786ca1','#b9b9a1','#a55d70','#745a9a','#737b78','#a6574c'].includes(v)?'fill="url(#m'+type+')" stroke="'+dark+'" stroke-width="1.5"':m})}
+
+function button(t,act,disabled=false,primary=false){return `<button class="wide ${primary?'primary':''}" onclick="${act}" ${disabled?'disabled':''}>${t}</button>`}
+function deckChoices(act,filter=()=>true){return `<div class="hand">${s.deck.map((k,i)=>filter(k)?card(k,null,`${act}(${i})`):'').join('')}</div>`}
+function mapView(){let icons={normal:'⚔',elite:'◆',rest:'♨',shop:'◇',event:'?',boss:'♛'},lines='',h='<div class="mapwrap"><svg viewBox="0 0 300 725" preserveAspectRatio="none" aria-hidden="true">';for(let r=0;r<10;r++)for(let c=0;c<3;c++)for(let d=0;d<3;d++){if(r===9&&d!==1||r<9&&Math.abs(c-d)>1)continue;let used=r+1<s.floor&&s.route[r]===c&&s.route[r+1]===d;lines+=`<line x1="${50+c*100}" y1="${697-r*66.5}" x2="${50+d*100}" y2="${697-(r+1)*66.5}" stroke="${used?'#e3ba72':'#776453'}" stroke-width="${used?2.5:1}" stroke-dasharray="${used?'0':'3 5'}" opacity="${used?1:.55}"/>`}h+=lines+'</svg><div class="mapgrid">';for(let r=10;r>=0;r--){for(let c=0;c<(r===10?1:3);c++){let col=r===10?1:c,k=s.map[r][col],on=r===s.floor&&avail(col),done=r<s.floor&&s.route[r]===col;h+=`<button class="${k} ${done?'selected':''} ${on?'available':''}" ${on?'':'disabled'} onclick="pickRoom(${col})"><span class="mapicon">${done?'✓':icons[k]}</span><span class="maplabel">${r+1} · ${roomNames[k].slice(2)}</span></button>`}}return h+'</div></div>'}
+function catalog(){ $('app').innerHTML=`<button onclick="render()">← 返回</button><h2>灰烬剑士 · ${Object.keys(cards).length} 张卡</h2><p class="small">普通 / 罕见 / 稀有；每张卡可强化一次。</p><div class="catalog">${Object.keys(cards).map(k=>card(k,null,'')).join('')}</div>`}
+function render(){let count=Object.keys(progress).length,master=coverage().master;let h=`<div class="top"><div><div class="brand">词塔 <span class="small">V0.9</span></div><div class="small">灰烬剑士 · ${esc(bank)}</div></div><button onclick="showStats()">复习 ${dueWords().length}</button></div>`;if(!s){h+=`<section class="panel hero">${sceneArt()}<div class="eyebrow">Lexis Spire · Three Acts</div><div class="heroart">${heroArt()}</div><h1>灰烬剑士</h1><p>以词为刃，踏上高塔。</p><p>三幕 · 33 层远征 · ${Object.keys(cards).length} 张卡牌 · 6 位首领</p>${actStrip()}${homeProgress()}${button('开始远征','newRun()',false,true)}<div class="secondary">${button('卡牌图鉴','catalog()')}${button('完整词库','online()')}</div></section>`}else{h+=`<section class="panel"><div class="line"><b>♥ ${s.hp}/${s.max}</b><span>🪙 ${s.gold} · ${s.deck.length} 张卡</span><span class="gold">${totalFloor()}/33 层</span></div><div class="hp"><i style="width:${100*s.hp/s.max}%"></i></div></section>`;if(s.phase==='map'){h+=`<section class="panel"><h2>${actInfo().en} · ${actInfo().name}</h2>${actStrip()}<p class="routeinfo">从下往上走；下一层可选择同列或相邻列。亮色按钮为可走节点。</p><p class="small">${difficultyName(s.difficulty)} · 塔顶：${monsters[s.boss][0]}</p>${mapView()}</section>`}else if(s.phase==='rest'){h+=`<section class="panel"><h2>篝火</h2><p>休息或强化一张卡，二选一。</p>${button('休息 · 恢复30%最大生命','rest()',false,true)}<h3>强化卡牌（选择一张）</h3>${deckChoices('upgrade',k=>!upgraded(k))}${s.deck.every(upgraded)?'<p>所有卡已强化，请休息。</p>':''}</section>`}else if(s.phase==='shop'){h+=`<section class="panel"><h2>流浪商人</h2><div class="hand">${s.stock.map((k,i)=>`<div>${card(k,null,`buy(${i})`)}${button(price(k)+' 金币',`buy(${i})`,s.gold<price(k))}</div>`).join('')}</div><h3>永久删卡 · ${s.removeCost}金币</h3><p class="small">每次访问最多删除一张；最低保留5张。</p>${!s.removed&&s.deck.length>5&&s.gold>=s.removeCost?deckChoices('removeCard'):'<p>当前不可删卡</p>'}${button('离开商店','leave()',false,true)}</section>`}else if(s.phase==='event'){let e=events[s.event];h+=`<section class="panel"><h2>${e[0]}</h2><p>${e[1]}</p>${s.eventUpgrade?deckChoices('upgrade',k=>!upgraded(k)):button(e[2],'eventChoice(0)',s.event===0&&s.hp<=10||s.event===3&&s.hp<=6||s.event===5&&s.gold<40||s.event===7&&(s.hp<=8||s.deck.every(upgraded))||s.event===8&&s.gold<30||s.event===11&&s.hp<=12,false)}${button(e[3],'eventChoice(1)',false,true)}</section>`}else if(s.phase==='battle'){let m=monsters[s.enemy],it=intent(),attack=Math.floor((it[1]+s.ePower)*(s.weak?.75:1));h+=`<section class="panel arena">${sceneArt()}<div class="intent">敌人意图：${it[0]==='攻'?'⚔ 攻击 '+attack:it[0]==='盾'?'⛨ 格挡 '+it[1]:it[0]==='强'?'力量 +'+it[1]:it[0]==='镜'?'镜面反制':it[0]==='诅'?'施加虚弱 '+it[1]:it[0]==='吸'?'汲血 '+(it[1]+s.ePower):'分裂准备'}</div><div class="stage"><div class="fighter">${heroArt()}<span class="figlabel">灰烬剑士</span></div><div class="foe">${enhancedMonster(m[1])}<span class="figlabel">${m[0]}</span></div></div><div class="enemyline"><span>${m[0]} ${s.eBlock?'⛨'+s.eBlock:''}</span><span>${Math.max(0,s.ehp)}/${s.emax}</span></div><div class="hp enemyhp"><i style="width:${clamp(100*s.ehp/s.emax,0,100)}%"></i></div><div class="small">${s.burn?'燃烧 '+s.burn+' · ':''}${s.vuln?'易伤 '+s.vuln+' · ':''}${s.weak?'虚弱 '+s.weak+' · ':''}${s.mirror?'镜面反伤':''}${s.split?'已分裂':''}${s.playerWeak?' · 自身虚弱 '+s.playerWeak:''}</div></section><div class="combatbar"><div class="orb">${s.energy}</div><div><b>⛨ ${s.block}　⚔ ${s.str+s.tempstr}</b><div class="small">护甲 · 力量</div></div><span class="small">第 ${s.turn} 回合${s.turn>=10?' · 狂暴':''}</span></div><div class="status"><span>抽牌 ${s.pile.length}</span><span>弃牌 ${s.discard.length}</span><span>消耗 ${s.ex.length}</span><span>连对 ${s.streak}</span></div><div class="log ${quiz?.done?(quiz.ok?'green':'red'):''}">${esc(msg)}</div>`;if(quiz){h+=`<section class="panel quizpanel"><div class="small">${info(quiz.key).name} · ${quiz.reverse?'选对应英文':'选择正确释义'}</div><div class="word">${esc(quiz.reverse?gloss(quiz.word.t):quiz.word.w)}</div><div class="small">${esc(quiz.reverse?'':quiz.word.p)}</div>${quiz.done?`<p class="${quiz.ok?'green':'red'}">${quiz.ok?'技能生效':'正确答案：'+esc(quiz.correct)}</p><p>${esc(quiz.word.w)} · ${esc(quiz.word.t)}</p>${button('继续','next()',false,true)}`:`<div class="opts">${quiz.choices.map((a,i)=>`<button onclick="answer(${i})"><span class="letter">${String.fromCharCode(65+i)}</span>${esc(a)}</button>`).join('')}</div>${button('太简单 · 换题（不出牌）','answer(-1,true)')}`}</section>`}else h+=`<div class="small">手牌 ${s.hand.length} 张 · 左右滑动查看</div><div class="hand battlehand">${s.hand.map((k,i)=>card(k,i,`play(${i})`)).join('')}</div><button class="wide endturn" onclick="endTurn()">结束回合 →</button>`;if(Object.keys(s.powers).length)h+=`<p class="small">能力：${Object.entries(s.powers).map(([k,v])=>(labels[k]||k)+' '+v).join(' · ')}</p>`}else if(s.phase==='reward'){h+=`<section class="panel rewardpanel"><h2 class="gold">${s.floor===11?'章节首领已击败':'战斗胜利'}</h2><p>${s.got?'获得遗物：'+relics[s.got]+'。':''}三选一，或跳过。</p><div class="hand">${s.reward.map(k=>card(k,null,`reward('${k}')`)).join('')}</div>${button('跳过奖励','reward(null)')}</section>`}else if(s.phase==='actClear'){h+=`<section class="panel act-transition">${pixel('crown')}<h2>${actInfo().name} · 已征服</h2><p>下一幕：${ACTS[s.act].name}</p><p>保留牌组、遗物和金币，恢复75%已损失生命。</p>${actStrip()}${button('进入下一幕','nextAct()',false,true)}</section>`}else h+=`<section class="panel"><h2>${s.phase==='victory'?'登塔成功！':'远征结束'}</h2><p>第 ${totalFloor()} 层 · 答对 ${s.right}/${s.total} · 错词 ${new Set(s.wrong).size}</p>${runSummary()}${button('返回营地','backCamp()',false,true)}</section>`;h+=`<details><summary>牌组与遗物</summary><div class="hand">${s.deck.map(k=>card(k,null,'')).join('')}</div><p>${s.relic.map(k=>relics[k]).join(' · ')||'暂无遗物'}</p></details>`}h+=`<details><summary>词库设置 · 验证熟练 ${master} 词</summary>${button('联网加载完整词库','online()')}<p>导入 JSON：<input type="file" accept=".json,application/json" onchange="importFile(this)"></p>${button(mode==='all'?'全词模式':'智能过滤基础词',"mode=mode==='all'?'smart':'all';study.mode=mode;saveStudy();render()")}${button('卡牌图鉴','catalog()')}${button('学习中心','showStats()')}<p class="small">词源：WordTyper Vocabularies / ECDICT（MIT）。完整来源词库首次联网或导入后缓存，内置精选词可离线使用。词汇记录沿用旧版，本局进度独立。</p>${button('返回首页',"if(confirm('结束本局？保留词汇记录。')){s=null;quiz=null;save();render()}")}</details>`;$('app').innerHTML=h}
+function importFile(el){let f=el.files[0];if(!f)return;f.text().then(t=>{loadBank(JSON.parse(t))}).catch(e=>{bank='导入失败 · '+words.length+' 词';render()})}
+function saveStudy(){try{localStorage.setItem(STUDYKEY,JSON.stringify(study))}catch(e){}}
+let studySession=null;
+function showStats(){studySession=null;let due=dueWords(),active=words.filter(x=>progress[x.w]),master=active.filter(x=>{let p=rec(x.w);return p.level>=5&&!p.known&&p.right>=5}),today=Object.values(progress).filter(p=>p.firstDay===dayKey()).length;let items=active.sort((a,b)=>(rec(a.w).nextAt||0)-(rec(b.w).nextAt||0)).slice(0,80);$('app').innerHTML=`<button onclick="render()">← 返回远征</button><h2>学习中心</h2>${coveragePanel()}<p class="small">${esc(bank)} · 基础词${mode==='all'?'参与':'默认跳过'}</p><section class="panel"><div class="studygrid"><div><b>${due.length}</b><span>到期复习</span></div><div><b>${active.length}</b><span>已学习</span></div><div><b>${master.length}</b><span>较熟练</span></div></div><p>今日新词 ${today} / ${study.dailyNew}</p><div class="hp"><i style="width:${Math.min(100,100*today/study.dailyNew)}%"></i></div>${button('开始到期复习 · 最多20词','beginStudy()',!due.length,true)}${button('未学词探索 · 20词','beginFresh()',!words.some(x=>eligible(x)&&!progress[x.w]))}${button('错词特训 · 最多20词','beginStudy(true)',!active.some(w=>rec(w.w).lapses>0))}<p class="small">答错90秒或4次作答后可复习；首次答对10分钟或5次作答后复查，之后延长至1、3、7、14、30、60天。标记简单：30天后复查。</p></section><section class="panel"><h3>词库管理</h3>${button('联网同步完整词库','online()')}<a href="${SOURCE}" target="_blank" rel="noopener" style="color:#dcc38d">打开原始 JSON（可下载后导入）</a><p>导入：<input type="file" accept=".json,application/json" onchange="importFile(this)"></p><label>每日新词目标 <select onchange="study.dailyNew=+this.value;saveStudy();showStats()">${[20,40,60,100,200].map(n=>`<option ${study.dailyNew===n?'selected':''}>${n}</option>`).join('')}</select></label><p>${button(mode==='all'?'切换智能过滤':'切换全词模式',"mode=mode==='all'?'smart':'all';study.mode=mode;saveStudy();showStats()")}</p><button onclick="exportStudy()">导出学习记录</button></section><h3>最近到期 / 学习记录</h3>${items.map((x,i)=>{let p=rec(x.w);return `<div class="panel wordrow"><div class="line"><b>${esc(x.w)}</b><span class="small">Lv.${p.level} · 错${p.lapses||0}次</span></div><p>${esc(x.t)}</p><div class="line"><span class="small">${reviewDue(p)?'现在复习':new Date(p.nextAt).toLocaleString()}</span><button data-word="${esc(x.w)}" onclick="resetWord(this.dataset.word)">重学</button></div></div>`}).join('')||'<p>还没有学习记录。</p>'}`}
+function resetWord(w){delete progress[w];save();showStats()}
+function exportStudy(){let b=new Blob([JSON.stringify({progress,clock,study,meta},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='lexis-study-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function beginStudy(wrong=false){let pool=wrong?words.filter(x=>rec(x.w)?.lapses>0):dueWords();if(!pool.length)return;studySession={queue:sh(pool).slice(0,20),i:0,right:0,q:null};studyNext()}
+function studyNext(){let z=studySession;if(!z)return;if(z.i>=z.queue.length){$('app').innerHTML=`<section class="panel"><h2>复习完成</h2><p>${z.right}/${z.queue.length} 答对 · 学习进度已保存</p>${button('返回学习中心','showStats()',false,true)}</section>`;return}z.q=makeQuestion(z.queue[z.i]);drawStudy()}
+function drawStudy(){let z=studySession,q=z.q;$('app').innerHTML=`<button onclick="showStats()">← 结束复习</button><section class="panel quizpanel"><div class="line small"><span>独立复习</span><span>${z.i+1}/${z.queue.length}</span></div><div class="word">${esc(q.reverse?gloss(q.word.t):q.word.w)}</div><p class="small">${esc(q.reverse?'选择英文':q.word.p)}</p>${q.done?`<p class="${q.ok?'green':'red'}">${q.ok?'正确':'正确答案：'+esc(q.correct)}</p><p>${esc(q.word.w)} · ${esc(q.word.t)}</p>${button('下一词','studySession.i++;studyNext()',false,true)}`:`<div class="opts">${q.choices.map((x,i)=>`<button onclick="studyAnswer(${i})">${esc(x)}</button>`).join('')}</div>`}</section>`}
+function studyAnswer(i){let z=studySession,q=z?.q;if(!q||q.done)return;q.ok=q.choices[i]===q.correct;q.done=true;clock++;updateWord(q.word.w,q.ok);if(q.ok)z.right++;save();drawStudy()}
+
+// Original pixel-art sprites (compact, no external images).
+const sprites={
+hero:[".......ww.......","......wwww......",".....wssssw.....",".....sossso.....",".....ssssss.....","......ssss......","...rrrsssrrr....","..rrrssssser....","..rrssssseer....","..rrsssss.ee....","..rr.ssss..e....","..r..s..s..e....",".....s..s..e....","....ss..ss......","....oo..oo......"],
+slime:["................","................","................",".......gg.......",".....gggggg.....","....gGGGGGGg....","...gGGGGGGGGg...","..gGGwGGwGGGg...","..gGGoGGoGGGg...",".gGGGGGGGGGGGg..",".gGGGGoooGGGGg..","ggggggggggggggg.","................","................","................"],
+bat:["................","................",".p............p.",".pp..........pp.",".ppp..p..p..ppp.",".pPPp.pppp.pPPp.","..pPPpPoPppPPp..","...pppPwwPppp...",".....pPooPp.....","......pPPp......",".......pp.......","................","................","................","................"],
+skel:["......wwww......",".....wwwwww.....",".....wowoww.....",".....wwowww.....","......wowo......",".......ww.......","....wwssssww....","...ww.ssss.ww...","..ww..swws..we..","......swws...e..","......wwww...e..","......w..w...e..","......w..w......",".....ww..ww.....","................"],
+mush:["................",".....rrrrrr.....","...rrrwwrrrr....","..rrwwrrrrwrr...",".rrrrrrrrrrrrr..",".rrrrwrrwrrrrr..","..ooooooooooo...",".....wwwwww.....",".....wowoow.....",".....wwwwww.....","....wwwwwwww....","...wwwwwwwwww...","...oooooooooo...","................","................"],
+eye:[".......p........","....p..p..p.....",".....ppppp......","..pppPPPPPppp...","....PPwwwPP.....","...PPwwowwPP....","...PPwpopwPP....","...PPwwowwPP....","....PPwwwPP.....","..pppPPPPPppp...",".....ppppp......","....p..p..p.....",".......p........","................","................"],
+golem:[".....ssssss.....","....ssrsrss.....","....sssssss.....","..ssssrssssss...",".sssrssrssrsss..",".sssrssssrssss..",".ssssrssrsssss..","..ss.srrss.ss...",".....ssssss.....",".....ss.ss......","....sss.sss.....","....sss.sss.....","...ssss.ssss....","................","................"],
+knight:[".......ss.......","......ssss......",".....ssoss......",".....srrrs......",".....sssss......","...pppsssppp....","..ppsssssspp....","..pssssssspe....","..pssssss..e....","..p.ssss...e....","....ss.ss..e....","....ss.ss.......","...sss.sss......","...ooo.ooo......","................"],
+dragon:[".r............r.",".rr..........rr.",".rRr..r..r..rRr.",".rRRr.rrrr.rRRr.","..rRRrrRrrrRRr..","...rrrRwwRrrr...",".....rRooRr.....","....rrRRRRrr....","...rrrReeRrrr...","......rRRr......",".....rrRRrr.....","....rrr..rrr....","....rr....rr....","................","................"],
+shield:["................",".....wwwwww.....","...wwssssssww...","..wssssssssssw..","..wsssswwssssw..","..wsssswwssssw..","..wsswwwwwwssw..","..wsssswwssssw..","...wssswwsssw...","....wssssssw....",".....wssssw.....","......wssw......",".......ww.......","................","................"],
+blade:["............ww..","...........wws..","..........wws...",".........wws....","........wws.....",".......wws......","......wws.......",".....wws........","..e.wws.........","...ees..........","....eee.........","...rr..e........","..rr............",".oo.............","................"],
+fire:["........r.......",".......rr.......","......rrr.r.....",".....rrrrrr.....","....rrRrrRrr....","....rRRrRRRr....","...rrRReeRRrr...","...rRReeeeRRr...","...rRRewweRRr...","....rRewweRr....",".....rReeRr.....","......rrrr......","................","................","................"],
+blood:[".......r........","......rrr.......",".....rrRrr......","....rrRRRrr.....","...rrRRRRRrr....","...rRRRRRRRr....","..rrRwwRRRRrr...","..rRRwRRRRRRr...","..rRRRRRRRRRr...","...rRRRRRRRr....","....rrrrrrr.....","................","................","................","................"],
+rune:[".......p........","......pwp.......",".....pwowp......","....pwooopw.....","...pwooooowp....","..pwoopppowp....",".pwoooppooowp...","pwooopwpoooowp..",".pwooopp oo wp..".replaceAll(' ', 'o'),"..pwoooooowp....","...pwoooowp.....","....pwoowp......",".....pwwp.......","......pp........","................"],
+crown:["................","..e....e....e...","..ee..eee..ee...","..eee.eee.eee...","..eeeeeeeeeee...","...eewwewwee....","...eeeeeeeee....","...eReeReeRe....","...eeeeeeeee....","...ooooooooo....","................","................","................","................","................"]};
+const colors={w:'#eee8ce',s:'#788898',o:'#202333',r:'#9e3d48',R:'#dc7452',e:'#e8b76b',g:'#275c49',G:'#85b66d',p:'#6b5488',P:'#ab92bc'};
+function pixel(type){let rows=sprites[type]||sprites.hero;return `<svg viewBox="0 0 16 15" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" class="pixel"><g>${rows.map((r,y)=>[...r].map((c,x)=>colors[c]?`<rect x="${x}" y="${y}" width="1" height="1" fill="${colors[c]}"/>`:'').join('')).join('')}</g></svg>`}
+heroArt=()=>pixel('hero');enhancedMonster=t=>pixel(t);cardArt=k=>{let c=info(k),a=c.fx.map(f=>f.k);return pixel(a.some(x=>/burn/i.test(x))?'fire':a.some(x=>['heal','self','losthit','hurtstr','lowhit'].includes(x))?'blood':a.some(x=>/block|retain|shield|thorn/i.test(x))?'shield':a.some(x=>/draw|energy|combo/i.test(x))?'rune':c.type==='power'?'crown':'blade')};
+sceneArt=()=>`<svg class="scene" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><path fill="#1c2332" d="M0 0H160V90H0z"/><path fill="#3d3449" d="M0 24H160V65H0z"/><path fill="#4c3b50" d="M90 8h18v4h8v22h-8v4H90v-4h-8V12h8z"/><path fill="#272b3d" d="M0 18h8v5h10v-7h7v50H0zM37 36h10V24h8v7h8v35H37zM124 16h10v-6h8v6h12v50h-30z"/><path fill="#333845" d="M0 66H160V90H0z"/><path stroke="#494856" d="M0 72H160M0 82H160M20 66v6m35 0v10m48-16v6m22 0v10"/></svg>`;
+// V0.7 presentation layer; wrappers preserve all V0.3 combat rules and save keys.
+let fxPrefs={sound:true,motion:!matchMedia('(prefers-reduced-motion: reduce)').matches},audioCtx=null;
+try{Object.assign(fxPrefs,JSON.parse(localStorage.getItem('spireFxPrefs')||'{}'))}catch(e){}
+function fxToggle(key){fxPrefs[key]=!fxPrefs[key];try{localStorage.setItem('spireFxPrefs',JSON.stringify(fxPrefs))}catch(e){}if(key==='sound'&&fxPrefs.sound)fxSound('click');render()}
+function fxSound(kind){if(!fxPrefs.sound)return;try{let AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audioCtx=audioCtx||new AC();if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});let now=audioCtx.currentTime;let sounds={click:[[420,.06,0]],card:[[280,.09,0],[520,.09,.055]],hit:[[105,.13,0],[57,.16,.045]],hurt:[[135,.12,0],[85,.18,.07]],shield:[[440,.12,0],[660,.16,.05]],good:[[523,.1,0],[659,.1,.08],[784,.16,.16]],bad:[[220,.15,0],[155,.2,.10]],win:[[392,.13,0],[523,.13,.12],[659,.13,.24],[784,.32,.36]],draw:[[300,.045,0],[410,.055,.055]]};for(let [freq,dur,delay] of sounds[kind]||sounds.click){let osc=audioCtx.createOscillator(),gain=audioCtx.createGain(),at=now+delay;osc.type=['hit','hurt','bad'].includes(kind)?'triangle':'sine';osc.frequency.setValueAtTime(freq,at);if(kind==='hit'||kind==='hurt')osc.frequency.exponentialRampToValueAtTime(freq*.55,at+dur);gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(.085,at+.012);gain.gain.exponentialRampToValueAtTime(.0001,at+dur);osc.connect(gain);gain.connect(audioCtx.destination);osc.start(at);osc.stop(at+dur+.02)}}catch(e){}}
+function fxElement(cls,side,text,color){let arena=document.querySelector('.arena'),target=arena?.querySelector(side==='hero'?'.fighter':'.foe');if(!arena||!target)return null;let a=arena.getBoundingClientRect(),b=target.getBoundingClientRect(),el=document.createElement('span');el.className=cls;el.style.setProperty('--x',`${b.left-a.left+b.width/2}px`);el.style.setProperty('--y',`${b.top-a.top+b.height*.42}px`);el.style.setProperty('--c',color||'#ffd18a');el.textContent=text||'';arena.append(el);setTimeout(()=>el.remove(),1600);return el}
+function fxBurst(side,color){if(!fxPrefs.motion)return;for(let i=0;i<12;i++){let e=fxElement('fx-particle',side,'',color);if(e){let a=i*Math.PI/6,r=27+Math.random()*48;e.style.setProperty('--dx',Math.cos(a)*r+'px');e.style.setProperty('--dy',Math.sin(a)*r+'px')}}}
+function fxActor(side,cls){if(!fxPrefs.motion)return;let el=document.querySelector(side==='hero'?'.fighter':'.foe');if(el){el.classList.add(cls);setTimeout(()=>el.classList.remove(cls),500)}}
+function fxDeal(){if(!fxPrefs.motion)return;document.querySelectorAll('.battlehand > *').forEach((el,i)=>{el.classList.add('fx-deal');el.style.setProperty('--delay',Math.min(i,7)*45+'ms');setTimeout(()=>el.classList.remove('fx-deal'),850)})}
+function fxSnap(){return s?{hp:s.hp,ehp:s.ehp,block:s.block,eb:s.eBlock,str:s.str,burn:s.burn,energy:s.energy,phase:s.phase,hand:s.hand?.length||0,turn:s.turn}:null}
+function fxDiff(b,enemy=false){if(!b||!s)return;let dmg=Math.max(0,b.ehp-s.ehp),hurtN=Math.max(0,b.hp-s.hp),gain=Math.max(0,s.hp-b.hp),shield=Math.max(0,s.block-b.block),enemyShield=Math.max(0,s.eBlock-b.eb),str=Math.max(0,s.str-b.str),burn=Math.max(0,s.burn-b.burn);if(dmg){fxElement('fx-float','foe','−'+dmg,'#ffd08a');if(fxPrefs.motion)fxElement('fx-slash','foe');fxActor('foe','fx-hit');if(!enemy)fxActor('hero','fx-lunge');fxBurst('foe','#ff9d62');fxSound('hit')}if(hurtN){fxElement('fx-float','hero','−'+hurtN,'#ff8c88');fxActor('hero','fx-hit');if(enemy)fxActor('foe','fx-lunge-back');fxBurst('hero','#e97671');fxSound('hurt')}if(shield||enemyShield){let side=shield?'hero':'foe';fxElement('fx-float',side,'⛨ +'+(shield||enemyShield),'#a4e4ff');if(fxPrefs.motion)fxElement('fx-shield',side);fxSound('shield')}if(gain)fxElement('fx-float','hero','+ '+gain+' HP','#a5e6a0');if(str&&!shield&&!hurtN)fxElement('fx-float','hero','力量 +'+str,'#ffce78');if(burn&&!dmg)fxElement('fx-float','foe','燃烧 +'+burn,'#ff9d62')}
+const oldRender=render;render=function(){oldRender();document.body.classList.toggle('fx-less',!fxPrefs.motion);let top=document.querySelector('#app > .top');if(top){let group=document.createElement('div');group.className='fx-settings';group.innerHTML=`<button class="${fxPrefs.sound?'on':''}" onclick="fxToggle('sound')" aria-pressed="${fxPrefs.sound}">${fxPrefs.sound?'♫':'静音'}</button><button class="${fxPrefs.motion?'on':''}" onclick="fxToggle('motion')" aria-pressed="${fxPrefs.motion}">${fxPrefs.motion?'特效':'简化'}</button>`;top.append(group)}};
+const oldPlay=play;play=function(i){let el=document.querySelectorAll('.battlehand > *')[i],r=el?.getBoundingClientRect(),ghost=el?.cloneNode(true);oldPlay(i);if(!quiz||quiz.done)return;fxSound('card');if(ghost&&r&&fxPrefs.motion){let q=document.querySelector('.quizpanel')?.getBoundingClientRect();if(q){ghost.removeAttribute('onclick');ghost.classList.add('fx-ghost');Object.assign(ghost.style,{left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px'});ghost.style.setProperty('--dx',(q.left+q.width/2-r.left-r.width/2)+'px');ghost.style.setProperty('--dy',(q.top+35-r.top-r.height/2)+'px');document.body.append(ghost);setTimeout(()=>ghost.remove(),550)}}};
+const oldAnswer=answer;answer=function(i,known=false){if(!quiz||quiz.done)return;let b=fxSnap();oldAnswer(i,known);if(!quiz?.done)return;document.querySelector('.quizpanel')?.classList.add(quiz.ok?'fx-good':'fx-bad');fxSound(quiz.ok?'good':'bad');if(quiz.ok){fxDiff(b);let arena=document.querySelector('.arena');if(arena&&s.streak>0&&s.streak%3===0){let e=document.createElement('div');e.className='fx-banner';e.textContent='✦ '+s.streak+' 连对';arena.append(e);setTimeout(()=>e.remove(),1600)}}};
+const oldEndTurn=endTurn;endTurn=function(){if(quiz||s?.phase!=='battle')return;let b=fxSnap();oldEndTurn();if(s?.phase==='battle'){fxDiff(b,true);fxDeal();fxSound('draw')}};
+const oldStartBattle=startBattle;startBattle=function(type){oldStartBattle(type);fxDeal();fxSound('draw')};
+const oldNext=next;next=function(){let done=quiz?.done;oldNext();if(done&&s?.phase==='battle'){fxDeal()}};
+const oldWin=win;win=function(){oldWin();document.querySelector('.rewardpanel')?.classList.add('fx-reward');fxSound('win')};
+
+
+const METAKEY='spireMetaV7';
+let meta={difficulty:'standard',loadout:'classic',runs:0,wins:0,best:0,bestCombo:0,history:[],finished:[]};
+try{Object.assign(meta,JSON.parse(localStorage.getItem(METAKEY)||'{}'))}catch(e){}
+const loadouts={classic:{name:'灰烬剑士 · 均衡',desc:'初始套牌，攻防均衡',need:0,deck:['strike','strike','strike','strike','guard','guard','guard','guard','bash']},iron:{name:'铁卫 · 防守反击',desc:'以反击、护甲和盾击为核心',need:25,deck:['strike','strike','strike','guard','guard','guard','parry','shieldbash','bash']},ember:{name:'余火 · 燃烧',desc:'火种和灼烧提供持续输出',need:75,deck:['strike','strike','strike','guard','guard','guard','poison','flame','bash']},blood:{name:'血刃 · 高风险',desc:'血契、复仇与主动自损',need:150,deck:['strike','strike','strike','guard','guard','guard','blood','revenge','bash']}};
+function rules(run){return ({practice:{hp:.82,atk:.75},standard:{hp:1,atk:1},challenge:{hp:1.2,atk:1.2}})[run?.difficulty]||{hp:1,atk:1}}
+function difficultyName(k){return ({practice:'练习',standard:'标准',challenge:'挑战'})[k]||'标准'}
+function saveMeta(){try{localStorage.setItem(METAKEY,JSON.stringify(meta))}catch(e){}}
+function verifiedCount(){return words.filter(x=>{let p=rec(x.w);return p&&p.right>0}).length}
+function setLoadout(k){if(!loadouts[k]||verifiedCount()<loadouts[k].need)return;meta.loadout=k;saveMeta();render()}
+function setDifficulty(k){if(!['practice','standard','challenge'].includes(k))return;if(k==='challenge'&&!meta.wins)return;meta.difficulty=k;saveMeta();render()}
+function finishRun(){if(!s||!['dead','victory'].includes(s.phase))return;s.id=s.id||'legacy-'+Date.now();if(meta.finished.includes(s.id))return;meta.finished.push(s.id);meta.runs++;meta.wins+=s.phase==='victory'?1:0;meta.best=Math.max(meta.best,totalFloor());meta.history.unshift({floor:totalFloor(),right:s.right,total:s.total,win:s.phase==='victory',difficulty:s.difficulty||'standard'});meta.history=meta.history.slice(0,10);saveMeta()}
+function backCamp(){finishRun();s=null;quiz=null;save();render()}
+function coverage(){let total=words.length,active=words.filter(x=>progress[x.w]),tested=active.filter(x=>{let p=rec(x.w);return p.tested||p.right>0||p.wrong>0}),master=active.filter(x=>{let p=rec(x.w);return p.level>=5&&!p.known&&p.right>=5}),self=active.filter(x=>rec(x.w).known),skipped=words.filter(x=>!eligible(x)),unseen=total-active.length;return {total,active:active.length,tested:tested.length,master:master.length,self:self.length,skipped:skipped.length,unseen,eligible:total-skipped.length}}
+function coveragePanel(){let c=coverage(),pct=n=>c.total?Math.round(n/c.total*1000)/10:0;return `<section class="panel"><h3>词塔档案 · 覆盖进度</h3><p class="small">当前词库 ${c.total} 条 / 来源目标 3815 条 · ${c.total===3815?'达到来源规模，非官方全量认证':'尚非完整来源词库'}</p><div class="studygrid"><div><b>${c.tested}</b><span>实际答题</span></div><div><b>${c.master}</b><span>验证熟练</span></div><div><b>${c.self}</b><span>自主标记</span></div></div><p>实际答题覆盖 ${pct(c.tested)}%</p><div class="hp"><i style="width:${pct(c.tested)}%"></i></div><p class="small">未接触 ${c.unseen} · 默认过滤 ${c.skipped}（未计入掌握） · 当前可考 ${c.eligible}。自主标记不等于答题验证；覆盖率分母为当前载入词库。</p></section>`}
+function homeProgress(){let n=verifiedCount();if(!loadouts[meta.loadout]||n<loadouts[meta.loadout].need)meta.loadout='classic';return `<div class="campbox"><div class="line"><b>远征营地</b><span class="small">通关 ${meta.wins} · 最远 ${meta.best}/33</span></div><div class="campchoices">${['practice','standard','challenge'].map(k=>`<button class="${meta.difficulty===k?'selected':''}" onclick="setDifficulty('${k}')" ${k==='challenge'&&!meta.wins?'disabled':''}>${difficultyName(k)}${k==='challenge'&&!meta.wins?' 🔒':''}</button>`).join('')}</div><p class="small">练习：敌方生命82%、攻击75%，错题保底3甲；标准：原始强度；挑战：敌方生命和攻击120%，通关解锁。</p><div class="line"><b>起始牌组</b><span class="small">实际答对过 ${n} 个不同词</span></div><div class="loadouts">${Object.entries(loadouts).map(([k,v])=>`<button class="${meta.loadout===k?'selected':''}" onclick="setLoadout('${k}')" ${n<v.need?'disabled':''}><b>${v.name}</b><small>${n<v.need?'🔒 '+v.need+'个不同词答对解锁':v.desc}</small></button>`).join('')}</div><p class="small">解锁的是新打法，不是永久数值碾压。</p></div>`}
+function runSummary(){finishRun();return `<div class="campbox"><p>本次${difficultyName(s.difficulty)}远征 · 正确率 ${s.total?Math.round(s.right/s.total*100):0}%</p><p>历史完成 ${meta.runs} 局 · 通关 ${meta.wins} 次 · 最远 ${meta.best} 层</p><p class="small">所有真实答题和复习记录均计入局外进度，即使远征失败。</p></div>`}
+function beginFresh(){let pool=words.filter(x=>eligible(x)&&!progress[x.w]);if(!pool.length)return;studySession={queue:sh(pool).slice(0,20),i:0,right:0,q:null};studyNext()}
+// New enemies are compact original pixel sprites; recolors and silhouettes distinguish variants.
+const variants={root:['golem',{s:'g',r:'G'}],thorn:['mush',{r:'g',w:'G'}],rootking:['golem',{s:'g',r:'e'}],imp:['bat',{p:'r',P:'R'}],hound:['dragon',{r:'o',R:'r',e:'R'}],furnace:['golem',{s:'o',r:'R'}],tyrant:['knight',{p:'r',s:'e'}],ghost:['skel',{w:'P',s:'p'}],spider:['eye',{p:'o',P:'p'}],star:['golem',{s:'p',r:'e'}],voidking:['knight',{s:'p',p:'P',r:'e'}]};
+for(const [k,[src,swap]] of Object.entries(variants))sprites[k]=sprites[src].map(row=>[...row].map(c=>swap[c]||c).join(''));
+sprites.rootking[0]='..e....e....e...';sprites.rootking[1]='..eeeeeeeeeee...';sprites.tyrant[0]='..e....e....e...';sprites.voidking[0]='..p....e....p...';
+const oldScene=sceneArt;sceneArt=()=>{let a=s?.act||1;if(a===3)return oldScene().replaceAll('#1c2332','#1b1930').replaceAll('#3d3449','#32274e').replaceAll('#4c3b50','#6a416f');if(a===2)return `<svg class="scene" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges"><path fill="#2a1926" d="M0 0h160v90H0z"/><path fill="#4c2930" d="M0 15h20v10h15v-9h20v34h20V12h25v25h20V8h20v15h20v48H0z"/><path fill="#db7045" d="M0 62h160v15H0z"/><path fill="#f4b35e" d="M0 64h31v3h34v-3h33v4h30v-3h32v4H0z"/><path fill="#37303b" d="M0 76h160v14H0z"/><path stroke="#8d4d44" d="M0 82h160M25 77v5m44 0v8m35-13v5m29 0v8"/></svg>`;return `<svg class="scene" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges"><path fill="#1a3031" d="M0 0h160v90H0z"/><path fill="#39544b" d="M0 25h160v42H0z"/>${[4,26,51,89,118,145].map((x,i)=>`<path fill="${i%2?'#243d37':'#2d4740'}" d="M${x} 2h8v30h8v8h-8v28h-8V39h-9v-7h9z"/>`).join('')}<path fill="#24372d" d="M0 67h160v23H0z"/><path fill="#46634a" d="M0 66h25v3h40v-3h40v3h55v4H0z"/></svg>`};
+if(s&&!s.act){s.act=1;if(!['battle','reward','victory','dead'].includes(s.phase)||s.floor<11)s.boss=actBoss(1);if(s.floor===11&&s.phase==='reward')s.phase='actClear';save()}
+const preActRender=render;
+render=function(){preActRender();document.body.dataset.act=String(s?.act||1);const top=document.querySelector('#app > .top');if(top){const note=document.createElement('div');note.className='offline-note';note.id='offline-status';note.textContent=offlineText();top.after(note);const b=document.createElement('button');b.className='wide';b.textContent='存档与离线';b.onclick=showOffline;note.after(b)}};
+const oldStats9=showStats;showStats=function(){oldStats9();const b=document.createElement('button');b.className='wide';b.textContent='完整存档 / 离线管理';b.onclick=showOffline;$('app').append(b)};
+let offlineReady=false,offlineError=false,persistent=null,offlineNotice='';
+function storageOK(){try{localStorage.setItem('spireStorageTest','1');const ok=localStorage.getItem('spireStorageTest')==='1';localStorage.removeItem('spireStorageTest');return ok}catch(e){return false}}
+function bankCached(){try{let a=JSON.parse(localStorage.getItem(BANKKEY)||'null');return Array.isArray(a)&&a.length===3815&&words.length===3815}catch(e){return false}}
+function embeddedFull(){try{return JSON.parse($('spire-embedded-bank').textContent)?.length===3815}catch(e){return false}}
+function offlineText(){return (offlineReady?'✓ 游戏离线包已缓存':offlineError?'网页离线缓存不可用':'离线包未确认')+' · '+(embeddedFull()?'✓ 内嵌完整词库':bankCached()?'✓ 3815词已缓存':'词库 '+words.length+'/3815')}
+function refreshOffline(){const e=$('offline-status');if(e)e.textContent=offlineText();const p=$('offline-detail');if(p)p.innerHTML=offlineDetails()}
+async function checkOffline(){offlineReady=false;offlineError=false;try{if(!('serviceWorker' in navigator)||!window.isSecureContext||!('caches' in window))throw Error();const c=await caches.open('lexis-spire-v09');const key=new URL(location.pathname,location.origin).href;offlineReady=!!navigator.serviceWorker.controller&&!!(await c.match(key));}catch(e){offlineError=true}try{persistent=await navigator.storage?.persisted?.()??null}catch(e){persistent=null}refreshOffline()}
+async function setupOffline(){try{if(location.protocol==='file:'||!('serviceWorker' in navigator)||!window.isSecureContext)throw Error();if(!location.pathname.endsWith('/cet4_spire_v08.html'))throw Error();const reg=await navigator.serviceWorker.register('./spire-sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',checkOffline);await navigator.serviceWorker.ready;await checkOffline();reg.update().catch(()=>{});}catch(e){offlineError=true;refreshOffline()}}
+function offlineDetails(){return `<p>${esc(offlineText())}</p><p>当前网络：${navigator.onLine?'在线（系统报告）':'离线（系统报告）'} · ${storageOK()?'本地存储可写':'本地存储不可写'}</p><p>持久存储：${persistent===true?'已获授权':persistent===false?'未获授权':'无法确认'}。</p><p>${offlineReady&&(bankCached()||embeddedFull())&&storageOK()?'离线条件已检查通过；请开启飞行模式、退出后重开验证。':'尚未确认全部离线条件。'}</p>`}
+function showOffline(){studySession=null;$('app').innerHTML=`<button onclick="render()">← 返回远征</button><h2>存档与离线</h2><section class="panel"><h3>离线准备</h3><div id="offline-detail">${offlineDetails()}</div>${button('重新检测','checkOffline()')}${button('申请持久存储','requestPersistence()')}${button('联网同步完整词库','online()')}<p class="small">也可以从原始词库下载 JSON 后导入。</p><input type="file" accept=".json,application/json" onchange="importFile(this)"><p class="small">iPhone 主屏幕 App 和 Safari 可能各有独立存档；请先导出，再到另一处导入。</p></section><section class="panel"><h3>完整存档迁移</h3><p>包含当前远征（包括战斗与未完成的答题）、词库、学习记录、解锁、历史与设置。导入会替换当前进度，先备份当前设备。</p>${button('导出完整存档 JSON','exportFullSave()',false,true)}<label class="small">导入完整存档 / 旧版学习备份</label><input type="file" accept=".json,application/json" onchange="restoreFile(this)"><p id="save-notice" class="small">${esc(offlineNotice)}</p></section><section class="panel"><h3>独立离线文件</h3><p>将当前完整词库直接写进游戏 HTML 文件。此文件不含个人存档，另存 JSON 备份即可迁移进度。iPhone 文件预览不一定能执行游戏，主屏幕 PWA 是首选。</p>${button('导出内嵌完整词库的 HTML','exportPortable()',words.length!==3815,true)}</section>`;checkOffline()}
+async function requestPersistence(){try{persistent=await navigator.storage?.persist?.()??null}catch(e){persistent=null}refreshOffline()}
+function downloadData(data,name,type){const a=document.createElement('a');const url=URL.createObjectURL(new Blob([data],{type}));a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}
+function fullSave(){return {format:'lexis-spire-save',version:1,gameVersion:'0.9',createdAt:new Date().toISOString(),progress,clock,study,meta,run:s,quiz,fxPrefs,words}}
+function exportFullSave(){downloadData(JSON.stringify(fullSave()),'lexis-spire-save-'+new Date().toISOString().slice(0,10)+'.json','application/json');offlineNotice='已发起备份下载，请在文件 App 确认。';const e=$('save-notice');if(e)e.textContent=offlineNotice}
+const isObj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+const safeCard=k=>typeof k==='string'&&/^[a-z][a-z0-9_]*\+?$/.test(k)&&Object.hasOwn(cards,base(k));
+function validateSave(d){if(!isObj(d)||!isObj(d.progress)||!Number.isFinite(d.clock)||d.clock<0)throw Error('不支持的存档格式');const legacy=d.format===undefined;if(!legacy&&(d.format!=='lexis-spire-save'||d.version!==1))throw Error('不支持的版本');if(Object.keys(d.progress).length>15000||Object.entries(d.progress).some(([w,p])=>['__proto__','constructor','prototype'].includes(w)||!isObj(p)))throw Error('学习记录损坏');if(d.study!==undefined&&!isObj(d.study)||d.meta!==undefined&&!isObj(d.meta))throw Error('设置损坏');if(!legacy){if(!Array.isArray(d.words)||d.words.length<100||d.words.length>15000||d.words.some(x=>!isObj(x)||typeof x.w!=='string'||typeof x.t!=='string'||['__proto__','constructor','prototype'].includes(x.w)))throw Error('词库损坏');const r=d.run;if(r!==null){if(!isObj(r)||!['map','battle','reward','rest','shop','event','actClear','dead','victory'].includes(r.phase)||![1,2,3].includes(r.act)||!Number.isInteger(r.floor)||r.floor<0||r.floor>11||!Array.isArray(r.map)||r.map.length!==11||r.map.some(row=>!Array.isArray(row)||row.length!==3||row.some(k=>!Object.hasOwn(roomNames,k)))||!Array.isArray(r.deck)||!r.deck.length||r.deck.some(k=>!safeCard(k))||!Array.isArray(r.route)||!Array.isArray(r.relic)||r.relic.some(k=>!Object.hasOwn(relics,k))||!Number.isInteger(r.boss)||!monsters[r.boss]||!Number.isFinite(r.hp)||!Number.isFinite(r.max)||r.max<=0||!Number.isFinite(r.gold))throw Error('远征记录损坏');for(const key of ['hand','pile','discard','ex','stock','reward'])if(r[key]!==undefined&&(!Array.isArray(r[key])||r[key].some(k=>!safeCard(k))))throw Error('牌组损坏');if(r.phase==='battle'&&(!monsters[r.enemy]||!Array.isArray(r.hand)||!Array.isArray(r.pile)||!Array.isArray(r.discard)||!Array.isArray(r.ex)))throw Error('战斗存档损坏');if(r.phase==='event'&&!events[r.event])throw Error('事件记录损坏');}if(d.quiz!==null&&(!isObj(d.quiz)||!r||r.phase!=='battle'||!isObj(d.quiz.word)||typeof d.quiz.word.w!=='string'||!Array.isArray(d.quiz.choices)||!safeCard(d.quiz.key)))throw Error('答题存档损坏');}return legacy}
+function restoreBackup(d){const legacy=validateSave(d);const keys=['spireWords','spireClock',STUDYKEY,METAKEY,'spireRunV2','spireQuizV2',BANKKEY,'spireFxPrefs'];const before=keys.map(k=>localStorage.getItem(k));const mergedStudy={dailyNew:40,auto:true,...(d.study||{})};const mergedMeta={difficulty:'standard',loadout:'classic',runs:0,wins:0,best:0,bestCombo:0,history:[],finished:[],...(d.meta||{})};if(!Array.isArray(mergedMeta.history)||!Array.isArray(mergedMeta.finished))throw Error('历史记录损坏');const values=[JSON.stringify(d.progress),String(d.clock),JSON.stringify(mergedStudy),JSON.stringify(mergedMeta),JSON.stringify(legacy?s:d.run),JSON.stringify(legacy?quiz:d.quiz),JSON.stringify(legacy?words:d.words),JSON.stringify(legacy?fxPrefs:(d.fxPrefs||fxPrefs))];try{for(let i=0;i<keys.length;i++)localStorage.setItem(keys[i],values[i]);}catch(e){for(let i=0;i<keys.length;i++){try{if(before[i]===null)localStorage.removeItem(keys[i]);else localStorage.setItem(keys[i],before[i])}catch(_) {}}throw Error('本地存储空间不足或不可写；未确认恢复成功。')}location.reload()}
+async function restoreFile(el){const f=el.files?.[0];if(!f)return;try{if(f.size>15000000)throw Error('存档文件过大');const d=JSON.parse(await f.text());const legacy=validateSave(d);if(!confirm(legacy?'导入旧版学习记录？会替换学习与局外进度，保留当前远征及词库。':'导入会覆盖当前远征、词汇与设置。确认已备份当前进度？'))return;restoreBackup(d)}catch(e){offlineNotice='导入失败：'+e.message;const n=$('save-notice');if(n)n.textContent=offlineNotice}finally{el.value=''}}
+function exportPortable(){if(words.length!==3815)return;const clone=document.documentElement.cloneNode(true);clone.querySelector('#app').innerHTML='';clone.querySelector('#spire-embedded-bank').textContent=JSON.stringify(words).replace(/</g,'\\u003c');clone.querySelectorAll('link[rel="manifest"],link[rel="apple-touch-icon"]').forEach(n=>n.remove());clone.querySelectorAll('[data-act]').forEach(n=>n.removeAttribute('data-act'));downloadData('<!doctype html>\n'+clone.outerHTML,'lexis-spire-full-offline.html','text/html')}
+
+if(s&&!s.difficulty)s.difficulty='standard';
+if(s&&['dead','victory'].includes(s.phase)){finishRun();save()}
+
+render();
+setupOffline();
+window.addEventListener("online",checkOffline);window.addEventListener("offline",checkOffline);
+</script></body></html>

@@ -1,0 +1,18 @@
+{
+  "name": "词塔 · 像素远征",
+  "short_name": "词塔",
+  "id": "./cet4_spire_v08.html",
+  "start_url": "./cet4_spire_v08.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#171b27",
+  "theme_color": "#171b27",
+  "icons": [
+    {
+      "src": "spire-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
