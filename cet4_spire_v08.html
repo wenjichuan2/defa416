@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>词塔 · 灰烬远征 V0.9</title><meta name="theme-color" content="#171b27"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="spire-manifest.json"><link rel="apple-touch-icon" href="spire-icon.png"><style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>词塔 · 灰烬远征 V0.10</title><meta name="theme-color" content="#171b27"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="spire-manifest.json"><link rel="apple-touch-icon" href="spire-icon.png"><style>
 *{box-sizing:border-box}body{margin:0;background:#111a1c;color:#f0e8d5;font:15px system-ui,sans-serif;min-height:100vh}main{max-width:660px;margin:auto;padding:16px 14px 30px}button{font:inherit;color:inherit;border:1px solid #59635b;border-radius:10px;background:#263535;padding:11px;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.35;cursor:default}button:active:not(:disabled){transform:scale(.97)}.top,.line{display:flex;justify-content:space-between;gap:8px;align-items:center}.brand{font-size:25px;font-weight:900;letter-spacing:3px;color:#e7c78d}.small{font-size:12px;color:#b0b7a9}.panel{background:#1a282b;border:1px solid #43504b;border-radius:14px;padding:14px;margin:12px 0}.arena{position:relative;min-height:220px;text-align:center;background:radial-gradient(ellipse at 50% 70%,#46574b 0,#25383a 37%,#152325 76%);overflow:hidden}.arena:before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(118deg,transparent 0 80px,#c8b57a09 82px 85px)}.monster{height:105px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 12px 10px #0009)}.monster svg{width:128px;height:112px}.hp{height:9px;border-radius:8px;background:#0d1719;overflow:hidden;margin:7px 0}.hp i{display:block;height:100%;background:#d66a58;transition:width .25s}.enemyhp i{background:#96b46c}.hand{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.card{padding:9px 6px;min-height:113px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(150deg,#47322b,#241f20);border-color:#93654e;text-align:center}.card.skill{background:linear-gradient(150deg,#264754,#1a2b36);border-color:#648c9b}.card.power{background:linear-gradient(150deg,#4b4230,#2c2520);border-color:#c1a266}.card b{font-size:16px}.card .art{font-size:23px}.card span{font-size:12px;color:#d8d1bf}.opts{display:grid;gap:8px}.opts button{text-align:left;line-height:1.4}.word{font-size:30px;font-weight:800;letter-spacing:.5px;overflow-wrap:anywhere;margin:12px 0 4px}.gold{color:#edc681}.red{color:#ff9d88}.green{color:#b7dd93}.primary{background:#d6b477;color:#24231d;font-weight:800;border-color:#f2d9a0}.wide{width:100%;margin-top:8px}.path{display:flex;gap:5px;justify-content:center;margin:12px 0}.node{height:27px;width:27px;border-radius:50%;display:grid;place-items:center;border:1px solid #687268;color:#85958b;font-size:12px}.node.now{background:#d6b477;color:#29251b}.node.done{background:#45644c;color:white}.log{min-height:40px;line-height:1.5}.tag{padding:4px 8px;border:1px solid #697869;border-radius:20px;font-size:12px}.menu{display:grid;grid-template-columns:1fr 1fr;gap:8px}details{margin-top:12px;color:#b0b7a9}summary{cursor:pointer}input[type=file]{max-width:100%}.flash{animation:hit .25s}@keyframes hit{50%{transform:translateX(5px);filter:brightness(1.8)}}
 .mapgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;position:relative}.mapgrid button{z-index:1;min-height:43px;font-size:13px;padding:6px}.mapgrid button.selected{border-color:#f5d289;background:#5b4b31}.mapgrid .boss{grid-column:1/-1}.rare{border-color:#e9c16f!important}.uncommon{border-color:#80b9b2!important}.card .rarity{font-size:10px;letter-spacing:.5px}.status{display:flex;gap:6px;flex-wrap:wrap;margin:5px 0}.status span{background:#293b3c;border-radius:6px;padding:4px 6px;font-size:12px}.card{min-width:0}.card span{overflow-wrap:anywhere}.catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.shopitem{margin:8px 0}.routeinfo{font-size:12px;color:#b4c6ad}.mapwrap{position:relative}.mapwrap svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.mapgrid button:disabled{opacity:.55}.hand{grid-template-columns:repeat(3,minmax(0,1fr))}.card:disabled{opacity:.42} 
 :root{color-scheme:dark;--gold:#e6c58c;--ink:#100f16;--paper:#f3e6cd}body{background:radial-gradient(ellipse at 50% 0,#302936 0,#14131c 42%,#0a0b12 90%);font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--paper)}main{max-width:900px;padding:14px 14px 38px}button{border-radius:7px;background:linear-gradient(180deg,#36303a,#201e28);border-color:#695c51;box-shadow:inset 0 1px #ffffff0b,0 3px 7px #0004}button:focus-visible{outline:2px solid #f2d49c;outline-offset:2px}button:active:not(:disabled){transform:translateY(2px)}.brand{font-family:Georgia,"Songti SC",serif;font-size:32px;letter-spacing:5px;color:#f5d69f;text-shadow:0 2px 10px #9b683e80}.brand .small{letter-spacing:1px;font:10px system-ui;color:#b6a58b}.small{color:#baadab}.top{min-height:40px}.panel{position:relative;border:1px solid #665449;border-radius:10px;background:linear-gradient(140deg,#29242e,#191923 80%);box-shadow:0 7px 22px #0006,inset 0 0 0 3px #100f1670;padding:16px}.panel h2{font-family:Georgia,"Songti SC",serif;letter-spacing:2px;margin:4px 0 12px;color:#eed4a5}.panel h3{font-size:14px;color:#d7c2a3;letter-spacing:1px}.primary{background:linear-gradient(180deg,#f0cf8e,#b58044);border-color:#f6d69d;color:#211711;box-shadow:0 3px 0 #705032,0 6px 15px #0006}.wide{min-height:43px}.hp{height:12px;background:#0d0c13;border:1px solid #514441;border-radius:4px;box-shadow:inset 0 2px 4px #000a}.hp i{background:linear-gradient(180deg,#e48370,#963b42);box-shadow:0 0 9px #f56b5650}.enemyhp i{background:linear-gradient(180deg,#f0a077,#b3473e)}.arena{min-height:285px;padding:14px 14px 12px;background:radial-gradient(ellipse at 70% 50%,#9e5c3b33,transparent 54%),linear-gradient(#171725,#34303a 65%,#15141c);isolation:isolate}.arena:before{background:none}.scene{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.87}.stage{display:flex;align-items:flex-end;justify-content:space-around;min-height:172px;gap:8px;position:relative}.fighter,.foe{width:46%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}.fighter svg,.foe svg{width:100%;height:165px;filter:drop-shadow(0 8px 4px #0009);overflow:visible}.foe svg{animation:breathe 3s ease-in-out infinite;transform-origin:center bottom}.fighter svg{animation:breathe 4s ease-in-out infinite}.figlabel{font-size:11px;letter-spacing:1px;color:#e4cdb2;background:#120f18bb;padding:3px 9px;border:1px solid #64504c;border-radius:4px}.intent{display:inline-block;background:#15121dd9;color:#ffd2a2;border:1px solid #896044;border-radius:5px;padding:6px 13px;font-weight:700;font-size:12px}.enemyline{font-size:13px;font-weight:700;display:flex;justify-content:space-between;gap:8px;margin-top:9px}.status{gap:5px}.status span{background:#201c28;border:1px solid #473d4b;color:#bfb1bd;font-size:11px}.combatbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:10px 0}.orb{display:grid;place-items:center;width:44px;height:44px;border:2px solid #c59858;border-radius:50%;background:radial-gradient(circle at 35% 25%,#f4cc76,#b77130 45%,#46271f 85%);box-shadow:0 0 15px #df9a4350,inset 0 0 0 3px #4d302b70;color:#fff4ce;font-size:22px;font-weight:900;text-shadow:0 2px 3px #573116}.log{min-height:25px;font-size:12px;color:#cab7a7;margin:7px 0}.hand,.catalog{gap:8px;grid-template-columns:repeat(3,minmax(0,1fr))}.card{position:relative;isolation:isolate;overflow:hidden;min-height:172px;border:1px solid #b27b60;border-radius:9px;padding:7px 6px 8px;gap:5px;background:linear-gradient(160deg,#633d36,#2d202a 55%,#201b24);box-shadow:inset 0 0 0 3px #251b25,0 5px 10px #0008;text-align:center}.card:before{content:'';position:absolute;inset:4px;z-index:-1;border:1px solid #ad8e703d;border-radius:5px;pointer-events:none}.card.skill{background:linear-gradient(160deg,#355968,#202a3a 55%,#1c2230);border-color:#779caa}.card.power{background:linear-gradient(160deg,#715b38,#3b2f2d 55%,#211d25);border-color:#d4b46d}.card.rare{box-shadow:inset 0 0 0 3px #5a462d,0 0 13px #ecb85e30}.card.uncommon{box-shadow:inset 0 0 0 3px #20383d,0 4px 12px #0007}.card b{font-size:14px;color:#f9e7c9;letter-spacing:.5px}.card .art{height:65px;min-height:65px;border:1px solid #bfa28454;border-radius:5px;width:100%;background:#100d17;overflow:hidden}.card .art svg{width:100%;height:100%;display:block}.card .line{width:100%;min-height:20px}.card .cost{display:grid;place-items:center;border:1px solid #e7c081;background:radial-gradient(circle at 35% 30%,#e8b96d,#6f3b29 75%);border-radius:50%;height:23px;width:23px;color:#fff0c6;font-weight:800;font-size:14px}.card .rarity{font-size:10px;color:#d5bd9a}.card .effect{font-size:11px;line-height:1.35;min-height:30px;color:#e0d2c6;white-space:normal}.card .kind{font-size:9px;letter-spacing:2px;color:#bca99d}.card:disabled{opacity:.45;filter:saturate(.5)}.card:hover:not(:disabled){border-color:#f9d9a1}.hand.battlehand{display:flex;overflow-x:auto;scroll-snap-type:x proximity;padding:6px 2px 13px;gap:8px;scrollbar-color:#97704b #201d28}.battlehand .card{flex:0 0 calc((100% - 16px)/3);scroll-snap-align:start;min-height:185px}.endturn{background:linear-gradient(#514259,#2e293a);border-color:#ad8b72;color:#f2dbbd;font-weight:700}.quizpanel{border-color:#b49a68;background:radial-gradient(ellipse at top,#51423e,#211e2a 65%);padding:16px;animation:appear .18s ease-out}.word{font-family:Georgia,serif;color:#ffe2aa;font-size:34px;text-shadow:0 2px 6px #0006}.opts{margin-top:12px}.opts button{background:linear-gradient(90deg,#35303d,#24212b);border-color:#78665d;min-height:47px;display:flex;align-items:center;gap:10px}.letter{display:grid;place-items:center;width:25px;height:25px;border:1px solid #a28c73;color:#e7c58d;border-radius:4px;font-weight:700;flex:none}.mapwrap{margin:12px auto 0;max-width:500px;padding:4px 0;background:radial-gradient(ellipse at center,#74604c20,transparent 75%)}.mapwrap>svg{z-index:0}.mapgrid{gap:12px 14px;grid-template-columns:repeat(3,minmax(0,1fr))}.mapgrid button{justify-self:center;width:100%;max-width:112px;min-height:55px;background:linear-gradient(#38303c,#25202a);border:1px solid #736254;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;position:relative}.mapgrid button:disabled{opacity:.47}.mapgrid button.selected{opacity:1;border-color:#bda06b;background:#4a3e32}.mapgrid button.available{background:linear-gradient(#715537,#3d2e29);border-color:#e4bf7e;box-shadow:0 0 12px #edbe6940;animation:pulse 2.5s infinite}.mapgrid .boss{max-width:140px}.mapicon{font-size:20px;line-height:1.1}.maplabel{font-size:10px;color:#e3c9ac}.mapgrid .elite .mapicon,.mapgrid .boss .mapicon{color:#e78b79}.mapgrid .rest .mapicon{color:#f3bc76}.mapgrid .shop .mapicon{color:#9dc5bf}.hero{min-height:390px;text-align:center;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 45%,#83513b40,#1c1a25 65%)}.hero .scene{opacity:.65}.hero .heroart{height:210px;display:grid;place-items:center}.heroart svg{width:210px;height:210px;filter:drop-shadow(0 0 25px #d2804e55)}.eyebrow{font-size:10px;letter-spacing:4px;color:#c6aa86;text-transform:uppercase}.hero h1{font-family:Georgia,"Songti SC",serif;color:#f5d6a0;font-size:34px;letter-spacing:6px;margin:5px 0;text-shadow:0 3px 8px #0009}.hero p{font-size:12px;color:#c8b9ae}.hero .primary{max-width:390px;min-height:50px;font-size:16px;letter-spacing:3px}.hero .secondary{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:390px;margin:auto}.rewardpanel{background:radial-gradient(ellipse at top,#5b4530,#201e27 65%)}.rewardpanel h2{text-align:center;letter-spacing:4px}details{border-top:1px solid #4b3e46;padding-top:12px;color:#bcaeaf}summary{font-size:13px} @keyframes breathe{50%{transform:translateY(-3px) scaleY(1.025)}}@keyframes pulse{50%{box-shadow:0 0 16px #edbe6980}}@keyframes appear{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}@media(min-width:660px){.hand,.catalog{grid-template-columns:repeat(5,minmax(0,1fr))}.battlehand .card{flex:0 0 calc((100% - 32px)/5)}.arena{min-height:340px}.stage{min-height:220px}.fighter svg,.foe svg{height:220px}.card{min-height:185px}.card .art{height:80px}.hero{min-height:450px}}@media(max-width:370px){main{padding:10px 9px 25px}.panel{padding:11px}.card b{font-size:12px}.card .effect{font-size:10px}.card{min-height:163px}.battlehand .card{flex-basis:calc((100% - 12px)/2.7)}.arena{min-height:260px}.fighter svg,.foe svg{height:145px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -10,7 +10,13 @@
 body{background:#171b27;color:#eee6d3}main{max-width:720px}.brand{letter-spacing:1px;color:#f3c879;text-shadow:2px 2px #593c35}.panel,button,.card,.primary,.quizpanel{border-radius:3px!important;box-shadow:3px 3px 0 #0c1019!important}.panel{background:#242b3b;border:2px solid #555269}.arena,.hero{background:#202638!important}.scene{opacity:1!important}.pixel{image-rendering:pixelated;shape-rendering:crispEdges;filter:drop-shadow(3px 4px 0 #11131e)!important}.fighter .pixel,.foe .pixel{width:100%;height:100%;max-height:142px}.heroart .pixel{max-height:170px}.card{background:#422f38!important;border:2px solid #9c6954!important}.card.skill{background:#293c50!important;border-color:#6e92aa!important}.card.power{background:#42394e!important;border-color:#ad92c0!important}.card.rare{border-color:#e3bc6d!important;box-shadow:0 0 0 1px #dbb45b,3px 3px #11131e!important}.card .art{background:#181e2b!important;border-radius:0!important}.card .art .pixel{height:100%;width:100%;max-height:78px}.hp{border-radius:0!important;height:10px}.hp i{background:#bb5257}.enemyhp i{background:#88ad65}.studygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.studygrid div{background:#181e2c;border:1px solid #555269;padding:10px 4px}.studygrid b{display:block;color:#f1c87e;font-size:26px}.studygrid span{font-size:12px}.wordrow p{overflow-wrap:anywhere}select{background:#242b3b;color:#eee6d3;padding:6px}button{font-weight:600}a{color:#e3c284}.fx-less .fighter,.fx-less .foe{animation:none!important}@media(max-width:420px){.fighter .pixel,.foe .pixel{max-height:116px}.top{flex-wrap:wrap}.card .art .pixel{max-height:64px}}
 </style><style>.campbox{text-align:left;background:#111521e6;border:1px solid #746347;padding:10px;margin:12px 0;position:relative}.campchoices{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.campchoices button,.loadouts button{background:#272d3c;padding:8px;min-width:0}.campchoices .selected,.loadouts .selected{border-color:#f3c879;color:#f3c879;background:#40362c}.loadouts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.loadouts button{text-align:left;display:flex;flex-direction:column;gap:4px;font-size:13px}.loadouts small{font-size:11px;color:#bcb4a4}.campbox p{line-height:1.5}.hero{overflow:visible}</style></head><body><main id="app"></main><script id="spire-embedded-bank" type="application/json">null</script>
 <script>
-const SOURCE='https://raw.githubusercontent.com/grhliu/wordtyper-vocabularies/main/vocabularies/cet4.json';
+const BANKS={cet4:{name:'大学英语四级',target:3815,path:'cet4.json',repo:'grhliu/wordtyper-vocabularies',file:'vocabularies/cet4.json',source:'WordTyper / ECDICT'},gaokao:{name:'高考英语',target:3856,path:'gaokao.json',repo:'C3H3-AI/vocab-wordbank',file:'wordbanks/gaokao-3500.json',source:'vocab-wordbank / lilinji'}};
+let bankId='cet4';try{if(localStorage.getItem('spireActiveBank')==='gaokao')bankId='gaokao'}catch(e){}
+const config=BANKS[bankId], TARGET=config.target, SOURCE='https://raw.githubusercontent.com/'+config.repo+'/main/'+config.file;
+const slot=(k,id=bankId)=>id==='gaokao'?k+':gaokao':k;
+function switchBank(id){if(!BANKS[id]||id===bankId||bankLoading)return;save();saveStudy();saveMeta();try{localStorage.setItem('spireActiveBank',id);location.reload()}catch(e){alert('本地存储不可写，无法切换')}}
+function bankPicker(){return `<section class="panel bank-switch"><div class="line"><b>英语词库</b><span class="small">独立学习与远征存档</span></div><div class="campchoices" style="grid-template-columns:1fr 1fr">${Object.entries(BANKS).map(([id,b])=>`<button class="${bankId===id?'selected':''}" ${bankLoading||bankId===id?'disabled':''} onclick="switchBank('${id}')">${b.name}</button>`).join('')}</div><p class="small">切换保留当前远征与错词，不混合两个词库。</p></section>`}
+
 const RAW=`abandon|放弃；抛弃
 abnormal|反常的
 absorb|吸收；使专注
@@ -357,7 +363,372 @@ vulnerable|易受伤害的
 welfare|福利
 withdraw|撤回；退出
 witness|目击；证人`;
-let words=RAW.split('\n').map(x=>{let [w,t]=x.split('|');return {w,t,p:''}}), bank='离线精选 '+words.length+' 词', mode='smart';
+const GAOKAO_SEED=`abandon|放弃；抛弃
+ability|能力
+abroad|在国外
+absence|缺席；缺乏
+absolute|绝对的
+absorb|吸收；理解
+abundant|大量的；丰富的
+academic|学术的；学校的
+accept|接受
+access|进入；使用的机会
+accident|事故
+accompany|陪伴；伴随
+accomplish|完成；实现
+account|账户；叙述；解释
+accurate|准确的
+achieve|达到；取得
+acknowledge|承认；感谢
+acquire|获得；习得
+adapt|适应；改编
+addict|使上瘾；成瘾者
+adequate|足够的
+adjust|调整；适应
+admire|钦佩；欣赏
+admission|准许进入；入场费
+admit|承认；准许进入
+adopt|采用；收养
+advance|前进；进步
+advantage|优势；有利条件
+advertise|做广告
+affect|影响
+afford|负担得起
+agency|机构；代理处
+agriculture|农业
+alarm|警报；惊恐
+alternative|可供选择的事物
+amaze|使惊奇
+ambition|抱负；野心
+amount|数量；总计
+analyze|分析
+announce|宣布
+annual|每年的
+anxiety|焦虑；担忧
+apologize|道歉
+appeal|呼吁；吸引力
+appear|出现；似乎
+appetite|食欲；欲望
+apply|申请；应用
+appoint|任命；约定
+appreciate|欣赏；感激
+approach|接近；方法
+appropriate|适当的
+approve|赞成；批准
+argue|争论；论证
+arrange|安排；整理
+arrest|逮捕
+artificial|人造的；人工的
+aspect|方面
+assess|评估
+assign|分配；指派
+assist|帮助
+assume|假设；承担
+attach|附加；系上
+attempt|尝试
+attend|出席；照料
+attitude|态度
+attract|吸引
+average|平均的；平均数
+avoid|避免
+aware|意识到的
+balance|平衡
+ban|禁止
+barrier|障碍
+behave|表现；举止
+benefit|益处；使受益
+blame|责备
+border|边界
+bother|打扰；烦恼
+brief|简短的
+broadcast|广播；播送
+burden|负担
+calculate|计算
+campaign|运动；活动
+candidate|候选人
+capable|有能力的
+capacity|容量；能力
+career|职业生涯
+casual|随意的；偶然的
+category|类别
+celebrate|庆祝
+challenge|挑战
+characteristic|特征；典型的
+charge|收费；充电；指控
+circumstance|环境；情况
+civilization|文明
+claim|声称；索取
+clarify|澄清
+climate|气候
+collapse|倒塌；崩溃
+combine|结合
+comfort|安慰；舒适
+commit|承诺；犯（罪）
+committee|委员会
+communicate|交流；传达
+community|社区；群体
+compare|比较
+compete|竞争
+complain|抱怨
+complex|复杂的
+concentrate|集中注意力
+concept|概念
+concern|担忧；涉及
+conclude|得出结论；结束
+conduct|实施；行为
+confident|自信的
+confirm|确认
+conflict|冲突
+confuse|使困惑
+consequence|后果
+conserve|保护；节约
+consider|考虑；认为
+consistent|一致的
+constant|持续的；恒定的
+construct|建造
+consume|消耗；消费
+contact|联系；接触
+contain|包含；容纳
+contribute|贡献；促成
+convenient|方便的
+convince|使信服
+cooperate|合作
+cope|应对
+core|核心
+costly|昂贵的
+courage|勇气
+creative|有创造力的
+credit|信用；学分
+critical|关键的；批判的
+crowd|人群；拥挤
+crucial|至关重要的
+cultivate|培养；耕作
+curiosity|好奇心
+damage|损害
+debate|辩论
+decade|十年
+decline|下降；拒绝
+defend|保卫；辩护
+define|定义
+delay|推迟
+deliver|递送；发表
+demand|要求；需求
+demonstrate|证明；展示
+deny|否认；拒绝
+department|部门；系
+deserve|值得；应得
+design|设计
+desire|渴望
+destroy|破坏
+determine|决定；确定
+devote|奉献；致力于
+differ|不同
+disappear|消失
+disappoint|使失望
+disaster|灾难
+discipline|纪律；学科
+discover|发现
+discourage|使泄气；劝阻
+display|展示
+distance|距离
+distinguish|区分
+distribute|分发；分布
+diverse|多样的
+donate|捐赠
+doubt|怀疑
+dramatic|戏剧性的；显著的
+duty|责任；义务
+eager|渴望的
+economy|经济
+effective|有效的
+efficient|高效的
+effort|努力
+emerge|出现
+emotion|情绪
+employ|雇用；使用
+encourage|鼓励
+energy|能量；精力
+enhance|增强
+entertain|使娱乐；招待
+enthusiasm|热情
+entire|全部的
+environment|环境
+equal|相等的；平等的
+escape|逃脱
+essential|必要的；本质的
+establish|建立
+estimate|估计
+evidence|证据
+examine|检查；考查
+exchange|交换
+exist|存在
+expand|扩大
+expect|预期；期待
+expense|费用
+experience|经历；经验
+experiment|实验
+explain|解释
+explore|探索
+express|表达
+extend|延伸；扩大
+factor|因素
+failure|失败
+familiar|熟悉的
+fascinate|使着迷
+feature|特征；以…为特色
+flexible|灵活的
+focus|焦点；集中
+forecast|预测
+formal|正式的
+fortune|财富；运气
+foundation|基础；基金会
+frequent|频繁的
+function|功能；运转
+fundamental|根本的
+further|更进一步
+generous|慷慨的
+genuine|真正的
+global|全球的
+gradual|逐渐的
+grateful|感激的
+guarantee|保证
+handle|处理；把手
+harmful|有害的
+hesitate|犹豫
+highlight|突出；亮点
+identify|识别；确认
+ignore|忽视
+imagine|想象
+immediate|立即的
+impact|影响；冲击
+improve|改善
+independent|独立的
+indicate|表明
+individual|个人；个体
+influence|影响
+inform|通知
+injure|伤害
+inspire|激励；启发
+intend|打算
+interact|互动
+interpret|解释；口译
+interrupt|打断
+introduce|介绍；引进
+investigate|调查
+involve|涉及；使参与
+issue|问题；发行
+judgement|判断
+lack|缺乏
+launch|发起；发射
+likely|可能的
+limit|限制
+maintain|维持
+majority|大多数
+manage|设法做到；管理
+material|材料；物质的
+measure|测量；措施
+mention|提到
+method|方法
+minority|少数
+motivate|激励
+negative|消极的；负面的
+observe|观察；遵守
+obtain|获得
+occur|发生
+oppose|反对
+opportunity|机会
+organize|组织
+original|原始的；原创的
+participate|参与
+particular|特定的；特别的
+patient|耐心的；病人
+perform|表演；执行
+persuade|说服
+phenomenon|现象
+physical|身体的；物理的
+policy|政策
+positive|积极的；正面的
+possess|拥有
+potential|潜在的；潜力
+practical|实际的；实用的
+prefer|更喜欢
+preserve|保存；保护
+prevent|阻止
+previous|先前的
+priority|优先事项
+process|过程；处理
+produce|生产；产生
+promote|促进；提升
+propose|提出；提议
+prove|证明
+publish|出版；发表
+purpose|目的
+pursue|追求
+quality|质量；品质
+quantity|数量
+recognize|认出；承认
+recommend|推荐
+recover|恢复
+reduce|减少
+reflect|反映；反思
+refuse|拒绝
+regard|看待；认为
+relate|联系；叙述
+reliable|可靠的
+remain|保持；剩余
+remark|评论
+remind|提醒
+remove|移除
+replace|替换
+represent|代表
+require|需要；要求
+research|研究
+resource|资源
+respect|尊重；方面
+respond|回应
+responsibility|责任
+restrict|限制
+reveal|揭示
+risk|风险
+routine|常规；惯例
+satisfy|使满意
+schedule|日程；安排
+select|选择
+significant|重要的；显著的
+similar|相似的
+solution|解决办法
+specific|具体的；特定的
+spread|传播；展开
+strategy|策略
+strength|力量；优势
+struggle|奋斗；挣扎
+succeed|成功；继任
+sufficient|足够的
+suggest|建议；暗示
+support|支持
+survive|幸存
+sustainable|可持续的
+target|目标
+technique|技术；技巧
+temporary|暂时的
+tend|倾向于；照料
+threat|威胁
+tolerate|容忍
+tradition|传统
+transform|转变
+transport|运输
+trend|趋势
+unique|独特的
+universal|普遍的
+variety|多样性；种类
+vehicle|交通工具；载体
+volunteer|志愿者；自愿做
+warn|警告
+welfare|福利
+willing|愿意的
+withdraw|撤回；退出
+worthwhile|值得的`;
+let words=(bankId==='gaokao'?GAOKAO_SEED:RAW).split('\n').map(x=>{let [w,t]=x.split('|');return {w,t,p:''}}), bank=config.name+' · 离线精选 '+words.length+' 词', mode='smart';
 const basic=new Set('a an the of in on at to for from by with and or but if as is are be am was were been being do does did have has had can could will would shall should may might must not no yes I you he she it we they me him her us them my your his our their this that these those here there who what when where why how all some any many much more most less very too so up down out over under into off back go come get make take give see look watch hear listen say tell speak read write eat drink run walk sit stand open close big small good bad new old high low hot cold day night morning evening time year month week today tomorrow yesterday man woman boy girl child school book pen desk chair table water food milk apple dog cat house home car bus train red blue green black white one two three four five six seven eight nine ten first last happy sad friend family father mother sister brother teacher student work play love like want need know think feel find help use name people thing life hand head eye face room door window world'.toLowerCase().split(' '));
 
 const CARDRAW=`strike|斩击|⚔|1|attack|basic|hit:8:11
@@ -441,16 +812,18 @@ const ACTS=[{name:'腐朽森林',en:'I · FOREST',normal:[0,1,3,10],elite:[11],b
 const actInfo=()=>ACTS[(s?.act||1)-1];const totalFloor=()=>((s?.act||1)-1)*11+(s?.floor||0);const actBoss=a=>sh(ACTS[a-1].boss)[0];
 function actStrip(){return '<div class="actbar">'+ACTS.map((a,i)=>`<span class="${i+1===(s?.act||1)?'active':i+1<(s?.act||1)?'cleared':''}">${['I','II','III'][i]} ${a.name}</span>`).join('')+'</div>'}
 const $=id=>document.getElementById(id), sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}, clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-let progress={},s=null,quiz=null,msg='',clock=0;try{progress=JSON.parse(localStorage.getItem('spireWords')||'{}');s=JSON.parse(localStorage.getItem('spireRunV2')||'null');quiz=JSON.parse(localStorage.getItem('spireQuizV2')||'null');clock=Number(localStorage.getItem('spireClock')||0)}catch(e){}if(s&&!s.map)s=null;
-function save(){try{localStorage.setItem('spireWords',JSON.stringify(progress));localStorage.setItem('spireRunV2',JSON.stringify(s));localStorage.setItem('spireQuizV2',JSON.stringify(quiz));localStorage.setItem('spireClock',String(clock))}catch(e){}}
+let progress={},s=null,quiz=null,msg='',clock=0;try{progress=JSON.parse(localStorage.getItem(slot('spireWords'))||'{}');s=JSON.parse(localStorage.getItem(slot('spireRunV2'))||'null');quiz=JSON.parse(localStorage.getItem(slot('spireQuizV2'))||'null');clock=Number(localStorage.getItem(slot('spireClock'))||0)}catch(e){}if(s&&!s.map)s=null;
+function save(){try{localStorage.setItem(slot('spireWords'),JSON.stringify(progress));localStorage.setItem(slot('spireRunV2'),JSON.stringify(s));localStorage.setItem(slot('spireQuizV2'),JSON.stringify(quiz));localStorage.setItem(slot('spireClock'),String(clock))}catch(e){}}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-const BANKKEY='spireBankV6', STUDYKEY='spireStudyV6';
+const BANKKEY=slot('spireBankV6'), STUDYKEY=slot('spireStudyV6');
 let study={dailyNew:40,auto:true};try{Object.assign(study,JSON.parse(localStorage.getItem(STUDYKEY)||'{}'));mode=study.mode||'smart'}catch(e){}
 function cacheBank(a){try{localStorage.setItem(BANKKEY,JSON.stringify(a));return true}catch(e){return false}}
-function loadBank(data,quiet=false){let a=Array.isArray(data)?data:data.words;if(!Array.isArray(a))throw Error('词库格式错误');let m=new Map();for(let x of a){let w=String(x.word||x.w||'').trim().toLowerCase();let t=Array.isArray(x.translations)?(x.translations.filter(v=>!String(v).startsWith('[')).join('；')||x.translations.join('；')):String(x.t||x.translation||'');if(w&&t)m.set(w,{w,t,p:x.phonetic||x.p||''})}if(m.size<100)throw Error('词库不完整');words=[...m.values()];let cached=cacheBank(words);bank=(words.length===3815?'3815条来源规模 · ':'导入词库 ')+words.length+' 词 · '+(cached?'已缓存':'未缓存');if(!quiet)render()}
+function normalizeBank(data){let a=Array.isArray(data)?data:data.words;if(!Array.isArray(a))throw Error('词库格式错误');let m=new Map();for(let x of a){if(!x||typeof x!=='object')continue;let w=String(Array.isArray(x)?x[0]:(x.word||x.w||'')).trim().toLowerCase();let t=Array.isArray(x)?String(x[3]||'').trim():Array.isArray(x.translations)?(x.translations.filter(v=>!String(v).startsWith('[')).join('；')||x.translations.join('；')):String(x.t||x.translation||'').trim();if(/^[a-z][a-z'. -]*$/.test(w)&&t&&!['__proto__','constructor','prototype'].includes(w))m.set(w,{w,t,p:String(Array.isArray(x)?x[1]||'':x.phonetic||x.p||'')})}if(m.size<100)throw Error('词库不完整');return [...m.values()]}
+function loadBank(data,quiet=false){words=normalizeBank(data);let cached=cacheBank(words);bank=config.name+' · '+words.length+' 词 · '+(cached?'已缓存':'未缓存');if(!quiet)render()}
+
 try{let a=JSON.parse(localStorage.getItem(BANKKEY)||'null');if(a?.length>=100)loadBank(a,true)}catch(e){}
-try{let a=JSON.parse(document.getElementById('spire-embedded-bank').textContent);if(a?.length>=3815&&words.length<3815)loadBank(a,true)}catch(e){}
-let bankLoading=false;async function online(){if(bankLoading)return;bankLoading=true;let previous=bank;bank='正在连接词库…';render();for(let u of ["./cet4.json",SOURCE,'https://cdn.jsdelivr.net/gh/grhliu/wordtyper-vocabularies@main/vocabularies/cet4.json','https://fastly.jsdelivr.net/gh/grhliu/wordtyper-vocabularies@main/vocabularies/cet4.json']){try{let ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),6500);let r;try{r=await fetch(u,{signal:ctl.signal})}finally{clearTimeout(timer)}if(!r.ok)continue;let data=await r.json();if((data.words||data).length<3815)continue;loadBank(data);bankLoading=false;return}catch(e){}}bankLoading=false;bank=previous+' · 联网失败，可导入';render()}
+try{let a=JSON.parse(document.getElementById('spire-embedded-bank').textContent);let b=Array.isArray(a)?(bankId==='cet4'?a:null):a?.[bankId];if(b?.length>=TARGET&&words.length<TARGET)loadBank(b,true)}catch(e){}
+let bankLoading=false;async function online(){if(bankLoading)return;bankLoading=true;let previous=bank;bank='正在连接词库…';render();for(let u of ["./"+config.path,SOURCE,'https://cdn.jsdelivr.net/gh/'+config.repo+'@main/'+config.file,'https://fastly.jsdelivr.net/gh/'+config.repo+'@main/'+config.file]){try{let ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),6500);let r;try{r=await fetch(u,{signal:ctl.signal})}finally{clearTimeout(timer)}if(!r.ok)continue;let data=await r.json();if(normalizeBank(data).length<TARGET)continue;loadBank(data);bankLoading=false;return}catch(e){}}bankLoading=false;bank=previous+' · 联网失败，可导入';render()}
 
 const roomNames={normal:'⚔ 战斗',elite:'◆ 精英',rest:'♨ 篝火',shop:'◇ 商店',event:'? 事件',boss:'♛ 首领'};
 const relics={heart:'再生之心：战后回血6',battery:'余烬：首回合+1能量',shield:'石符：每回合+3护甲',coin:'金羽：战后额外10金币',edge:'磨石：开战力量+2',ember:'火种瓶：开战燃烧5'};
@@ -516,13 +889,13 @@ function button(t,act,disabled=false,primary=false){return `<button class="wide 
 function deckChoices(act,filter=()=>true){return `<div class="hand">${s.deck.map((k,i)=>filter(k)?card(k,null,`${act}(${i})`):'').join('')}</div>`}
 function mapView(){let icons={normal:'⚔',elite:'◆',rest:'♨',shop:'◇',event:'?',boss:'♛'},lines='',h='<div class="mapwrap"><svg viewBox="0 0 300 725" preserveAspectRatio="none" aria-hidden="true">';for(let r=0;r<10;r++)for(let c=0;c<3;c++)for(let d=0;d<3;d++){if(r===9&&d!==1||r<9&&Math.abs(c-d)>1)continue;let used=r+1<s.floor&&s.route[r]===c&&s.route[r+1]===d;lines+=`<line x1="${50+c*100}" y1="${697-r*66.5}" x2="${50+d*100}" y2="${697-(r+1)*66.5}" stroke="${used?'#e3ba72':'#776453'}" stroke-width="${used?2.5:1}" stroke-dasharray="${used?'0':'3 5'}" opacity="${used?1:.55}"/>`}h+=lines+'</svg><div class="mapgrid">';for(let r=10;r>=0;r--){for(let c=0;c<(r===10?1:3);c++){let col=r===10?1:c,k=s.map[r][col],on=r===s.floor&&avail(col),done=r<s.floor&&s.route[r]===col;h+=`<button class="${k} ${done?'selected':''} ${on?'available':''}" ${on?'':'disabled'} onclick="pickRoom(${col})"><span class="mapicon">${done?'✓':icons[k]}</span><span class="maplabel">${r+1} · ${roomNames[k].slice(2)}</span></button>`}}return h+'</div></div>'}
 function catalog(){ $('app').innerHTML=`<button onclick="render()">← 返回</button><h2>灰烬剑士 · ${Object.keys(cards).length} 张卡</h2><p class="small">普通 / 罕见 / 稀有；每张卡可强化一次。</p><div class="catalog">${Object.keys(cards).map(k=>card(k,null,'')).join('')}</div>`}
-function render(){let count=Object.keys(progress).length,master=coverage().master;let h=`<div class="top"><div><div class="brand">词塔 <span class="small">V0.9</span></div><div class="small">灰烬剑士 · ${esc(bank)}</div></div><button onclick="showStats()">复习 ${dueWords().length}</button></div>`;if(!s){h+=`<section class="panel hero">${sceneArt()}<div class="eyebrow">Lexis Spire · Three Acts</div><div class="heroart">${heroArt()}</div><h1>灰烬剑士</h1><p>以词为刃，踏上高塔。</p><p>三幕 · 33 层远征 · ${Object.keys(cards).length} 张卡牌 · 6 位首领</p>${actStrip()}${homeProgress()}${button('开始远征','newRun()',false,true)}<div class="secondary">${button('卡牌图鉴','catalog()')}${button('完整词库','online()')}</div></section>`}else{h+=`<section class="panel"><div class="line"><b>♥ ${s.hp}/${s.max}</b><span>🪙 ${s.gold} · ${s.deck.length} 张卡</span><span class="gold">${totalFloor()}/33 层</span></div><div class="hp"><i style="width:${100*s.hp/s.max}%"></i></div></section>`;if(s.phase==='map'){h+=`<section class="panel"><h2>${actInfo().en} · ${actInfo().name}</h2>${actStrip()}<p class="routeinfo">从下往上走；下一层可选择同列或相邻列。亮色按钮为可走节点。</p><p class="small">${difficultyName(s.difficulty)} · 塔顶：${monsters[s.boss][0]}</p>${mapView()}</section>`}else if(s.phase==='rest'){h+=`<section class="panel"><h2>篝火</h2><p>休息或强化一张卡，二选一。</p>${button('休息 · 恢复30%最大生命','rest()',false,true)}<h3>强化卡牌（选择一张）</h3>${deckChoices('upgrade',k=>!upgraded(k))}${s.deck.every(upgraded)?'<p>所有卡已强化，请休息。</p>':''}</section>`}else if(s.phase==='shop'){h+=`<section class="panel"><h2>流浪商人</h2><div class="hand">${s.stock.map((k,i)=>`<div>${card(k,null,`buy(${i})`)}${button(price(k)+' 金币',`buy(${i})`,s.gold<price(k))}</div>`).join('')}</div><h3>永久删卡 · ${s.removeCost}金币</h3><p class="small">每次访问最多删除一张；最低保留5张。</p>${!s.removed&&s.deck.length>5&&s.gold>=s.removeCost?deckChoices('removeCard'):'<p>当前不可删卡</p>'}${button('离开商店','leave()',false,true)}</section>`}else if(s.phase==='event'){let e=events[s.event];h+=`<section class="panel"><h2>${e[0]}</h2><p>${e[1]}</p>${s.eventUpgrade?deckChoices('upgrade',k=>!upgraded(k)):button(e[2],'eventChoice(0)',s.event===0&&s.hp<=10||s.event===3&&s.hp<=6||s.event===5&&s.gold<40||s.event===7&&(s.hp<=8||s.deck.every(upgraded))||s.event===8&&s.gold<30||s.event===11&&s.hp<=12,false)}${button(e[3],'eventChoice(1)',false,true)}</section>`}else if(s.phase==='battle'){let m=monsters[s.enemy],it=intent(),attack=Math.floor((it[1]+s.ePower)*(s.weak?.75:1));h+=`<section class="panel arena">${sceneArt()}<div class="intent">敌人意图：${it[0]==='攻'?'⚔ 攻击 '+attack:it[0]==='盾'?'⛨ 格挡 '+it[1]:it[0]==='强'?'力量 +'+it[1]:it[0]==='镜'?'镜面反制':it[0]==='诅'?'施加虚弱 '+it[1]:it[0]==='吸'?'汲血 '+(it[1]+s.ePower):'分裂准备'}</div><div class="stage"><div class="fighter">${heroArt()}<span class="figlabel">灰烬剑士</span></div><div class="foe">${enhancedMonster(m[1])}<span class="figlabel">${m[0]}</span></div></div><div class="enemyline"><span>${m[0]} ${s.eBlock?'⛨'+s.eBlock:''}</span><span>${Math.max(0,s.ehp)}/${s.emax}</span></div><div class="hp enemyhp"><i style="width:${clamp(100*s.ehp/s.emax,0,100)}%"></i></div><div class="small">${s.burn?'燃烧 '+s.burn+' · ':''}${s.vuln?'易伤 '+s.vuln+' · ':''}${s.weak?'虚弱 '+s.weak+' · ':''}${s.mirror?'镜面反伤':''}${s.split?'已分裂':''}${s.playerWeak?' · 自身虚弱 '+s.playerWeak:''}</div></section><div class="combatbar"><div class="orb">${s.energy}</div><div><b>⛨ ${s.block}　⚔ ${s.str+s.tempstr}</b><div class="small">护甲 · 力量</div></div><span class="small">第 ${s.turn} 回合${s.turn>=10?' · 狂暴':''}</span></div><div class="status"><span>抽牌 ${s.pile.length}</span><span>弃牌 ${s.discard.length}</span><span>消耗 ${s.ex.length}</span><span>连对 ${s.streak}</span></div><div class="log ${quiz?.done?(quiz.ok?'green':'red'):''}">${esc(msg)}</div>`;if(quiz){h+=`<section class="panel quizpanel"><div class="small">${info(quiz.key).name} · ${quiz.reverse?'选对应英文':'选择正确释义'}</div><div class="word">${esc(quiz.reverse?gloss(quiz.word.t):quiz.word.w)}</div><div class="small">${esc(quiz.reverse?'':quiz.word.p)}</div>${quiz.done?`<p class="${quiz.ok?'green':'red'}">${quiz.ok?'技能生效':'正确答案：'+esc(quiz.correct)}</p><p>${esc(quiz.word.w)} · ${esc(quiz.word.t)}</p>${button('继续','next()',false,true)}`:`<div class="opts">${quiz.choices.map((a,i)=>`<button onclick="answer(${i})"><span class="letter">${String.fromCharCode(65+i)}</span>${esc(a)}</button>`).join('')}</div>${button('太简单 · 换题（不出牌）','answer(-1,true)')}`}</section>`}else h+=`<div class="small">手牌 ${s.hand.length} 张 · 左右滑动查看</div><div class="hand battlehand">${s.hand.map((k,i)=>card(k,i,`play(${i})`)).join('')}</div><button class="wide endturn" onclick="endTurn()">结束回合 →</button>`;if(Object.keys(s.powers).length)h+=`<p class="small">能力：${Object.entries(s.powers).map(([k,v])=>(labels[k]||k)+' '+v).join(' · ')}</p>`}else if(s.phase==='reward'){h+=`<section class="panel rewardpanel"><h2 class="gold">${s.floor===11?'章节首领已击败':'战斗胜利'}</h2><p>${s.got?'获得遗物：'+relics[s.got]+'。':''}三选一，或跳过。</p><div class="hand">${s.reward.map(k=>card(k,null,`reward('${k}')`)).join('')}</div>${button('跳过奖励','reward(null)')}</section>`}else if(s.phase==='actClear'){h+=`<section class="panel act-transition">${pixel('crown')}<h2>${actInfo().name} · 已征服</h2><p>下一幕：${ACTS[s.act].name}</p><p>保留牌组、遗物和金币，恢复75%已损失生命。</p>${actStrip()}${button('进入下一幕','nextAct()',false,true)}</section>`}else h+=`<section class="panel"><h2>${s.phase==='victory'?'登塔成功！':'远征结束'}</h2><p>第 ${totalFloor()} 层 · 答对 ${s.right}/${s.total} · 错词 ${new Set(s.wrong).size}</p>${runSummary()}${button('返回营地','backCamp()',false,true)}</section>`;h+=`<details><summary>牌组与遗物</summary><div class="hand">${s.deck.map(k=>card(k,null,'')).join('')}</div><p>${s.relic.map(k=>relics[k]).join(' · ')||'暂无遗物'}</p></details>`}h+=`<details><summary>词库设置 · 验证熟练 ${master} 词</summary>${button('联网加载完整词库','online()')}<p>导入 JSON：<input type="file" accept=".json,application/json" onchange="importFile(this)"></p>${button(mode==='all'?'全词模式':'智能过滤基础词',"mode=mode==='all'?'smart':'all';study.mode=mode;saveStudy();render()")}${button('卡牌图鉴','catalog()')}${button('学习中心','showStats()')}<p class="small">词源：WordTyper Vocabularies / ECDICT（MIT）。完整来源词库首次联网或导入后缓存，内置精选词可离线使用。词汇记录沿用旧版，本局进度独立。</p>${button('返回首页',"if(confirm('结束本局？保留词汇记录。')){s=null;quiz=null;save();render()}")}</details>`;$('app').innerHTML=h}
-function importFile(el){let f=el.files[0];if(!f)return;f.text().then(t=>{loadBank(JSON.parse(t))}).catch(e=>{bank='导入失败 · '+words.length+' 词';render()})}
+function render(){let count=Object.keys(progress).length,master=coverage().master;let h=`<div class="top"><div><div class="brand">词塔 <span class="small">V0.10</span></div><div class="small">灰烬剑士 · ${esc(bank)}</div></div><button onclick="showStats()">复习 ${dueWords().length}</button></div>`;if(!s){h+=`<section class="panel hero">${sceneArt()}<div class="eyebrow">Lexis Spire · Three Acts</div><div class="heroart">${heroArt()}</div><h1>灰烬剑士</h1><p>以词为刃，踏上高塔。</p><p>三幕 · 33 层远征 · ${Object.keys(cards).length} 张卡牌 · 6 位首领</p>${actStrip()}${homeProgress()}${button('开始远征','newRun()',false,true)}<div class="secondary">${button('卡牌图鉴','catalog()')}${button('完整词库','online()')}</div></section>`}else{h+=`<section class="panel"><div class="line"><b>♥ ${s.hp}/${s.max}</b><span>🪙 ${s.gold} · ${s.deck.length} 张卡</span><span class="gold">${totalFloor()}/33 层</span></div><div class="hp"><i style="width:${100*s.hp/s.max}%"></i></div></section>`;if(s.phase==='map'){h+=`<section class="panel"><h2>${actInfo().en} · ${actInfo().name}</h2>${actStrip()}<p class="routeinfo">从下往上走；下一层可选择同列或相邻列。亮色按钮为可走节点。</p><p class="small">${difficultyName(s.difficulty)} · 塔顶：${monsters[s.boss][0]}</p>${mapView()}</section>`}else if(s.phase==='rest'){h+=`<section class="panel"><h2>篝火</h2><p>休息或强化一张卡，二选一。</p>${button('休息 · 恢复30%最大生命','rest()',false,true)}<h3>强化卡牌（选择一张）</h3>${deckChoices('upgrade',k=>!upgraded(k))}${s.deck.every(upgraded)?'<p>所有卡已强化，请休息。</p>':''}</section>`}else if(s.phase==='shop'){h+=`<section class="panel"><h2>流浪商人</h2><div class="hand">${s.stock.map((k,i)=>`<div>${card(k,null,`buy(${i})`)}${button(price(k)+' 金币',`buy(${i})`,s.gold<price(k))}</div>`).join('')}</div><h3>永久删卡 · ${s.removeCost}金币</h3><p class="small">每次访问最多删除一张；最低保留5张。</p>${!s.removed&&s.deck.length>5&&s.gold>=s.removeCost?deckChoices('removeCard'):'<p>当前不可删卡</p>'}${button('离开商店','leave()',false,true)}</section>`}else if(s.phase==='event'){let e=events[s.event];h+=`<section class="panel"><h2>${e[0]}</h2><p>${e[1]}</p>${s.eventUpgrade?deckChoices('upgrade',k=>!upgraded(k)):button(e[2],'eventChoice(0)',s.event===0&&s.hp<=10||s.event===3&&s.hp<=6||s.event===5&&s.gold<40||s.event===7&&(s.hp<=8||s.deck.every(upgraded))||s.event===8&&s.gold<30||s.event===11&&s.hp<=12,false)}${button(e[3],'eventChoice(1)',false,true)}</section>`}else if(s.phase==='battle'){let m=monsters[s.enemy],it=intent(),attack=Math.floor((it[1]+s.ePower)*(s.weak?.75:1));h+=`<section class="panel arena">${sceneArt()}<div class="intent">敌人意图：${it[0]==='攻'?'⚔ 攻击 '+attack:it[0]==='盾'?'⛨ 格挡 '+it[1]:it[0]==='强'?'力量 +'+it[1]:it[0]==='镜'?'镜面反制':it[0]==='诅'?'施加虚弱 '+it[1]:it[0]==='吸'?'汲血 '+(it[1]+s.ePower):'分裂准备'}</div><div class="stage"><div class="fighter">${heroArt()}<span class="figlabel">灰烬剑士</span></div><div class="foe">${enhancedMonster(m[1])}<span class="figlabel">${m[0]}</span></div></div><div class="enemyline"><span>${m[0]} ${s.eBlock?'⛨'+s.eBlock:''}</span><span>${Math.max(0,s.ehp)}/${s.emax}</span></div><div class="hp enemyhp"><i style="width:${clamp(100*s.ehp/s.emax,0,100)}%"></i></div><div class="small">${s.burn?'燃烧 '+s.burn+' · ':''}${s.vuln?'易伤 '+s.vuln+' · ':''}${s.weak?'虚弱 '+s.weak+' · ':''}${s.mirror?'镜面反伤':''}${s.split?'已分裂':''}${s.playerWeak?' · 自身虚弱 '+s.playerWeak:''}</div></section><div class="combatbar"><div class="orb">${s.energy}</div><div><b>⛨ ${s.block}　⚔ ${s.str+s.tempstr}</b><div class="small">护甲 · 力量</div></div><span class="small">第 ${s.turn} 回合${s.turn>=10?' · 狂暴':''}</span></div><div class="status"><span>抽牌 ${s.pile.length}</span><span>弃牌 ${s.discard.length}</span><span>消耗 ${s.ex.length}</span><span>连对 ${s.streak}</span></div><div class="log ${quiz?.done?(quiz.ok?'green':'red'):''}">${esc(msg)}</div>`;if(quiz){h+=`<section class="panel quizpanel"><div class="small">${info(quiz.key).name} · ${quiz.reverse?'选对应英文':'选择正确释义'}</div><div class="word">${esc(quiz.reverse?gloss(quiz.word.t):quiz.word.w)}</div><div class="small">${esc(quiz.reverse?'':quiz.word.p)}</div>${quiz.done?`<p class="${quiz.ok?'green':'red'}">${quiz.ok?'技能生效':'正确答案：'+esc(quiz.correct)}</p><p>${esc(quiz.word.w)} · ${esc(quiz.word.t)}</p>${button('继续','next()',false,true)}`:`<div class="opts">${quiz.choices.map((a,i)=>`<button onclick="answer(${i})"><span class="letter">${String.fromCharCode(65+i)}</span>${esc(a)}</button>`).join('')}</div>${button('太简单 · 换题（不出牌）','answer(-1,true)')}`}</section>`}else h+=`<div class="small">手牌 ${s.hand.length} 张 · 左右滑动查看</div><div class="hand battlehand">${s.hand.map((k,i)=>card(k,i,`play(${i})`)).join('')}</div><button class="wide endturn" onclick="endTurn()">结束回合 →</button>`;if(Object.keys(s.powers).length)h+=`<p class="small">能力：${Object.entries(s.powers).map(([k,v])=>(labels[k]||k)+' '+v).join(' · ')}</p>`}else if(s.phase==='reward'){h+=`<section class="panel rewardpanel"><h2 class="gold">${s.floor===11?'章节首领已击败':'战斗胜利'}</h2><p>${s.got?'获得遗物：'+relics[s.got]+'。':''}三选一，或跳过。</p><div class="hand">${s.reward.map(k=>card(k,null,`reward('${k}')`)).join('')}</div>${button('跳过奖励','reward(null)')}</section>`}else if(s.phase==='actClear'){h+=`<section class="panel act-transition">${pixel('crown')}<h2>${actInfo().name} · 已征服</h2><p>下一幕：${ACTS[s.act].name}</p><p>保留牌组、遗物和金币，恢复75%已损失生命。</p>${actStrip()}${button('进入下一幕','nextAct()',false,true)}</section>`}else h+=`<section class="panel"><h2>${s.phase==='victory'?'登塔成功！':'远征结束'}</h2><p>第 ${totalFloor()} 层 · 答对 ${s.right}/${s.total} · 错词 ${new Set(s.wrong).size}</p>${runSummary()}${button('返回营地','backCamp()',false,true)}</section>`;h+=`<details><summary>牌组与遗物</summary><div class="hand">${s.deck.map(k=>card(k,null,'')).join('')}</div><p>${s.relic.map(k=>relics[k]).join(' · ')||'暂无遗物'}</p></details>`}h+=`<details><summary>词库设置 · 验证熟练 ${master} 词</summary>${button('联网加载完整词库','online()')}<p>导入 JSON：<input type="file" accept=".json,application/json" onchange="importFile(this)"></p>${button(mode==='all'?'全词模式':'智能过滤基础词',"mode=mode==='all'?'smart':'all';study.mode=mode;saveStudy();render()")}${button('卡牌图鉴','catalog()')}${button('学习中心','showStats()')}<p class="small">词源：${esc(config.source)}。社区整理词表，非官方大纲认证。完整来源词库首次联网或导入后缓存，内置精选词可离线使用。词汇记录沿用旧版，本局进度独立。</p>${button('返回首页',"if(confirm('结束本局？保留词汇记录。')){s=null;quiz=null;save();render()}")}</details>`;$('app').innerHTML=h}
+function importFile(el){let f=el.files[0];if(!f)return;f.text().then(t=>{let d=JSON.parse(t);let hint=d?.meta?.id||d?.name||'';if((/gaokao|高考/i.test(hint)&&bankId!=='gaokao')||(/CET-?4|四级/i.test(hint)&&bankId!=='cet4'))throw Error('请先切换到对应词库');loadBank(d)}).catch(e=>{bank='导入失败 · '+words.length+' 词';render()})}
 function saveStudy(){try{localStorage.setItem(STUDYKEY,JSON.stringify(study))}catch(e){}}
 let studySession=null;
 function showStats(){studySession=null;let due=dueWords(),active=words.filter(x=>progress[x.w]),master=active.filter(x=>{let p=rec(x.w);return p.level>=5&&!p.known&&p.right>=5}),today=Object.values(progress).filter(p=>p.firstDay===dayKey()).length;let items=active.sort((a,b)=>(rec(a.w).nextAt||0)-(rec(b.w).nextAt||0)).slice(0,80);$('app').innerHTML=`<button onclick="render()">← 返回远征</button><h2>学习中心</h2>${coveragePanel()}<p class="small">${esc(bank)} · 基础词${mode==='all'?'参与':'默认跳过'}</p><section class="panel"><div class="studygrid"><div><b>${due.length}</b><span>到期复习</span></div><div><b>${active.length}</b><span>已学习</span></div><div><b>${master.length}</b><span>较熟练</span></div></div><p>今日新词 ${today} / ${study.dailyNew}</p><div class="hp"><i style="width:${Math.min(100,100*today/study.dailyNew)}%"></i></div>${button('开始到期复习 · 最多20词','beginStudy()',!due.length,true)}${button('未学词探索 · 20词','beginFresh()',!words.some(x=>eligible(x)&&!progress[x.w]))}${button('错词特训 · 最多20词','beginStudy(true)',!active.some(w=>rec(w.w).lapses>0))}<p class="small">答错90秒或4次作答后可复习；首次答对10分钟或5次作答后复查，之后延长至1、3、7、14、30、60天。标记简单：30天后复查。</p></section><section class="panel"><h3>词库管理</h3>${button('联网同步完整词库','online()')}<a href="${SOURCE}" target="_blank" rel="noopener" style="color:#dcc38d">打开原始 JSON（可下载后导入）</a><p>导入：<input type="file" accept=".json,application/json" onchange="importFile(this)"></p><label>每日新词目标 <select onchange="study.dailyNew=+this.value;saveStudy();showStats()">${[20,40,60,100,200].map(n=>`<option ${study.dailyNew===n?'selected':''}>${n}</option>`).join('')}</select></label><p>${button(mode==='all'?'切换智能过滤':'切换全词模式',"mode=mode==='all'?'smart':'all';study.mode=mode;saveStudy();showStats()")}</p><button onclick="exportStudy()">导出学习记录</button></section><h3>最近到期 / 学习记录</h3>${items.map((x,i)=>{let p=rec(x.w);return `<div class="panel wordrow"><div class="line"><b>${esc(x.w)}</b><span class="small">Lv.${p.level} · 错${p.lapses||0}次</span></div><p>${esc(x.t)}</p><div class="line"><span class="small">${reviewDue(p)?'现在复习':new Date(p.nextAt).toLocaleString()}</span><button data-word="${esc(x.w)}" onclick="resetWord(this.dataset.word)">重学</button></div></div>`}).join('')||'<p>还没有学习记录。</p>'}`}
 function resetWord(w){delete progress[w];save();showStats()}
-function exportStudy(){let b=new Blob([JSON.stringify({progress,clock,study,meta},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='lexis-study-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function exportStudy(){let b=new Blob([JSON.stringify({progress,clock,study,meta,bankId},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='lexis-study-'+bankId+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function beginStudy(wrong=false){let pool=wrong?words.filter(x=>rec(x.w)?.lapses>0):dueWords();if(!pool.length)return;studySession={queue:sh(pool).slice(0,20),i:0,right:0,q:null};studyNext()}
 function studyNext(){let z=studySession;if(!z)return;if(z.i>=z.queue.length){$('app').innerHTML=`<section class="panel"><h2>复习完成</h2><p>${z.right}/${z.queue.length} 答对 · 学习进度已保存</p>${button('返回学习中心','showStats()',false,true)}</section>`;return}z.q=makeQuestion(z.queue[z.i]);drawStudy()}
 function drawStudy(){let z=studySession,q=z.q;$('app').innerHTML=`<button onclick="showStats()">← 结束复习</button><section class="panel quizpanel"><div class="line small"><span>独立复习</span><span>${z.i+1}/${z.queue.length}</span></div><div class="word">${esc(q.reverse?gloss(q.word.t):q.word.w)}</div><p class="small">${esc(q.reverse?'选择英文':q.word.p)}</p>${q.done?`<p class="${q.ok?'green':'red'}">${q.ok?'正确':'正确答案：'+esc(q.correct)}</p><p>${esc(q.word.w)} · ${esc(q.word.t)}</p>${button('下一词','studySession.i++;studyNext()',false,true)}`:`<div class="opts">${q.choices.map((x,i)=>`<button onclick="studyAnswer(${i})">${esc(x)}</button>`).join('')}</div>`}</section>`}
@@ -569,7 +942,7 @@ const oldNext=next;next=function(){let done=quiz?.done;oldNext();if(done&&s?.pha
 const oldWin=win;win=function(){oldWin();document.querySelector('.rewardpanel')?.classList.add('fx-reward');fxSound('win')};
 
 
-const METAKEY='spireMetaV7';
+const METAKEY=slot('spireMetaV7');
 let meta={difficulty:'standard',loadout:'classic',runs:0,wins:0,best:0,bestCombo:0,history:[],finished:[]};
 try{Object.assign(meta,JSON.parse(localStorage.getItem(METAKEY)||'{}'))}catch(e){}
 const loadouts={classic:{name:'灰烬剑士 · 均衡',desc:'初始套牌，攻防均衡',need:0,deck:['strike','strike','strike','strike','guard','guard','guard','guard','bash']},iron:{name:'铁卫 · 防守反击',desc:'以反击、护甲和盾击为核心',need:25,deck:['strike','strike','strike','guard','guard','guard','parry','shieldbash','bash']},ember:{name:'余火 · 燃烧',desc:'火种和灼烧提供持续输出',need:75,deck:['strike','strike','strike','guard','guard','guard','poison','flame','bash']},blood:{name:'血刃 · 高风险',desc:'血契、复仇与主动自损',need:150,deck:['strike','strike','strike','guard','guard','guard','blood','revenge','bash']}};
@@ -582,7 +955,7 @@ function setDifficulty(k){if(!['practice','standard','challenge'].includes(k))re
 function finishRun(){if(!s||!['dead','victory'].includes(s.phase))return;s.id=s.id||'legacy-'+Date.now();if(meta.finished.includes(s.id))return;meta.finished.push(s.id);meta.runs++;meta.wins+=s.phase==='victory'?1:0;meta.best=Math.max(meta.best,totalFloor());meta.history.unshift({floor:totalFloor(),right:s.right,total:s.total,win:s.phase==='victory',difficulty:s.difficulty||'standard'});meta.history=meta.history.slice(0,10);saveMeta()}
 function backCamp(){finishRun();s=null;quiz=null;save();render()}
 function coverage(){let total=words.length,active=words.filter(x=>progress[x.w]),tested=active.filter(x=>{let p=rec(x.w);return p.tested||p.right>0||p.wrong>0}),master=active.filter(x=>{let p=rec(x.w);return p.level>=5&&!p.known&&p.right>=5}),self=active.filter(x=>rec(x.w).known),skipped=words.filter(x=>!eligible(x)),unseen=total-active.length;return {total,active:active.length,tested:tested.length,master:master.length,self:self.length,skipped:skipped.length,unseen,eligible:total-skipped.length}}
-function coveragePanel(){let c=coverage(),pct=n=>c.total?Math.round(n/c.total*1000)/10:0;return `<section class="panel"><h3>词塔档案 · 覆盖进度</h3><p class="small">当前词库 ${c.total} 条 / 来源目标 3815 条 · ${c.total===3815?'达到来源规模，非官方全量认证':'尚非完整来源词库'}</p><div class="studygrid"><div><b>${c.tested}</b><span>实际答题</span></div><div><b>${c.master}</b><span>验证熟练</span></div><div><b>${c.self}</b><span>自主标记</span></div></div><p>实际答题覆盖 ${pct(c.tested)}%</p><div class="hp"><i style="width:${pct(c.tested)}%"></i></div><p class="small">未接触 ${c.unseen} · 默认过滤 ${c.skipped}（未计入掌握） · 当前可考 ${c.eligible}。自主标记不等于答题验证；覆盖率分母为当前载入词库。</p></section>`}
+function coveragePanel(){let c=coverage(),pct=n=>c.total?Math.round(n/c.total*1000)/10:0;return `<section class="panel"><h3>词塔档案 · 覆盖进度</h3><p class="small">当前词库 ${c.total} 条 / 来源目标 ${TARGET} 条 · ${c.total>=TARGET?'达到来源规模，非官方全量认证':'尚非完整来源词库'}</p><div class="studygrid"><div><b>${c.tested}</b><span>实际答题</span></div><div><b>${c.master}</b><span>验证熟练</span></div><div><b>${c.self}</b><span>自主标记</span></div></div><p>实际答题覆盖 ${pct(c.tested)}%</p><div class="hp"><i style="width:${pct(c.tested)}%"></i></div><p class="small">未接触 ${c.unseen} · 默认过滤 ${c.skipped}（未计入掌握） · 当前可考 ${c.eligible}。自主标记不等于答题验证；覆盖率分母为当前载入词库。</p></section>`}
 function homeProgress(){let n=verifiedCount();if(!loadouts[meta.loadout]||n<loadouts[meta.loadout].need)meta.loadout='classic';return `<div class="campbox"><div class="line"><b>远征营地</b><span class="small">通关 ${meta.wins} · 最远 ${meta.best}/33</span></div><div class="campchoices">${['practice','standard','challenge'].map(k=>`<button class="${meta.difficulty===k?'selected':''}" onclick="setDifficulty('${k}')" ${k==='challenge'&&!meta.wins?'disabled':''}>${difficultyName(k)}${k==='challenge'&&!meta.wins?' 🔒':''}</button>`).join('')}</div><p class="small">练习：敌方生命82%、攻击75%，错题保底3甲；标准：原始强度；挑战：敌方生命和攻击120%，通关解锁。</p><div class="line"><b>起始牌组</b><span class="small">实际答对过 ${n} 个不同词</span></div><div class="loadouts">${Object.entries(loadouts).map(([k,v])=>`<button class="${meta.loadout===k?'selected':''}" onclick="setLoadout('${k}')" ${n<v.need?'disabled':''}><b>${v.name}</b><small>${n<v.need?'🔒 '+v.need+'个不同词答对解锁':v.desc}</small></button>`).join('')}</div><p class="small">解锁的是新打法，不是永久数值碾压。</p></div>`}
 function runSummary(){finishRun();return `<div class="campbox"><p>本次${difficultyName(s.difficulty)}远征 · 正确率 ${s.total?Math.round(s.right/s.total*100):0}%</p><p>历史完成 ${meta.runs} 局 · 通关 ${meta.wins} 次 · 最远 ${meta.best} 层</p><p class="small">所有真实答题和复习记录均计入局外进度，即使远征失败。</p></div>`}
 function beginFresh(){let pool=words.filter(x=>eligible(x)&&!progress[x.w]);if(!pool.length)return;studySession={queue:sh(pool).slice(0,20),i:0,right:0,q:null};studyNext()}
@@ -593,28 +966,31 @@ sprites.rootking[0]='..e....e....e...';sprites.rootking[1]='..eeeeeeeeeee...';sp
 const oldScene=sceneArt;sceneArt=()=>{let a=s?.act||1;if(a===3)return oldScene().replaceAll('#1c2332','#1b1930').replaceAll('#3d3449','#32274e').replaceAll('#4c3b50','#6a416f');if(a===2)return `<svg class="scene" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges"><path fill="#2a1926" d="M0 0h160v90H0z"/><path fill="#4c2930" d="M0 15h20v10h15v-9h20v34h20V12h25v25h20V8h20v15h20v48H0z"/><path fill="#db7045" d="M0 62h160v15H0z"/><path fill="#f4b35e" d="M0 64h31v3h34v-3h33v4h30v-3h32v4H0z"/><path fill="#37303b" d="M0 76h160v14H0z"/><path stroke="#8d4d44" d="M0 82h160M25 77v5m44 0v8m35-13v5m29 0v8"/></svg>`;return `<svg class="scene" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges"><path fill="#1a3031" d="M0 0h160v90H0z"/><path fill="#39544b" d="M0 25h160v42H0z"/>${[4,26,51,89,118,145].map((x,i)=>`<path fill="${i%2?'#243d37':'#2d4740'}" d="M${x} 2h8v30h8v8h-8v28h-8V39h-9v-7h9z"/>`).join('')}<path fill="#24372d" d="M0 67h160v23H0z"/><path fill="#46634a" d="M0 66h25v3h40v-3h40v3h55v4H0z"/></svg>`};
 if(s&&!s.act){s.act=1;if(!['battle','reward','victory','dead'].includes(s.phase)||s.floor<11)s.boss=actBoss(1);if(s.floor===11&&s.phase==='reward')s.phase='actClear';save()}
 const preActRender=render;
-render=function(){preActRender();document.body.dataset.act=String(s?.act||1);const top=document.querySelector('#app > .top');if(top){const note=document.createElement('div');note.className='offline-note';note.id='offline-status';note.textContent=offlineText();top.after(note);const b=document.createElement('button');b.className='wide';b.textContent='存档与离线';b.onclick=showOffline;note.after(b)}};
-const oldStats9=showStats;showStats=function(){oldStats9();const b=document.createElement('button');b.className='wide';b.textContent='完整存档 / 离线管理';b.onclick=showOffline;$('app').append(b)};
+render=function(){preActRender();document.body.dataset.act=String(s?.act||1);const top=document.querySelector('#app > .top');if(top){const note=document.createElement('div');note.className='offline-note';note.id='offline-status';note.textContent=offlineText();top.after(note);const b=document.createElement('button');b.className='wide';b.textContent='存档与离线';b.onclick=showOffline;note.after(b);note.insertAdjacentHTML('afterend',bankPicker())}};
+const oldStats9=showStats;showStats=function(){oldStats9();$('app').insertAdjacentHTML('afterbegin',bankPicker());const b=document.createElement('button');b.className='wide';b.textContent='完整存档 / 离线管理';b.onclick=showOffline;$('app').append(b)};
 let offlineReady=false,offlineError=false,persistent=null,offlineNotice='';
 function storageOK(){try{localStorage.setItem('spireStorageTest','1');const ok=localStorage.getItem('spireStorageTest')==='1';localStorage.removeItem('spireStorageTest');return ok}catch(e){return false}}
-function bankCached(){try{let a=JSON.parse(localStorage.getItem(BANKKEY)||'null');return Array.isArray(a)&&a.length===3815&&words.length===3815}catch(e){return false}}
-function embeddedFull(){try{return JSON.parse($('spire-embedded-bank').textContent)?.length===3815}catch(e){return false}}
-function offlineText(){return (offlineReady?'✓ 游戏离线包已缓存':offlineError?'网页离线缓存不可用':'离线包未确认')+' · '+(embeddedFull()?'✓ 内嵌完整词库':bankCached()?'✓ 3815词已缓存':'词库 '+words.length+'/3815')}
+function bankCached(){try{let a=JSON.parse(localStorage.getItem(BANKKEY)||'null');return Array.isArray(a)&&a.length>=TARGET&&words.length>=TARGET}catch(e){return false}}
+function embeddedFull(){try{let a=JSON.parse($('spire-embedded-bank').textContent);return (Array.isArray(a)?(bankId==='cet4'?a.length:0):a?.[bankId]?.length)>=TARGET}catch(e){return false}}
+function offlineText(){return (offlineReady?'✓ 游戏离线包已缓存':offlineError?'网页离线缓存不可用':'离线包未确认')+' · '+(embeddedFull()?'✓ 内嵌完整词库':bankCached()?'✓ '+words.length+'词已缓存':'词库 '+words.length+'/'+TARGET)}
 function refreshOffline(){const e=$('offline-status');if(e)e.textContent=offlineText();const p=$('offline-detail');if(p)p.innerHTML=offlineDetails()}
-async function checkOffline(){offlineReady=false;offlineError=false;try{if(!('serviceWorker' in navigator)||!window.isSecureContext||!('caches' in window))throw Error();const c=await caches.open('lexis-spire-v09');const key=new URL(location.pathname,location.origin).href;offlineReady=!!navigator.serviceWorker.controller&&!!(await c.match(key));}catch(e){offlineError=true}try{persistent=await navigator.storage?.persisted?.()??null}catch(e){persistent=null}refreshOffline()}
+async function checkOffline(){offlineReady=false;offlineError=false;try{if(!('serviceWorker' in navigator)||!window.isSecureContext||!('caches' in window))throw Error();const c=await caches.open('lexis-spire-v010');const key=new URL(location.pathname,location.origin).href;offlineReady=!!navigator.serviceWorker.controller&&!!(await c.match(key));}catch(e){offlineError=true}try{persistent=await navigator.storage?.persisted?.()??null}catch(e){persistent=null}refreshOffline()}
 async function setupOffline(){try{if(location.protocol==='file:'||!('serviceWorker' in navigator)||!window.isSecureContext)throw Error();if(!location.pathname.endsWith('/cet4_spire_v08.html'))throw Error();const reg=await navigator.serviceWorker.register('./spire-sw.js',{updateViaCache:'none'});navigator.serviceWorker.addEventListener('controllerchange',checkOffline);await navigator.serviceWorker.ready;await checkOffline();reg.update().catch(()=>{});}catch(e){offlineError=true;refreshOffline()}}
 function offlineDetails(){return `<p>${esc(offlineText())}</p><p>当前网络：${navigator.onLine?'在线（系统报告）':'离线（系统报告）'} · ${storageOK()?'本地存储可写':'本地存储不可写'}</p><p>持久存储：${persistent===true?'已获授权':persistent===false?'未获授权':'无法确认'}。</p><p>${offlineReady&&(bankCached()||embeddedFull())&&storageOK()?'离线条件已检查通过；请开启飞行模式、退出后重开验证。':'尚未确认全部离线条件。'}</p>`}
-function showOffline(){studySession=null;$('app').innerHTML=`<button onclick="render()">← 返回远征</button><h2>存档与离线</h2><section class="panel"><h3>离线准备</h3><div id="offline-detail">${offlineDetails()}</div>${button('重新检测','checkOffline()')}${button('申请持久存储','requestPersistence()')}${button('联网同步完整词库','online()')}<p class="small">也可以从原始词库下载 JSON 后导入。</p><input type="file" accept=".json,application/json" onchange="importFile(this)"><p class="small">iPhone 主屏幕 App 和 Safari 可能各有独立存档；请先导出，再到另一处导入。</p></section><section class="panel"><h3>完整存档迁移</h3><p>包含当前远征（包括战斗与未完成的答题）、词库、学习记录、解锁、历史与设置。导入会替换当前进度，先备份当前设备。</p>${button('导出完整存档 JSON','exportFullSave()',false,true)}<label class="small">导入完整存档 / 旧版学习备份</label><input type="file" accept=".json,application/json" onchange="restoreFile(this)"><p id="save-notice" class="small">${esc(offlineNotice)}</p></section><section class="panel"><h3>独立离线文件</h3><p>将当前完整词库直接写进游戏 HTML 文件。此文件不含个人存档，另存 JSON 备份即可迁移进度。iPhone 文件预览不一定能执行游戏，主屏幕 PWA 是首选。</p>${button('导出内嵌完整词库的 HTML','exportPortable()',words.length!==3815,true)}</section>`;checkOffline()}
+function showOffline(){studySession=null;$('app').innerHTML=`<button onclick="render()">← 返回远征</button><h2>存档与离线</h2>${bankPicker()}<section class="panel"><h3>离线准备</h3><div id="offline-detail">${offlineDetails()}</div>${button('重新检测','checkOffline()')}${button('申请持久存储','requestPersistence()')}${button('联网同步完整词库','online()')}<p class="small">也可以从原始词库下载 JSON 后导入。</p><input type="file" accept=".json,application/json" onchange="importFile(this)"><p class="small">iPhone 主屏幕 App 和 Safari 可能各有独立存档；请先导出，再到另一处导入。</p></section><section class="panel"><h3>完整存档迁移</h3><p>包含两个词库各自的远征、词库、学习记录、解锁、历史与设置。导入会替换当前进度，先备份当前设备。</p>${button('导出完整存档 JSON','exportFullSave()',false,true)}<label class="small">导入完整存档 / 旧版学习备份</label><input type="file" accept=".json,application/json" onchange="restoreFile(this)"><p id="save-notice" class="small">${esc(offlineNotice)}</p></section><section class="panel"><h3>独立离线文件</h3><p>将当前已加载的两个词库直接写进游戏 HTML 文件（未同步的词库只含精选词）。此文件不含个人存档，另存 JSON 备份即可迁移进度。iPhone 文件预览不一定能执行游戏，主屏幕 PWA 是首选。</p>${button('导出内嵌完整词库的 HTML','exportPortable()',words.length<TARGET,true)}</section>`;checkOffline()}
 async function requestPersistence(){try{persistent=await navigator.storage?.persist?.()??null}catch(e){persistent=null}refreshOffline()}
 function downloadData(data,name,type){const a=document.createElement('a');const url=URL.createObjectURL(new Blob([data],{type}));a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}
-function fullSave(){return {format:'lexis-spire-save',version:1,gameVersion:'0.9',createdAt:new Date().toISOString(),progress,clock,study,meta,run:s,quiz,fxPrefs,words}}
-function exportFullSave(){downloadData(JSON.stringify(fullSave()),'lexis-spire-save-'+new Date().toISOString().slice(0,10)+'.json','application/json');offlineNotice='已发起备份下载，请在文件 App 确认。';const e=$('save-notice');if(e)e.textContent=offlineNotice}
+function fullSave(){return {format:'lexis-spire-save',version:1,gameVersion:'0.10',bankId,createdAt:new Date().toISOString(),progress,clock,study,meta,run:s,quiz,fxPrefs,words}}
+function exportFullSave(){downloadData(JSON.stringify(allSave()),'lexis-spire-save-'+new Date().toISOString().slice(0,10)+'.json','application/json');offlineNotice='已发起备份下载，请在文件 App 确认。';const e=$('save-notice');if(e)e.textContent=offlineNotice}
 const isObj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const safeCard=k=>typeof k==='string'&&/^[a-z][a-z0-9_]*\+?$/.test(k)&&Object.hasOwn(cards,base(k));
 function validateSave(d){if(!isObj(d)||!isObj(d.progress)||!Number.isFinite(d.clock)||d.clock<0)throw Error('不支持的存档格式');const legacy=d.format===undefined;if(!legacy&&(d.format!=='lexis-spire-save'||d.version!==1))throw Error('不支持的版本');if(Object.keys(d.progress).length>15000||Object.entries(d.progress).some(([w,p])=>['__proto__','constructor','prototype'].includes(w)||!isObj(p)))throw Error('学习记录损坏');if(d.study!==undefined&&!isObj(d.study)||d.meta!==undefined&&!isObj(d.meta))throw Error('设置损坏');if(!legacy){if(!Array.isArray(d.words)||d.words.length<100||d.words.length>15000||d.words.some(x=>!isObj(x)||typeof x.w!=='string'||typeof x.t!=='string'||['__proto__','constructor','prototype'].includes(x.w)))throw Error('词库损坏');const r=d.run;if(r!==null){if(!isObj(r)||!['map','battle','reward','rest','shop','event','actClear','dead','victory'].includes(r.phase)||![1,2,3].includes(r.act)||!Number.isInteger(r.floor)||r.floor<0||r.floor>11||!Array.isArray(r.map)||r.map.length!==11||r.map.some(row=>!Array.isArray(row)||row.length!==3||row.some(k=>!Object.hasOwn(roomNames,k)))||!Array.isArray(r.deck)||!r.deck.length||r.deck.some(k=>!safeCard(k))||!Array.isArray(r.route)||!Array.isArray(r.relic)||r.relic.some(k=>!Object.hasOwn(relics,k))||!Number.isInteger(r.boss)||!monsters[r.boss]||!Number.isFinite(r.hp)||!Number.isFinite(r.max)||r.max<=0||!Number.isFinite(r.gold))throw Error('远征记录损坏');for(const key of ['hand','pile','discard','ex','stock','reward'])if(r[key]!==undefined&&(!Array.isArray(r[key])||r[key].some(k=>!safeCard(k))))throw Error('牌组损坏');if(r.phase==='battle'&&(!monsters[r.enemy]||!Array.isArray(r.hand)||!Array.isArray(r.pile)||!Array.isArray(r.discard)||!Array.isArray(r.ex)))throw Error('战斗存档损坏');if(r.phase==='event'&&!events[r.event])throw Error('事件记录损坏');}if(d.quiz!==null&&(!isObj(d.quiz)||!r||r.phase!=='battle'||!isObj(d.quiz.word)||typeof d.quiz.word.w!=='string'||!Array.isArray(d.quiz.choices)||!safeCard(d.quiz.key)))throw Error('答题存档损坏');}return legacy}
-function restoreBackup(d){const legacy=validateSave(d);const keys=['spireWords','spireClock',STUDYKEY,METAKEY,'spireRunV2','spireQuizV2',BANKKEY,'spireFxPrefs'];const before=keys.map(k=>localStorage.getItem(k));const mergedStudy={dailyNew:40,auto:true,...(d.study||{})};const mergedMeta={difficulty:'standard',loadout:'classic',runs:0,wins:0,best:0,bestCombo:0,history:[],finished:[],...(d.meta||{})};if(!Array.isArray(mergedMeta.history)||!Array.isArray(mergedMeta.finished))throw Error('历史记录损坏');const values=[JSON.stringify(d.progress),String(d.clock),JSON.stringify(mergedStudy),JSON.stringify(mergedMeta),JSON.stringify(legacy?s:d.run),JSON.stringify(legacy?quiz:d.quiz),JSON.stringify(legacy?words:d.words),JSON.stringify(legacy?fxPrefs:(d.fxPrefs||fxPrefs))];try{for(let i=0;i<keys.length;i++)localStorage.setItem(keys[i],values[i]);}catch(e){for(let i=0;i<keys.length;i++){try{if(before[i]===null)localStorage.removeItem(keys[i]);else localStorage.setItem(keys[i],before[i])}catch(_) {}}throw Error('本地存储空间不足或不可写；未确认恢复成功。')}location.reload()}
-async function restoreFile(el){const f=el.files?.[0];if(!f)return;try{if(f.size>15000000)throw Error('存档文件过大');const d=JSON.parse(await f.text());const legacy=validateSave(d);if(!confirm(legacy?'导入旧版学习记录？会替换学习与局外进度，保留当前远征及词库。':'导入会覆盖当前远征、词汇与设置。确认已备份当前进度？'))return;restoreBackup(d)}catch(e){offlineNotice='导入失败：'+e.message;const n=$('save-notice');if(n)n.textContent=offlineNotice}finally{el.value=''}}
-function exportPortable(){if(words.length!==3815)return;const clone=document.documentElement.cloneNode(true);clone.querySelector('#app').innerHTML='';clone.querySelector('#spire-embedded-bank').textContent=JSON.stringify(words).replace(/</g,'\\u003c');clone.querySelectorAll('link[rel="manifest"],link[rel="apple-touch-icon"]').forEach(n=>n.remove());clone.querySelectorAll('[data-act]').forEach(n=>n.removeAttribute('data-act'));downloadData('<!doctype html>\n'+clone.outerHTML,'lexis-spire-full-offline.html','text/html')}
+const PROFILE_KEYS=['spireWords','spireClock','spireStudyV6','spireMetaV7','spireRunV2','spireQuizV2','spireBankV6'];
+function storedProfile(id){const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(slot(k,id))||'null')??d}catch(e){return d}};let w=read('spireBankV6',null);if(!w)w=(id==='cet4'?RAW:GAOKAO_SEED).split('\n').map(x=>{let [w,t]=x.split('|');return {w,t,p:''}});return {format:'lexis-spire-save',version:1,bankId:id,progress:read('spireWords',{}),clock:read('spireClock',0),study:read('spireStudyV6',{}),meta:read('spireMetaV7',{}),run:read('spireRunV2',null),quiz:read('spireQuizV2',null),words:w,fxPrefs}}
+function allSave(){save();saveStudy();saveMeta();return {format:'lexis-spire-multibank',version:2,active:bankId,profiles:Object.fromEntries(Object.keys(BANKS).map(id=>[id,id===bankId?fullSave():storedProfile(id)]))}}
+function restoreBackup(d){let profiles=d.format==='lexis-spire-multibank'?d.profiles:{[d.bankId==='gaokao'?'gaokao':'cet4']:d};let active=d.format==='lexis-spire-multibank'?d.active:Object.keys(profiles)[0];if(!BANKS[active]||!isObj(profiles)||!Object.keys(profiles).length||Object.keys(profiles).some(id=>!BANKS[id]))throw Error('词库存档不支持');let changes=[];for(const [id,v] of Object.entries(profiles)){let legacy=validateSave(v);let old=id===bankId?fullSave():storedProfile(id);let st={dailyNew:40,auto:true,...(v.study||{})};let mt={difficulty:'standard',loadout:'classic',runs:0,wins:0,best:0,bestCombo:0,history:[],finished:[],...(v.meta||{})};if(!Array.isArray(mt.history)||!Array.isArray(mt.finished))throw Error('历史记录损坏');let vals=[v.progress,v.clock,st,mt,legacy?old.run:v.run,legacy?old.quiz:v.quiz,legacy?old.words:v.words];PROFILE_KEYS.forEach((k,i)=>changes.push([slot(k,id),JSON.stringify(vals[i])]))}changes.push(['spireFxPrefs',JSON.stringify(profiles[active]?.fxPrefs||fxPrefs)],['spireActiveBank',active]);let before=changes.map(([k])=>localStorage.getItem(k));try{changes.forEach(([k,v])=>localStorage.setItem(k,v))}catch(e){changes.forEach(([k],i)=>{try{if(before[i]===null)localStorage.removeItem(k);else localStorage.setItem(k,before[i])}catch(_){}});throw Error('本地存储空间不足或不可写；未确认恢复成功。')}location.reload()}
+async function restoreFile(el){const f=el.files?.[0];if(!f)return;try{if(f.size>15000000)throw Error('存档文件过大');const d=JSON.parse(await f.text());const multi=d.format==='lexis-spire-multibank';if(multi&&d.version!==2)throw Error('不支持的备份版本');const legacy=multi?false:validateSave(d);if(!confirm(legacy?'导入旧版学习记录？会替换学习与局外进度，保留当前远征及词库。':'导入会覆盖当前远征、词汇与设置。确认已备份当前进度？'))return;restoreBackup(d)}catch(e){offlineNotice='导入失败：'+e.message;const n=$('save-notice');if(n)n.textContent=offlineNotice}finally{el.value=''}}
+function exportPortable(){if(words.length<TARGET)return;const clone=document.documentElement.cloneNode(true);clone.querySelector('#app').innerHTML='';clone.querySelector('#spire-embedded-bank').textContent=JSON.stringify(Object.fromEntries(Object.keys(BANKS).map(id=>[id,id===bankId?words:storedProfile(id).words]))).replace(/</g,'\\u003c');clone.querySelectorAll('link[rel="manifest"],link[rel="apple-touch-icon"]').forEach(n=>n.remove());clone.querySelectorAll('[data-act]').forEach(n=>n.removeAttribute('data-act'));downloadData('<!doctype html>\n'+clone.outerHTML,'lexis-spire-full-offline.html','text/html')}
 
 if(s&&!s.difficulty)s.difficulty='standard';
 if(s&&['dead','victory'].includes(s.phase)){finishRun();save()}
